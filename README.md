@@ -39,7 +39,6 @@ https://www.figma.com/file/32eCMwwxpSCN0BKCN2noaO/%EB%A9%8B%EC%82%AC-%EB%8D%B0%E
 
 
 ### API 명세서
-<img width="1239" alt="image" src="https://github.com/2023-SINCHONTHON-Team8/Server/assets/122217424/2778bb6b-180d-4eb0-8b1f-614f903eeb29">
 
 
 
