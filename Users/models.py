@@ -8,18 +8,18 @@ class User(models.Model):
     student_year = models.IntegerField()
     password = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    major = models.ForeignKey(
-        Major,
-        on_delete=models.CASCADE,
-        related_name='major_students'
-    )
-    submajor = models.ForeignKey(
-        Major,
-        on_delete=models.SET_NULL,
-        related_name='submajor_students',
-        null=True,
-        blank=True
-    )
+    # major = models.ForeignKey(
+    #     Major,
+    #     on_delete=models.CASCADE,
+    #     related_name='major_students'
+    # )
+    # submajor = models.ForeignKey(
+    #     Major,
+    #     on_delete=models.SET_NULL,
+    #     related_name='submajor_students',
+    #     null=True,
+    #     blank=True
+    # )
     completed_total = models.IntegerField(default=0)
     completed_common = models.IntegerField(default=0)
     completed_major = models.IntegerField(default=0)
@@ -41,3 +41,20 @@ class User(models.Model):
 
     def __str__(self):
         return self.name
+    
+class UserMajor(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_submajor' #유저의 부전공
+    )
+    major = models.ForeignKey(
+        Major,
+        on_delete=models.CASCADE,
+        related_name='major_submajor' #전공중 부전공으로 선택된것
+    )
+    prime = models.BooleanField()
+    completed = models.IntegerField(default=0) #해당전공 이수 학점
+
+    def __str__(self):
+        return f"{self.user}'s submajor-{self.major}"
