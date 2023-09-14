@@ -1,6 +1,6 @@
 from django.db import models
-from Roadmaps.models import *
-from Users.models import User
+# from Roadmaps.models import Roadmap,RoadmapDetail,RoadmapDetailLecture
+# from Users.models import User
 
 # Create your models here.
 
@@ -33,8 +33,8 @@ class Track(models.Model):  #다전공, 심화전공...
 # class Track_Lecture(models.Model):
     
 class Lecture(models.Model):
-    title = models.CharField()
-    code = models.CharField()
+    title = models.CharField(max_length=30)
+    code = models.CharField(max_length=30)
     point = models.IntegerField(choices=[(1,'1'),(2,'2'),(3,'3')])
     eta = models.URLField(blank = True)
     semester_one = models.IntegerField(choices=[(1,'1'),(2,'2'),(3,'3')])

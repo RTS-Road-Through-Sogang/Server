@@ -4,13 +4,13 @@ from Lectures.models import Major
 # Create your models here.
 class User(models.Model):
     name = models.CharField(max_length=100)
-    student_number = models.IntegerField(max_length=10, unique=True)
+    student_number = models.IntegerField(unique=True)
     student_year = models.IntegerField()
     password = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     major = models.ForeignKey(
         Major,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='major_students'
     )
     submajor = models.ForeignKey(
