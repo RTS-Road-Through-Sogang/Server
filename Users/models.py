@@ -16,7 +16,9 @@ class User(models.Model):
     submajor = models.ForeignKey(
         Major,
         on_delete=models.SET_NULL,
-        related_name='submajor_students'
+        related_name='submajor_students',
+        null=True,
+        blank=True
     )
     completed_total = models.IntegerField(default=0)
     completed_common = models.IntegerField(default=0)

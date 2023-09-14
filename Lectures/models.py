@@ -1,18 +1,19 @@
 from django.db import models
 from Roadmaps.models import *
-from Users.models import *
+from Users.models import User
 
 # Create your models here.
 
 class Major(models.Model):
     title = models.CharField(max_length=30)
-
     def __str__(self):
         return self.title
 
 class Category(models.Model):
     title = models.CharField(max_length=10)
     detail = models.CharField(max_length=30)
+    def __str__(self):
+        return self.title
 
 class MajorTech(models.Model):
     major = models.ForeignKey(
@@ -21,14 +22,16 @@ class MajorTech(models.Model):
         related_name='major_tech' #전공에 해당하는 테크
     )
     title = models.CharField(max_length=30)
+    def __str__(self):
+        return self.title
 
-class Track(models.Model):
+class Track(models.Model):  #다전공, 심화전공...
     title = models.CharField(max_length=30)
-
+    def __str__(self):
+        return self.title
 
 # class Track_Lecture(models.Model):
     
-
 class Lecture(models.Model):
     title = models.CharField()
     code = models.CharField()

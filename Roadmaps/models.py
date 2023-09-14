@@ -1,6 +1,6 @@
 from django.db import models
 from Users.models import User
-from Lectures.models import *
+from Lectures.models import Track, Lecture
 
 # Create your models here.
 class Roadmap(models.Model):
@@ -10,7 +10,7 @@ class Roadmap(models.Model):
         related_name='student_roadmap'
     )
     title = models.CharField(max_length = 10) #1안 2안
-    track = models.ForeignKey(
+    track = models.ForeignKey(  #다전공, 심화전공...
         Track,
         on_delete=models.CASCADE,
         related_name='track_roadmap'
@@ -43,7 +43,7 @@ class RoadmapDetailLecture(models.Model):
     lecture = models.ForeignKey(
         Lecture,
         on_delete=models.CASCADE,
-        related_name='roadmap_detail_lecture',
+        related_name='lecture_roadmap_detail', #렉처를 담은 로드맵 디테일
         null=True,
         blank=True
     )
