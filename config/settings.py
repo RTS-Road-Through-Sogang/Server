@@ -43,9 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Lectures',
+    'CSEclasses',
     'Roadmaps',
     'Users',
+    'Majors',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,10 @@ DATABASES = {
         'HOST': os.getenv("DB_HOST"),
         'USER': os.getenv("DB_USER"),
         'PASSWORD': os.getenv("DB_PASSWORD"),
-        'PORT': os.getenv("DB_PORT")
+        'PORT': os.getenv("DB_PORT"),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 

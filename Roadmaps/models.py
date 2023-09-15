@@ -1,6 +1,6 @@
 from django.db import models
 from Users.models import User
-from Lectures.models import Track, Lecture
+from CSEclasses.models import Track, Lecture
 
 # Create your models here.
 class Roadmap(models.Model):
