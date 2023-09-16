@@ -1,0 +1,15 @@
+from django.contrib import admin
+from .models import *
+admin.site.register(Category)
+admin.site.register(CategoryDetail)
+admin.site.register(CategoryDetailMembership)
+admin.site.register(Track)
+admin.site.register(StudentID)
+admin.site.register(Subject)
+admin.site.register(SubjectEnrollment)
+admin.site.register(Major)
+admin.site.register(User)
+admin.site.register(UserMajor)
+admin.site.register(MajorTech)
+admin.site.register(TrackMajor)
+admin.site.register(TrackMembership)
