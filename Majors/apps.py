@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LecturesConfig(AppConfig):
+class MajorsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Lectures'
+    name = 'Majors'
