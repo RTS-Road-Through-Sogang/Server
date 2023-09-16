@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Roadmaps',
     'Users',
     'Majors',
+    'Commonclasses',
 ]
 
 MIDDLEWARE = [
