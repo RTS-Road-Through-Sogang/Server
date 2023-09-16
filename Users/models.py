@@ -4,8 +4,8 @@ from Majors.models import Major
 # Create your models here.
 class User(models.Model):
     name = models.CharField(max_length=100)
-    student_number = models.IntegerField(unique=True)
-    # student_year = models.IntegerField()
+    student_number = models.CharField(max_length=10, unique=True)
+    student_year = models.IntegerField(null=True, blank=True, default=0)
     password = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     completed_total = models.IntegerField(default=0)
@@ -15,16 +15,10 @@ class User(models.Model):
     completed_submajor2 = models.IntegerField(default=0, null=True)
     completed_english = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.name
-    
-class StudentYear(models.Model):
-    student_year = models.IntegerField()
-
-    #학번에서 몇학번인지 User에서 추출해서 student_year에 따로 저장
+    # 학번에서 몇학번인지 User에서 추출해서 student_year에 따로 저장
     def save(self, *args, **kwargs):
-        if User.student_number and len(User.student_number) >= 4:
-            year = User.student_number[2:4]
+        if self.student_number and len(self.student_number) >= 4:
+            year = self.student_number[2:4]
             try:
                 student_year = int(year)
             except ValueError:
@@ -33,8 +27,28 @@ class StudentYear(models.Model):
             student_year = None
         self.student_year = student_year
         super(User, self).save(*args, **kwargs)
+
     def __str__(self):
-        return self.student_year
+        return self.name
+    
+class StudentYear(models.Model):
+
+    student_year = models.IntegerField()
+
+    # #학번에서 몇학번인지 User에서 추출해서 student_year에 따로 저장
+    # def save(self, *args, **kwargs):
+    #     if User.student_number and len(User.student_number) >= 4:
+    #         year = User.student_number[2:4]
+    #         try:
+    #             student_year = int(year)
+    #         except ValueError:
+    #             student_year = None
+    #     else:
+    #         student_year = None
+    #     self.student_year = student_year
+    #     super(User, self).save(*args, **kwargs)
+    def __str__(self):
+        return str(self.student_year)
     
 class UserMajor(models.Model):
     user = models.ForeignKey(
@@ -51,4 +65,7 @@ class UserMajor(models.Model):
     completed = models.IntegerField(default=0) #해당전공 이수 학점
 
     def __str__(self):
-        return f"{self.user}'s submajor-{self.major}"
+        if self.prime==0:
+            return f"{self.user}'s submajor-{self.major}"
+        else:
+            return f"{self.user}'s primemajor-{self.major}"
