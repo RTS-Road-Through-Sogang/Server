@@ -39,6 +39,11 @@ class Command(BaseCommand):
             'duty_point': 1
         },
         {
+            'title': '공통필수교과',
+            'detail': '소프트웨어',
+            'duty_point': 3
+        },
+        {
             'title': '공통선택교과',
             'detail': '인간과 신앙',
             'duty_point': 3
