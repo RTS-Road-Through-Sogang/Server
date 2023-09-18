@@ -16,7 +16,8 @@ class Command(BaseCommand):
             'category23': '서강인성',
             'category22': '서강인성',
             'category21': '서강인성',
-            'category20': '서강인성'
+            'category20': '서강인성',
+            'category19': '서강인성'
         },
         {   'title': '인문사회 글쓰기',
             'code':'COR1012',
@@ -29,7 +30,8 @@ class Command(BaseCommand):
             'category23': '글쓰기',
             'category22': '글쓰기',
             'category21': '글쓰기',
-            'category20': '글쓰기'
+            'category20': '글쓰기',
+            'category19': '글쓰기'
         },
         {   'title': '자연계 글쓰기',
             'code':'COR1013',
@@ -42,7 +44,8 @@ class Command(BaseCommand):
             'category23': '글쓰기',
             'category22': '글쓰기',
             'category21': '글쓰기',
-            'category20': '글쓰기'
+            'category20': '글쓰기',
+            'category19': '글쓰기'
         },
         {   'title': '영어글로벌 의사소통1',
             'code':'COR1003',
@@ -55,7 +58,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '독일언어와 문화1',
             'code':'LCS2001',
@@ -68,7 +72,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '프랑스언어와 문화1',
             'code':'LCS2003',
@@ -81,7 +86,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '중국언어와 문화1',
             'code':'LCS2005',
@@ -94,7 +100,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '일본언어와 문화1',
             'code':'LCS2007',
@@ -107,7 +114,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '초급 라틴어',
             'code':'LCU4021',
@@ -120,7 +128,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '초급 스페인어',
             'code':'LCU4030',
@@ -133,7 +142,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '초급 이탈리아어',
             'code':'LCU4025',
@@ -146,7 +156,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '초급 러시아어',
             'code':'LCU4035',
@@ -159,7 +170,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '초급 아랍어',
             'code':'LCU4105',
@@ -172,7 +184,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '초급 아랍어',
             'code':'LCU4105',
@@ -185,7 +198,8 @@ class Command(BaseCommand):
             'category23': '글로벌 언어1',
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1',
-            'category20': '글로벌 언어1'
+            'category20': '글로벌 언어1',
+            'category19': '글로벌 언어1'
         },
         {   'title': '알바트로스 세미나',
             'code':'COR1015',
@@ -198,7 +212,8 @@ class Command(BaseCommand):
             'category23': '전공 진로 탐색',
             'category22': '전공 진로 탐색',
             'category21': '전공 진로 탐색',
-            'category20': '전공 진로 탐색'
+            'category20': '전공 진로 탐색',
+            'category19': '전공 진로 탐색'
         },
         {   'title': '알바트로스 세미나(경영)',
             'code':'COR1016',
@@ -211,9 +226,10 @@ class Command(BaseCommand):
             'category23': '전공 진로 탐색',
             'category22': '전공 진로 탐색',
             'category21': '전공 진로 탐색',
-            'category20': '전공 진로 탐색'
+            'category20': '전공 진로 탐색',
+            'category19': '전공 진로 탐색'
         },
-        {   'title': '기초인공지능프로그래밍',
+        {   'title': '기초인공지능프로그래밍(구 컴퓨팅사고력)',
             'code':'COR1010',
             'point': 3,
             'semester_one': 3,
@@ -224,7 +240,22 @@ class Command(BaseCommand):
             'category23': '소프트웨어',
             'category22': '소프트웨어',
             'category21': '소프트웨어',
-            'category20': '소프트웨어'
+            'category20': '소프트웨어',
+            'category19': '소프트웨어'
+        },
+        {   'title': '기초인공지능프로그래밍 고급(구 컴퓨팅사고력 고급)',
+            'code':'COR1010',
+            'point': 3,
+            'semester_one': 3,
+            'semester_two': 3,
+            'teamplay': 1,
+            'grade_recommend': 1,
+            'season_open': 1,
+            'category23': '소프트웨어',
+            'category22': '소프트웨어',
+            'category21': None,
+            'category20': '소프트웨어',
+            'category19': '소프트웨어'
         },
         {   'title': '철학적 인간학',
             'code':'HFS2001',
@@ -237,7 +268,8 @@ class Command(BaseCommand):
             'category23': '인간과 신앙',
             'category22': '인간과 신앙',
             'category21': '인간과 신앙',
-            'category20': '인간과 신앙'
+            'category20': '인간과 신앙',
+            'category19': '인간과 신앙'
         },
         {   'title': '신학적 인간학',
             'code':'HFS2002',
@@ -250,7 +282,8 @@ class Command(BaseCommand):
             'category23': '인간과 신앙',
             'category22': '인간과 신앙',
             'category21': '인간과 신앙',
-            'category20': '인간과 신앙'
+            'category20': '인간과 신앙',
+            'category19': '인간과 신앙'
         },
         {   'title': '그리스도교 윤리',
             'code':'HFS2003',
@@ -263,7 +296,8 @@ class Command(BaseCommand):
             'category23': '인간과 신앙',
             'category22': '인간과 신앙',
             'category21': '인간과 신앙',
-            'category20': '인간과 신앙'
+            'category20': '인간과 신앙',
+            'category19': '인간과 신앙'
         },
         {   'title': '그리스도교 신앙과 영성',
             'code':'HFU4012',
@@ -276,7 +310,8 @@ class Command(BaseCommand):
             'category23': '인간과 신앙',
             'category22': '인간과 신앙',
             'category21': '인간과 신앙',
-            'category20': '인간과 신앙'
+            'category20': '인간과 신앙',
+            'category19': '인간과 신앙'
         },
         {   'title': '진선미성',
             'code':'HFU4023',
@@ -289,7 +324,8 @@ class Command(BaseCommand):
             'category23': '인간과 신앙',
             'category22': '인간과 신앙',
             'category21': '인간과 신앙',
-            'category20': '인간과 신앙'
+            'category20': '인간과 신앙',
+            'category19': '인간과 신앙'
         },
         {   'title': '현대세계와 윤리문제',
             'code':'ETS2001',
@@ -302,7 +338,8 @@ class Command(BaseCommand):
             'category23': '인간과 사상',
             'category22': '인간과 사상',
             'category21': '인간과 사상',
-            'category20': '인간과 사상'
+            'category20': '인간과 사상',
+            'category19': '인간과 사상'
         },
         {   'title': '논리와 비판적 사고',
             'code':'ETS2002',
@@ -315,7 +352,8 @@ class Command(BaseCommand):
             'category23': '인간과 사상',
             'category22': '인간과 사상',
             'category21': '인간과 사상',
-            'category20': '인간과 사상'
+            'category20': '인간과 사상',
+            'category19': '인간과 사상'
         },
         {   'title': '종교와 세계문화',
             'code':'ETS2004',
@@ -328,7 +366,8 @@ class Command(BaseCommand):
             'category23': '인간과 사상',
             'category22': '인간과 사상',
             'category21': '인간과 사상',
-            'category20': '인간과 사상'
+            'category20': '인간과 사상',
+            'category19': '인간과 사상'
         },
         {   'title': '현대 한국의 형성',
             'code':'CHS2002',
@@ -341,7 +380,8 @@ class Command(BaseCommand):
             'category23': '인간과 사상',
             'category22': '인간과 사상',
             'category21': '인간과 사상',
-            'category20': '인간과 사상'
+            'category20': '인간과 사상',
+            'category19': '인간과 사상'
         },
         {   'title': '현대 동아시아의 형성',
             'code':'CHS2003',
@@ -354,7 +394,8 @@ class Command(BaseCommand):
             'category23': '인간과 사상',
             'category22': '인간과 사상',
             'category21': '인간과 사상',
-            'category20': '인간과 사상'
+            'category20': '인간과 사상',
+            'category19': '인간과 사상'
         },
         {   'title': '현대 서양의 형성',
             'code':'CHS2004',
@@ -367,7 +408,8 @@ class Command(BaseCommand):
             'category23': '인간과 사상',
             'category22': '인간과 사상',
             'category21': '인간과 사상',
-            'category20': '인간과 사상'
+            'category20': '인간과 사상',
+            'category19': '인간과 사상'
         },
         {   'title': '현대 사회의 이해',
             'code':'SHS2001',
@@ -380,7 +422,8 @@ class Command(BaseCommand):
             'category23': '인간과 사회',
             'category22': '인간과 사회',
             'category21': '인간과 사회',
-            'category20': '인간과 사회'
+            'category20': '인간과 사회',
+            'category19': '인간과 사회'
         },
         {   'title': '한국과 세계',
             'code':'SHS2002',
@@ -393,7 +436,8 @@ class Command(BaseCommand):
             'category23': '인간과 사회',
             'category22': '인간과 사회',
             'category21': '인간과 사회',
-            'category20': '인간과 사회'
+            'category20': '인간과 사회',
+            'category19': '인간과 사회'
         },
         {   'title': '커뮤니케이션과 사회',
             'code':'SHS2003',
@@ -406,7 +450,8 @@ class Command(BaseCommand):
             'category23': '인간과 사회',
             'category22': '인간과 사회',
             'category21': '인간과 사회',
-            'category20': '인간과 사회'
+            'category20': '인간과 사회',
+            'category19': '인간과 사회'
         },
         {   'title': '생활속의 심리학',
             'code':'SHS2007',
@@ -419,7 +464,8 @@ class Command(BaseCommand):
             'category23': '인간과 사회',
             'category22': '인간과 사회',
             'category21': '인간과 사회',
-            'category20': '인간과 사회'
+            'category20': '인간과 사회',
+            'category19': '인간과 사회'
         },
         {   'title': '법과지식재산',
             'code':'SHS2005',
@@ -432,7 +478,8 @@ class Command(BaseCommand):
             'category23': '인간과 사회',
             'category22': '인간과 사회',
             'category21': '인간과 사회',
-            'category20': '인간과 사회'
+            'category20': '인간과 사회',
+            'category19': '인간과 사회'
         },
         {   'title': '자연과 인간',
             'code':'STS2001',
@@ -445,7 +492,8 @@ class Command(BaseCommand):
             'category23': '인간과 과학',
             'category22': '인간과 과학',
             'category21': '인간과 과학',
-            'category20': '인간과 과학'
+            'category20': '인간과 과학',
+            'category19': '인간과 과학'
         },
         {   'title': '생명과 환경',
             'code':'STS2002',
@@ -458,7 +506,8 @@ class Command(BaseCommand):
             'category23': '인간과 과학',
             'category22': '인간과 과학',
             'category21': '인간과 과학',
-            'category20': '인간과 과학'
+            'category20': '인간과 과학',
+            'category19': '인간과 과학'
         },
         {   'title': '우주와 원자시대',
             'code':'STS4011',
@@ -471,7 +520,8 @@ class Command(BaseCommand):
             'category23': '인간과 과학',
             'category22': '인간과 과학',
             'category21': '인간과 과학',
-            'category20': '인간과 과학'
+            'category20': '인간과 과학',
+            'category19': '인간과 과학'
         },
         {   'title': '기초빅데이터프로그래밍',
             'code':'STS2011',
@@ -484,7 +534,8 @@ class Command(BaseCommand):
             'category23': '인간과 과학',
             'category22': '인간과 과학',
             'category21': '인간과 과학',
-            'category20': '인간과 과학'
+            'category20': '인간과 과학',
+            'category19': '인간과 과학'
         },
         {   'title': '딥러닝기반빅데이터처리실습',
             'code':'STS2012',
@@ -496,8 +547,9 @@ class Command(BaseCommand):
             'season_open': 1,
             'category23': '인간과 과학',
             'category22': '인간과 과학',
-            'category21': '인간과 과학',
-            'category20': '인간과 과학'
+            'category21': None,
+            'category20': None,
+            'category19': None
         },
         {   'title': '과학사',
             'code':'STS2010',
@@ -510,7 +562,8 @@ class Command(BaseCommand):
             'category23': '인간과 과학',
             'category22': '인간과 과학',
             'category21': '인간과 과학',
-            'category20': '인간과 과학'
+            'category20': '인간과 과학',
+            'category19': '인간과 과학'
         },
         {   'title': '미적분학1',
             'code':'STS2005',
@@ -523,29 +576,33 @@ class Command(BaseCommand):
             'category23': '인간과 과학',
             'category22': '인간과 과학',
             'category21': '인간과 과학',
-            'category20': '인간과 과학'
+            'category20': '인간과 과학',
+            'category19': '인간과 과학'
         },
     ]
     def handle(self, *args, **options):
         for lecture in self.Lectures:
             lec = Lecture(
-                title = lecture['title'], 
-                code = lecture['code'], 
-                point = lecture['point'], 
-                semester_one = lecture['semester_one'], 
-                semester_two = lecture['semester_two'], 
-                teamplay = lecture['teamplay'], 
-                season_open = lecture['season_open'], 
-                grade_recommend = lecture['grade_recommend'], 
-                category23 = Category.objects.get( detail = lecture['category23']),
-                category22 = Category.objects.get( detail = lecture['category22']),
-                
+            title = lecture['title'], 
+            code = lecture['code'], 
+            point = lecture['point'], 
+            semester_one = lecture['semester_one'], 
+            semester_two = lecture['semester_two'], 
+            teamplay = lecture['teamplay'], 
+            season_open = lecture['season_open'], 
+            grade_recommend = lecture['grade_recommend'], 
+            category23 = Category.objects.get( detail = lecture['category23']),
+            category22 = Category.objects.get( detail = lecture['category22'])            
             )
-            
             if (lecture['category21']) is not None:
                 lec.category21 = Category.objects.get( detail = lecture['category21'])
+
             if (lecture['category20']) is not None:
                 lec.category20 = Category.objects.get( detail = lecture['category20'])
+
+            if (lecture['category19']) is not None:
+                lec.category19 = Category.objects.get( detail = lecture['category19'])
+            
             lec.save()
         self.stdout.write(self.style.SUCCESS('Lectures initialized'))
         return 0
