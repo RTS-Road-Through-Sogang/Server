@@ -1,11 +1,12 @@
 from django.db import models
-from Users.models import User
+from django.conf import settings
+
 from CSEclasses.models import Track, Lecture
 
 # Create your models here.
 class Roadmap(models.Model):
     student = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='student_roadmap'
     )

@@ -3,5 +3,5 @@ from .models import *
 
 # Register your models here.
 admin.site.register(StudentYear)
-admin.site.register(User)
+admin.site.register(MyUser)
 admin.site.register(UserMajor)

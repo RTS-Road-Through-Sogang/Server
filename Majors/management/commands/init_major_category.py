@@ -81,20 +81,20 @@ class Command(BaseCommand):
     ]
 
     def handle(self, *args, **options):
-        # for major in self.Major:
-        #     Major.objects.get_or_create(
-        #         title = major['title'], 
+        for major in self.Major:
+            Major.objects.get_or_create(
+                title = major['title'], 
                 
-        #     )
-            
-        for category in self.Category:
-            cate = Category(
-                title = category['title'],
-                duty_point = category['duty_point']
             )
-            if category['detail'] is not None:
-                cate.detail = category ['detail']
-            cate.save()
+            
+        # for category in self.Category:
+        #     cate = Category(
+        #         title = category['title'],
+        #         duty_point = category['duty_point']
+        #     )
+        #     if category['detail'] is not None:
+        #         cate.detail = category ['detail']
+        #     cate.save()
                         
         self.stdout.write(self.style.SUCCESS('Major&Category initialized'))
         return 0
