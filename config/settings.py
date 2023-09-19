@@ -191,6 +191,15 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': datetime.timedelta(minutes=5),
+    'SLIDING_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'SLIDING_TOKEN_REFRESH_LIFETIME': datetime.timedelta(days=1),
 }
+# 이메일 설정
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sogangRTS@gmail.com'  #인증 이메일 발신자
+EMAIL_HOST_PASSWORD = 'rxzsuxbjjqqgidhr'  #발신자 이메일 앱 비밀번호
+
+AUTH_USER_MODEL = 'Users.MyUser'

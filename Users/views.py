@@ -24,25 +24,11 @@ from .serializers import UserSerializer
 
 User = get_user_model()
 
-@csrf_exempt
-def verify_email(request):
-    if request.method == 'POST':
-        data = request.POST
-        email = data.get('email')
-        verification_code = data.get('verification_code')
-        try:
-            user = User.objects.get(email = email, verification_code = verification_code)
-            user.is_email_verified = True
-            user.save()
-            return JsonResponse({'message': 'Email verification successful. You can now complete the registration.'})
-        except User.DoesNotExist:
-            return JsonResponse({'message': 'Invalid verification code'}, status=400)
-    else:
-        return JsonResponse({'message': 'Invalid request method'}, status=400)
 
 
 def generate_verification_code():
     return str(random.randint(100000, 999999))
+
 
 @csrf_exempt
 def signup_view(request):
@@ -85,6 +71,23 @@ def signup_view(request):
 
             return JsonResponse({'message': 'Verification code sent to your email. Please check your email and complete the registration.'})
         return JsonResponse({'message': 'Invalid credentials'}, status=400)
+    else:
+        return JsonResponse({'message': 'Invalid request method'}, status=400)
+
+
+@csrf_exempt
+def verify_email(request):
+    if request.method == 'POST':
+        data = request.POST
+        email = data.get('email')
+        verification_code = data.get('verification_code')
+        try:
+            user = User.objects.get(email = email, verification_code = verification_code)
+            user.is_email_verified = True
+            user.save()
+            return JsonResponse({'message': 'Email verification successful. You can now complete the registration.'})
+        except User.DoesNotExist:
+            return JsonResponse({'message': 'Invalid verification code'}, status=400)
     else:
         return JsonResponse({'message': 'Invalid request method'}, status=400)
 
