@@ -71,19 +71,22 @@ class Lecture(models.Model):
         Category,
         on_delete=models.CASCADE,
         related_name='category19_common_lecture', #카테고리 안에 렉처
-        null=True
+        null=True,
+        blank=True
     )
     category20 = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
         related_name='category20_common_lecture', #카테고리 안에 렉처
-        null=True
+        null=True,
+        blank=True
     )
     category21 = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
         related_name='category21_common_lecture', #카테고리 안에 렉처
-        null=True
+        null=True,
+        blank=True
     )
     category22 = models.ForeignKey(
         Category,
@@ -95,13 +98,15 @@ class Lecture(models.Model):
         Category,
         on_delete=models.CASCADE,
         related_name='category23_common_lecture', #카테고리 안에 렉처
-        null=True
+        null=True,
+        blank=True
     )
     category24 = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
         related_name='category24_common_lecture', #카테고리 안에 렉처
-        null=True
+        null=True,
+        blank=True
     )
 
     def __str__(self):

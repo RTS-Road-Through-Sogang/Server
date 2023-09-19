@@ -1,8 +1,45 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+
 from Majors.models import Major
 
-# Create your models here.
-class User(models.Model):
+def validate_email_domain(value):
+    valid_domains = ['sogang.ac.kr']
+    email = value.split('@')
+    if len(email) == 2 and email[1] in valid_domains:
+        return True
+    raise ValidationError("서강대학교 도메인 주소를 통한 이메일 인증만 가능합니다.")
+
+class MyUserManager(BaseUserManager):
+    def create_user(self, email, student_number, password=None, **extra_fields):
+        if not email:
+            raise ValueError("올바른 이메일 주소를 입력하세요.")
+        if not student_number:
+            raise ValueError("올바른 학번을 입력하세요.")
+        
+        user = self.model(
+            email = self.normalize_email(email),
+            student_number = student_number,
+            **extra_fields
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    
+    def create_superuser(self, email, student_number, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(email, student_number, password, **extra_fields)
+
+class MyUser(AbstractBaseUser,PermissionsMixin):
     name = models.CharField(max_length=100)
     student_number = models.CharField(max_length=10, unique=True)
     student_year = models.IntegerField(null=True, blank=True, default=0)
@@ -14,6 +51,17 @@ class User(models.Model):
     completed_submajor1 = models.IntegerField(default=0, null=True)
     completed_submajor2 = models.IntegerField(default=0, null=True)
     completed_english = models.IntegerField(default=0)
+    
+    is_email_verified = models.BooleanField(default=False)
+    verification_code = models.CharField(max_length=6, blank=True, null=True)
+
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    
+    objects = MyUserManager()
+    
+    USERNAME_FIELD = 'student_number'
+    REQUIRED_FIELDS =['name', 'email']
 
     # 학번에서 몇학번인지 User에서 추출해서 student_year에 따로 저장
     def save(self, *args, **kwargs):
@@ -26,7 +74,7 @@ class User(models.Model):
         else:
             student_year = None
         self.student_year = student_year
-        super(User, self).save(*args, **kwargs)
+        super(MyUser, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -52,7 +100,7 @@ class StudentYear(models.Model):
     
 class UserMajor(models.Model):
     user = models.ForeignKey(
-        User,
+        MyUser,
         on_delete=models.CASCADE,
         related_name='user_submajor' #유저의 부전공
     )

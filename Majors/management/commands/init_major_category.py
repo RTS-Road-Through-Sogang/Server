@@ -39,6 +39,11 @@ class Command(BaseCommand):
             'duty_point': 1
         },
         {
+            'title': '공통필수교과',
+            'detail': '소프트웨어',
+            'duty_point': 3
+        },
+        {
             'title': '공통선택교과',
             'detail': '인간과 신앙',
             'duty_point': 3
@@ -58,6 +63,21 @@ class Command(BaseCommand):
             'detail': '인간과 과학',
             'duty_point': 3
         },
+        {
+            'title': '전공입문교과',
+            'detail': None,
+            'duty_point': 3
+        },
+        {
+            'title': '전공필수교과',
+            'detail': None,
+            'duty_point': 3
+        },
+        {
+            'title': '전공선택교과',
+            'detail': None,
+            'duty_point': 3
+        },
     ]
 
     def handle(self, *args, **options):
@@ -67,13 +87,14 @@ class Command(BaseCommand):
                 
             )
             
-        for category in self.Category:
-            Category.objects.get_or_create(
-                title = category['title'],
-                detail = category['detail'],
-                duty_point = category['duty_point']
-            )
-        
+        # for category in self.Category:
+        #     cate = Category(
+        #         title = category['title'],
+        #         duty_point = category['duty_point']
+        #     )
+        #     if category['detail'] is not None:
+        #         cate.detail = category ['detail']
+        #     cate.save()
                         
         self.stdout.write(self.style.SUCCESS('Major&Category initialized'))
         return 0
