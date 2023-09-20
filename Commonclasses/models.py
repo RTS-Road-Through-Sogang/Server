@@ -1,5 +1,6 @@
 from django.db import models
 from Majors.models import Category
+from Users.models import MyUser
 # Create your models here.
 
 ##어차피 공통
@@ -111,3 +112,21 @@ class Lecture(models.Model):
 
     def __str__(self):
         return f"{self.title}_{self.category19}"
+
+class UserCommonLecture(models.Model):
+    user = models.ForeignKey(
+        MyUser,
+        on_delete=models.CASCADE,
+        related_name='commonlecture_User',
+        null=True,
+        blank=True
+    )
+    commonlecture = models.ForeignKey(
+        Lecture,
+        on_delete=models.CASCADE,
+        related_name='commonlecture_completed',
+        null=True,
+        blank=True
+    )
+    def __str__(self):
+        return f"{self.user} has completed {self.commonlecture.title}"

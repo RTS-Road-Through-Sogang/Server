@@ -1,7 +1,10 @@
 from django.db import models
 from django.conf import settings
 
-from CSEclasses.models import Track, Lecture
+from Commonclasses.models import Lecture as CommonLecture
+from CSEclasses.models import Track, Lecture as CSELecture
+from MGTclasses.models import Track, Lecture as MGTLecture
+from ECOclasses.models import Track, Lecture as ECOLecture
 
 # Create your models here.
 class Roadmap(models.Model):
@@ -41,13 +44,41 @@ class RoadmapDetailLecture(models.Model):
         null=True,
         blank=True
     )
-    lecture = models.ForeignKey(
-        Lecture,
+    commonlecture = models.ForeignKey(
+        CommonLecture,
         on_delete=models.CASCADE,
-        related_name='lecture_roadmap_detail', #렉처를 담은 로드맵 디테일
+        related_name='cselecture_roadmap_detail', #렉처를 담은 로드맵 디테일
+        null=True,
+        blank=True
+    )
+    cselecture = models.ForeignKey(
+        CSELecture,
+        on_delete=models.CASCADE,
+        related_name='cselecture_roadmap_detail', #렉처를 담은 로드맵 디테일
+        null=True,
+        blank=True
+    )
+    mgtlecture = models.ForeignKey(
+        MGTLecture,
+        on_delete=models.CASCADE,
+        related_name='mgtlecture_roadmap_detail', #렉처를 담은 로드맵 디테일
+        null=True,
+        blank=True
+    )
+    ecolecture = models.ForeignKey(
+        ECOLecture,
+        on_delete=models.CASCADE,
+        related_name='ecolecture_roadmap_detail', #렉처를 담은 로드맵 디테일
         null=True,
         blank=True
     )
 
     def __str__(self):
-        return f"{self.roadmap_detail.roadmap.student}_{self.roadmap_detail.roadmap.title}_{self.roadmap_detail.semester}_{self.lecture}"
+        if self.commonlecture:
+            return f"{self.roadmap_detail.roadmap.student}_{self.roadmap_detail.roadmap.title}_{self.roadmap_detail.semester}_{self.commonlecture.title}"
+        elif self.cselecture:
+            return f"{self.roadmap_detail.roadmap.student}_{self.roadmap_detail.roadmap.title}_{self.roadmap_detail.semester}_{self.cselecture.title}"
+        elif self.mgtlecture:
+            return f"{self.roadmap_detail.roadmap.student}_{self.roadmap_detail.roadmap.title}_{self.roadmap_detail.semester}_{self.mgtlecture.title}"
+        elif self.ecolecture:
+            return f"{self.roadmap_detail.roadmap.student}_{self.roadmap_detail.roadmap.title}_{self.roadmap_detail.semester}_{self.ecolecture.title}"

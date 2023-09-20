@@ -1,5 +1,5 @@
 from django.db import models
-from Users.models import StudentYear
+from Users.models import StudentYear, MyUser
 from Majors.models import Major, Category
 
 
@@ -139,4 +139,20 @@ class Lecture(models.Model):
     def __str__(self):
         return self.title
 
-
+class UserCSELecture(models.Model):
+    user = models.ForeignKey(
+        MyUser,
+        on_delete=models.CASCADE,
+        related_name='cselecture_User',
+        null=True,
+        blank=True
+    )
+    cselecture = models.ForeignKey(
+        Lecture,
+        on_delete=models.CASCADE,
+        related_name='cselecture_completed',
+        null=True,
+        blank=True
+    )
+    def __str__(self):
+        return f"{self.user} has completed {self.cselecture.title}"

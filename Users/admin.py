@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(StudentYear)
 admin.site.register(MyUser)
 admin.site.register(UserMajor)
+admin.site.register(CompletedEng)

@@ -112,3 +112,15 @@ class UserMajor(models.Model):
             return f"{self.user}'s submajor-{self.major}"
         else:
             return f"{self.user}'s primemajor-{self.major}"
+        
+class CompletedEng(models.Model):
+    completedeng = models.IntegerField()
+    user = models.ForeignKey(
+        MyUser,
+        on_delete=models.CASCADE,
+        related_name='User_completedeng', #유저가 완료한 영강학점 찾을때
+        null=True,
+        blank=True
+    )
+    def __str__(self):
+        return f"{self.user} has completed {self.completedeng} point of eng"
