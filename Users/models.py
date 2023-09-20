@@ -45,11 +45,6 @@ class MyUser(AbstractBaseUser,PermissionsMixin):
     student_year = models.IntegerField(null=True, blank=True, default=0)
     password = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    completed_total = models.IntegerField(default=0)
-    completed_common = models.IntegerField(default=0)
-    completed_major = models.IntegerField(default=0)
-    completed_submajor1 = models.IntegerField(default=0, null=True)
-    completed_submajor2 = models.IntegerField(default=0, null=True)
     completed_english = models.IntegerField(default=0)
     
     is_email_verified = models.BooleanField(default=False)

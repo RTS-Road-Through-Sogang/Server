@@ -11,7 +11,7 @@ from django.http import JsonResponse
 
 from rest_framework import status
 from rest_framework import generics
-from rest_framework_simplejwt import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -49,7 +49,7 @@ def signup_view(request):
         # completed_english= data.get('completed_english')
 
         try:
-            print("A")
+            
             validate_email(email)  # 이메일 형식 검증
             validate_email_domain(email)  # 도메인 검증
         except ValidationError as e:
