@@ -200,7 +200,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'sogangRTS@gmail.com'  #인증 이메일 발신자
-EMAIL_HOST_PASSWORD = 'rxzsuxbjjqqgidhr'  #발신자 이메일 앱 비밀번호
+EMAIL_HOST_USER = 'RTSsogang@gmail.com'  #인증 이메일 발신자
+EMAIL_HOST_PASSWORD = 'ilpl sutl xmen ueop'  #발신자 이메일 앱 비밀번호
 
 AUTH_USER_MODEL = 'Users.MyUser'
