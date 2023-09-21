@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from Majors.models import *
+from Commonclasses.models import *
 class Command(BaseCommand):
     help = 'Initialize Major, Category'
     Major = [  
@@ -87,14 +87,14 @@ class Command(BaseCommand):
                 
             )
             
-        # for category in self.Category:
-        #     cate = Category(
-        #         title = category['title'],
-        #         duty_point = category['duty_point']
-        #     )
-        #     if category['detail'] is not None:
-        #         cate.detail = category ['detail']
-        #     cate.save()
+        for category in self.Category:
+             cate = Category(
+                 title = category['title'],
+                 duty_point = category['duty_point']
+             )
+             if category['detail'] is not None:
+                 cate.detail = category ['detail']
+             cate.save()
                         
         self.stdout.write(self.style.SUCCESS('Major&Category initialized'))
         return 0
