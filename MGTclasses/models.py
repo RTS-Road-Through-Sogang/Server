@@ -84,12 +84,7 @@ class Lecture(models.Model):
     )
     grade_recommend = models.IntegerField(choices=[(1,'1'),(2,'2'),(3,'3'),(4,'4')], blank=True)
     season_open = models.BooleanField()
-    category20 = models.ForeignKey(
-        Category,
-        on_delete=models.CASCADE,
-        related_name='category20_MGT_lecture', #카테고리 안에 렉처
-        null=True
-    )
+
     category21 = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
