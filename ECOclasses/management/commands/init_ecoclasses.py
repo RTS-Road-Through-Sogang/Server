@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from ECOclasses.models import *
 from Majors.models import *
 class Command(BaseCommand):
-     
+
     help = 'Initialize , Category'
     MajorTech = [  
         {
@@ -51,47 +51,17 @@ class Command(BaseCommand):
         },
         {
             'major': 1,
-            'title': '다전공 2전공',
+            'title': '다전공 타전공',
             'student_year': 1
         },
         {
             'major': 1,
-            'title': '다전공 2전공',
+            'title': '다전공 타전공',
             'student_year': 2
         },
         {
             'major': 1,
-            'title': '다전공 2전공',
-            'student_year': 3
-        },
-        {
-            'major': 1,
-            'title': '심화',
-            'student_year': 1
-        },
-        {
-            'major': 1,
-            'title': '심화',
-            'student_year': 2
-        },
-        {
-            'major': 1,
-            'title': '심화',
-            'student_year': 3
-        },
-        {
-            'major': 1,
-            'title': '교육',
-            'student_year': 1
-        },
-        {
-            'major': 1,
-            'title': '교육',
-            'student_year': 2
-        },
-        {
-            'major': 1,
-            'title': '교육',
+            'title': '다전공 타전공',
             'student_year': 3
         },
         {
@@ -131,7 +101,7 @@ class Command(BaseCommand):
                 student_year = StudentYear.objects.get(pk=track['student_year']),
             
             )
-             
+            
                         
         self.stdout.write(self.style.SUCCESS('ECOclasses initialized'))
         return 0

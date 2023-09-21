@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from MGTclasses.models import *
 from Majors.models import *
 class Command(BaseCommand):
-     
+    
     help = 'Initialize , MGT'
     MajorTech = [  
         {
@@ -55,47 +55,17 @@ class Command(BaseCommand):
         },
         {
             'major': 1,
-            'title': '다전공 2전공',
+            'title': '다전공 타전공',
             'student_year': 1
         },
         {
             'major': 1,
-            'title': '다전공 2전공',
+            'title': '다전공 타전공',
             'student_year': 2
         },
         {
             'major': 1,
-            'title': '다전공 2전공',
-            'student_year': 3
-        },
-        {
-            'major': 1,
-            'title': '심화',
-            'student_year': 1
-        },
-        {
-            'major': 1,
-            'title': '심화',
-            'student_year': 2
-        },
-        {
-            'major': 1,
-            'title': '심화',
-            'student_year': 3
-        },
-        {
-            'major': 1,
-            'title': '교육',
-            'student_year': 1
-        },
-        {
-            'major': 1,
-            'title': '교육',
-            'student_year': 2
-        },
-        {
-            'major': 1,
-            'title': '교육',
+            'title': '다전공 타전공',
             'student_year': 3
         },
         {
@@ -113,8 +83,6 @@ class Command(BaseCommand):
             'title': '단일전공',
             'student_year': 3
         },
-
-        
     ]
 
     def handle(self, *args, **options):
@@ -135,7 +103,7 @@ class Command(BaseCommand):
                 student_year = StudentYear.objects.get(pk=track['student_year']),
             
             )
-             
+            
                         
         self.stdout.write(self.style.SUCCESS('MGTclasses initialized'))
         return 0
