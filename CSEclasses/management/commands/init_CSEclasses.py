@@ -95,7 +95,6 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
-
         },
         {   'title': '미적분학2',
             'code':'STS2006',
@@ -109,7 +108,6 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
-
         },
         {   'title': '일반물리실험1',
             'code':'PHY1101',
@@ -123,21 +121,6 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
-
-        },
-        {   'title': '일반물리실험1',
-            'code':'PHY1101',
-            'point': 3,
-            'semester_one': 3,
-            'semester_two': 3,
-            'teamplay': 1,
-            'former': None,
-            'grade_recommend': 1,
-            'season_open': 1,
-            'category23': '전공입문교과',
-            'category22': '전공입문교과',
-            'category21': '전공입문교과',
-
         },
         {   'title': '일반물리1',
             'code':'PHY1001',
@@ -151,7 +134,6 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
-
         },
         {   'title': '응용수학1',
             'code':'MAT2410',
@@ -165,7 +147,6 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
-
         },
         {   'title': '응용수학2',
             'code':'MAT2420',
@@ -179,7 +160,6 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
-
         },
         {   'title': '응용수학1',
             'code':'MAT2010',
@@ -193,7 +173,6 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
-
         },
     ]
     

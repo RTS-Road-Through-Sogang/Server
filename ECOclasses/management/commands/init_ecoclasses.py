@@ -79,7 +79,21 @@ class Command(BaseCommand):
             'title': '단일전공',
             'student_year': 3
         },
-
+                {
+            'major': 1,
+            'title': 'Honors Program',
+            'student_year': 1
+        },
+                {
+            'major': 1,
+            'title': 'Honors Program',
+            'student_year': 2
+        },
+                {
+            'major': 1,
+            'title': 'Honors Program',
+            'student_year': 3
+        },
         
     ]
 
