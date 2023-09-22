@@ -2,15 +2,7 @@ from django.core.management.base import BaseCommand
 from Users.models import *
 class Command(BaseCommand):
     help = 'Initialize StudentYear'
-    StudentYear = [  
-        {
-            'student_year': 19,
-            
-        }, 
-        {
-            'student_year': 20,
-            
-        }, 
+    StudentYear = [
         {
             'student_year': 21,
             
@@ -33,11 +25,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for studentyear in self.StudentYear:
-            Major.objects.get_or_create(
-                studentyear = studentyear['student_year'], 
+            StudentYear.objects.get_or_create(
+                student_year = studentyear['student_year'], 
                 
             )
-       
+    
         
                         
         self.stdout.write(self.style.SUCCESS('Student year initialized'))
