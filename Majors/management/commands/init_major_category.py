@@ -68,6 +68,17 @@ class Command(BaseCommand):
             'detail': None,
             'duty_point': 3
         },
+        
+        {
+            'title': '전공입문교과',
+            'detail': '필수',
+            'duty_point': 3
+        },
+        {
+            'title': '전공입문교과',
+            'detail': '선택',
+            'duty_point': 3
+        },
         {
             'title': '전공필수교과',
             'detail': None,
@@ -76,6 +87,16 @@ class Command(BaseCommand):
         {
             'title': '전공선택교과',
             'detail': None,
+            'duty_point': 3
+        },
+        {
+            'title': '전공선택교과',
+            'detail': '필수',
+            'duty_point': 3
+        },
+        {
+            'title': '전공선택교과',
+            'detail': '선택 필수',
             'duty_point': 3
         },
     ]
