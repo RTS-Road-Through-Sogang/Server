@@ -18,7 +18,8 @@ class Command(BaseCommand):
             'category21': '전공입문교과',
             'category23_d': '필수',
             'category22_d': '필수',
-            'category21_d': '필수'
+            'category21_d': '필수',
+            'tech': None
         },
         {
             'title': '경제수리기초',
@@ -34,7 +35,8 @@ class Command(BaseCommand):
             'category21': '전공입문교과',
             'category23_d': '선택',
             'category22_d': '선택',
-            'category21_d': '선택'
+            'category21_d': '선택',
+            'tech': None
         },
         {
             'title': '미적분학 I',
@@ -50,7 +52,8 @@ class Command(BaseCommand):
             'category21': '전공입문교과',
             'category23_d': '선택',
             'category22_d': '선택',
-            'category21_d': '선택'
+            'category21_d': '선택',
+            'tech': None
         },        
         {
             'title': '미적분학 II',
@@ -66,7 +69,8 @@ class Command(BaseCommand):
             'category21': '전공입문교과',
             'category23_d': '선택',
             'category22_d': '선택',
-            'category21_d': '선택'
+            'category21_d': '선택',
+            'tech': None
         },        
         {
             'title': '경제학원론 I',
@@ -82,7 +86,8 @@ class Command(BaseCommand):
             'category21': '전공필수교과',
             'category23_d': None,
             'category22_d': None,
-            'category21_d': None
+            'category21_d': None,
+            'tech': None
         },
         {
             'title': '경제학원론 II',
@@ -98,7 +103,8 @@ class Command(BaseCommand):
             'category21': '전공필수교과',
             'category23_d': None,
             'category22_d': None,
-            'category21_d': None
+            'category21_d': None,
+            'tech': None
         },
         {
             'title': '금융경제학',
@@ -271,7 +277,7 @@ class Command(BaseCommand):
             'tech': '공공경제'
         },
     ]
-def handle(self, *args, **options):
+    def handle(self, *args, **options):
         for lecture in self.Lectures:
             lec = Lecture(
             title = lecture['title'], 
@@ -285,8 +291,11 @@ def handle(self, *args, **options):
             category23 = Category.objects.get( title = lecture['category23'], detail = lecture['category23_d']),
             category22 = Category.objects.get( title = lecture['category22'], detail = lecture['category22_d']),            
             category21 = Category.objects.get( title = lecture['category21'], detail = lecture['category21_d']),
-            tech = MajorTech.objects.get(title = lecture['tech'])
+            teach = 0,
+            advance = 0
             )
+            if (lecture['tech']) is not None:
+                lec.tech = MajorTech.objects.get( title = lecture['tech'])
             lec.save()
         self.stdout.write(self.style.SUCCESS('Lectures initialized'))
         return 0
