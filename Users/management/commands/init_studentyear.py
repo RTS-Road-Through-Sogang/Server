@@ -4,14 +4,6 @@ class Command(BaseCommand):
     help = 'Initialize StudentYear'
     StudentYear = [  
         {
-            'student_year': 19,
-            
-        }, 
-        {
-            'student_year': 20,
-            
-        }, 
-        {
             'student_year': 21,
             
         }, 

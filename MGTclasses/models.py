@@ -43,6 +43,7 @@ class MajorTrack(models.Model): #트랙당 전공이수학점이 달라서 해�
     complete_point = models.IntegerField() #해당 전공 필수 총이수 학점
     gicho_point = models.IntegerField() #전공입문 학점
     duty_point = models.IntegerField() #전공필수 학점
+    duty_choice_point = models.IntegerField() #전공필수선택 학점
     choice_point = models.IntegerField() #전공선택 학점
     # advance_point = models.IntegerField() #전공심화 학점
 
