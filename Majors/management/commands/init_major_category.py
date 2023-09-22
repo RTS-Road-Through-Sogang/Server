@@ -1,5 +1,10 @@
 from django.core.management.base import BaseCommand
-from Commonclasses.models import *
+# from Commonclasses.models import *
+# from CSEclasses.models import *
+# from ECOclasses.models import *
+# from MGTclasses.models import *
+from Majors.models import *
+
 class Command(BaseCommand):
     help = 'Initialize Major, Category'
     Major = [  
