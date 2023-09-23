@@ -7,9 +7,11 @@ assignees: ''
 
 ---
 
-# 이슈 템플릿
-## 제목 1
--
+## Description
+설명을 작성하시오
 
-## 제목 2
--
+## To-do
+- [ ] todo
+- [ ] todo
+
+## ETC
