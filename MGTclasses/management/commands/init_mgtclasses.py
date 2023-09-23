@@ -177,25 +177,8 @@ class Command(BaseCommand):
             'choice_point' : 15
         }
     ]
-    Lecture =[ 
-        {
-            'title': '마케팅원론',
-            'code':'MGT3009',
-            'point': 3,
-            'semester_one': 3,
-            'semester_two': 3,
-            'teamplay': 4,
-            'grade_recommend': 2,
-            'season_open': 0,
-            'category23': '전공필수',
-            'category22': '전공필수',
-            'category21': '전공필수',
-            'category23_d': '필수',
-            'category22_d': '필수',
-            'category21_d': '필수',
-            'tech': '공공경제'
-        }, 
-    ]
+    
+    
 
     def handle(self, *args, **options):
 
@@ -222,8 +205,8 @@ class Command(BaseCommand):
                 complete_point = majortrack['complete_point'],
                 gicho_point = majortrack['gicho_point'],
                 duty_point = majortrack['duty_point'],
-                duty_choice_point = ['duty_choice_point'],
-                choice_point = ['choice_point']
+                duty_choice_point = majortrack['duty_choice_point'],
+                choice_point = majortrack['choice_point']
             
             )
             

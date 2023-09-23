@@ -296,6 +296,13 @@ class Command(BaseCommand):
             )
             if (lecture['tech']) is not None:
                 lec.tech = MajorTech.objects.get( title = lecture['tech'])
+            former_title = lecture.get('former')
+
+            if former_title:
+                    try:
+                        lec.former = Lecture.objects.get(title=former_title)
+                    except Lecture.DoesNotExist:
+                        pass
             lec.save()
         self.stdout.write(self.style.SUCCESS('Lectures initialized'))
         return 0
