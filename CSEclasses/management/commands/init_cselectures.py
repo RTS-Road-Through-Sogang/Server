@@ -1,90 +1,9 @@
-
 from django.core.management.base import BaseCommand
 from Majors.models import *
 from CSEclasses.models import *
 
-
 class Command(BaseCommand):
-    tracks = [
-        {
-            'major': '컴퓨터공학',
-            'title':'단일전공',
-            'student_year': 23
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'융합과정',
-            'student_year': 23
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'다전공 1전공',
-            'student_year': 23
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'다전공 타전공',
-            'student_year': 23
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'교직과정',
-            'student_year': 23
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'단일전공',
-            'student_year': 22
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'융합과정',
-            'student_year': 22
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'다전공 1전공',
-            'student_year': 22
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'다전공 타전공',
-            'student_year': 22
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'교직과정',
-            'student_year': 22
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'단일전공',
-            'student_year': 21
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'융합과정',
-            'student_year': 21
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'다전공 1전공',
-            'student_year': 21
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'다전공 타전공',
-            'student_year': 21
-        },
-        {
-            'major': '컴퓨터공학',
-            'title':'교직과정',
-            'student_year': 21
-        },
-        
-    ]
-    
-    lectures = [
+    Lectures = [
         {   'title': '미적분학1',
             'code':'STS2005',
             'point': 3,
@@ -97,6 +16,10 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
+            'category23_d': '필수',
+            'category22_d': '필수',
+            'category21_d': '필수',
+            'tech' : None
         },
         {   'title': '미적분학2',
             'code':'STS2006',
@@ -110,6 +33,10 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
+            'category23_d': '필수',
+            'category22_d': '필수',
+            'category21_d': '필수',
+            'tech' : None
         },
         {   'title': '일반물리실험1',
             'code':'PHY1101',
@@ -123,6 +50,10 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
+            'category23_d': '필수',
+            'category22_d': '필수',
+            'category21_d': '필수',
+            'tech' : None
         },
         {   'title': '일반물리1',
             'code':'PHY1001',
@@ -136,6 +67,10 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
+            'category23_d': '필수',
+            'category22_d': '필수',
+            'category21_d': '필수',
+            'tech' : None
         },
         {   'title': '응용수학1',
             'code':'MAT2410',
@@ -149,6 +84,10 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
+            'category23_d': '필수',
+            'category22_d': '필수',
+            'category21_d': '필수',
+            'tech' : None
         },
         {   'title': '응용수학2',
             'code':'MAT2420',
@@ -162,6 +101,10 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
+            'category23_d': '필수',
+            'category22_d': '필수',
+            'category21_d': '필수',
+            'tech' : None
         },
         {   'title': '응용수학1',
             'code':'MAT2010',
@@ -175,17 +118,38 @@ class Command(BaseCommand):
             'category23': '전공입문교과',
             'category22': '전공입문교과',
             'category21': '전공입문교과',
+            'category23_d': '필수',
+            'category22_d': '필수',
+            'category21_d': '필수',
+            'tech' : None
         },
     ]
-    
     def handle(self, *args, **options):
-        for track in self.tracks:
-            Track.objects.get_or_create(
-                major = Major.objects.get(title = track['major']),
-                title = track['title'],
-                student_year = StudentYear.objects.get(student_year=track['student_year'])
+        for lecture in self.Lectures:
+            lec = Lecture(
+            title = lecture['title'], 
+            code = lecture['code'], 
+            point = lecture['point'], 
+            semester_one = lecture['semester_one'], 
+            semester_two = lecture['semester_two'], 
+            teamplay = lecture['teamplay'], 
+            season_open = lecture['season_open'], 
+            grade_recommend = lecture['grade_recommend'], 
+            category23 = Category.objects.get( title = lecture['category23'], detail = lecture['category23_d']),
+            category22 = Category.objects.get( title = lecture['category22'], detail = lecture['category22_d']),            
+            category21 = Category.objects.get( title = lecture['category21'], detail = lecture['category21_d']),
+            teach = 0,
+            advance = 0
             )
-        self.stdout.write(self.style.SUCCESS('Tracks initialized'))
+            if (lecture['tech']) is not None:
+                lec.tech = MajorTech.objects.get( title = lecture['tech'])
+            former_title = lecture.get('former')
+
+            if former_title:
+                    try:
+                        lec.former = Lecture.objects.get(title=former_title)
+                    except Lecture.DoesNotExist:
+                        pass
+            lec.save()
+        self.stdout.write(self.style.SUCCESS('Lectures initialized'))
         return 0
-            
-        
