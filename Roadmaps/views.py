@@ -60,20 +60,21 @@ class RoadmapFullView(generics.ListAPIView):
         user = MyUser.objects.get(student_number=user_id)
         roadmaps = Roadmap.objects.filter(student=user)
         roadmap_data = {'roadmaps': []}
+
         for roadmap in roadmaps:
             roadmap_info = RoadMapSerializer(roadmap).data
             roadmap_details = RoadmapDetail.objects.filter(roadmap=roadmap)
-            roadmap_info['roadmapdetaillecture'] = []
+            roadmap_info['roadmap_detail'] = []  
 
             for detail in roadmap_details:
                 detail_data = RoadMapDetailSerializer(detail).data
-                semester = detail_data['semester']  # Get the semester information
+                semester = detail_data['semester']
                 detail_lectures = RoadmapDetailLecture.objects.filter(roadmap_detail=detail)
-                detail_data['lectures'] = RoadMapDetailLectureSerializer(detail_lectures, many=True).data
-                roadmap_info['roadmapdetaillecture'].append({
-                    semester: detail_data['lectures']  # Add semester information
-                })
+                lectures_data = RoadMapDetailLectureSerializer(detail_lectures, many=True).data
+                detail_data['roadmapdetaillecture'] = {semester: lectures_data}  
+                roadmap_info['roadmap_detail'].append(detail_data['roadmapdetaillecture']) 
 
             roadmap_data['roadmaps'].append(roadmap_info)
 
         return JsonResponse(roadmap_data['roadmaps'], safe=False)
+
