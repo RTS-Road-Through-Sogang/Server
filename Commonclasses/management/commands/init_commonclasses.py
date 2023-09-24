@@ -161,18 +161,7 @@ class Command(BaseCommand):
             'category22': '글로벌 언어1',
             'category21': '글로벌 언어1'
         },
-        {   'title': '초급 아랍어',
-            'code':'LCU4105',
-            'point': 3,
-            'semester_one': 3,
-            'semester_two': 3,
-            'teamplay': 1,
-            'grade_recommend': 1,
-            'season_open': 0,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
-        },
+        
         {   'title': '알바트로스 세미나',
             'code':'COR1015',
             'point': 3,

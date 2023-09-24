@@ -98,7 +98,7 @@ class Lecture(models.Model):
     )
 
     def __str__(self):
-        return f"{self.title}_{self.category19}"
+        return f"{self.title}_{self.category21}_{self.category22}_{self.category23}"
 
 class UserCommonLecture(models.Model):
     user = models.ForeignKey(
