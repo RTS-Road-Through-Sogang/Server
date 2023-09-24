@@ -106,23 +106,7 @@ class Command(BaseCommand):
             'category21_d': '필수',
             'tech' : None
         },
-        {   'title': '응용수학1',
-            'code':'MAT2010',
-            'point': 3,
-            'semester_one': 3,
-            'semester_two': 3,
-            'teamplay': 1,
-            'former': None,
-            'grade_recommend': 1,
-            'season_open': 1,
-            'category23': '전공입문교과',
-            'category22': '전공입문교과',
-            'category21': '전공입문교과',
-            'category23_d': '필수',
-            'category22_d': '필수',
-            'category21_d': '필수',
-            'tech' : None
-        },
+        
     ]
     def handle(self, *args, **options):
         for lecture in self.Lectures:
