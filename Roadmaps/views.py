@@ -67,9 +67,12 @@ class RoadmapFullView(generics.ListAPIView):
 
             for detail in roadmap_details:
                 detail_data = RoadMapDetailSerializer(detail).data
+                semester = detail_data['semester']  # Get the semester information
                 detail_lectures = RoadmapDetailLecture.objects.filter(roadmap_detail=detail)
                 detail_data['lectures'] = RoadMapDetailLectureSerializer(detail_lectures, many=True).data
-                roadmap_info['roadmapdetaillecture'].append(detail_data['lectures'])
+                roadmap_info['roadmapdetaillecture'].append({
+                    semester: detail_data['lectures']  # Add semester information
+                })
 
             roadmap_data['roadmaps'].append(roadmap_info)
 
