@@ -19,7 +19,10 @@ class UserMajorSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserMajor
         fields = ['major']
-
+class CommonLectureDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommonLecture
+        fields ='__all__'
 
 class ECOLectureDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -57,10 +60,29 @@ class LectureDetailSerializer(serializers.ModelSerializer):
         model = RoadmapDetailLecture
         fields = '__all__'"""
 
+
+
 class RoadMapDetailLectureSerializer(serializers.ModelSerializer):
+
+    common_name = CommonLectureDetailSerializer(source='commonlecture', read_only=True)
+    eco_name = ECOLectureDetailSerializer(source='ecolecture', read_only=True)
+    mgt_name = MGTLectureDetailSerializer(source='mgtlecture', read_only=True)
+    cse_name = CSELectureDetailSerializer(source='cselecture', read_only=True)
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
+
+        if data['common_name'] is not None:
+            data['common_name'] = data['common_name']['title']
+        if data['eco_name'] is not None:
+            data['eco_name'] = data['eco_name']['title']
+        if data['mgt_name'] is not None:
+            data['mgt_name'] = data['mgt_name']['title']
+        if data['cse_name'] is not None:
+            data['cse_name'] = data['cse_name']['title']
+
         return {key: value for key, value in data.items() if value is not None}
+
     class Meta:
         model = RoadmapDetailLecture
         fields = '__all__'
@@ -75,7 +97,7 @@ class RoadMapDetailSerializer(serializers.ModelSerializer):
 class RoadMapSerializer(serializers.ModelSerializer):
     roadmap_detail = RoadMapDetailSerializer(many=True, read_only=True)
     major = UserMajorSerializer(many=True, read_only=True)
-    track = serializers.StringRelatedField()  # Remove the source argument
+    track = serializers.StringRelatedField()  
     student = serializers.StringRelatedField(source='student.student_number')
     
     class Meta:
