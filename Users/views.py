@@ -64,7 +64,7 @@ def signup_view(request):
             send_mail(
                 'Email Verification',
                 f'Your verification code is: {verification_code}',
-                'soganglikelionverify@gmail.com',
+                'rtssogang@gmail.com',
                 [email],
                 fail_silently=False,
             )
