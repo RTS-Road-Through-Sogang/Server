@@ -52,7 +52,7 @@ class MyUser(AbstractBaseUser,PermissionsMixin):
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    
+    major = models.ForeignKey(Major, on_delete=models.CASCADE, related_name= "prime_major", null=True)
     objects = MyUserManager()
     
     USERNAME_FIELD = 'student_number'
@@ -112,7 +112,11 @@ class UserMajor(models.Model):
             return f"{self.user}'s submajor-{self.major}"
         else:
             return f"{self.user}'s primemajor-{self.major}"
-        
+    def create_usermajor(user, major, prime, completed):
+        user_major = UserMajor(user=user, major=major, prime=prime, completed=completed)
+        user_major.save()
+        return user_major
+            
 class CompletedEng(models.Model):
     completedeng = models.IntegerField()
     user = models.ForeignKey(

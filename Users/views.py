@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-
+from Majors import *
 from rest_framework import status
 from rest_framework import generics
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -39,7 +39,7 @@ def signup_view(request):
         password = data.get('password')
         name = data.get('name')
         student_number = data.get('student_number')
-        
+        prime_major = data.get('major')
         # 회원가입 시에 입력을 받나?
         # completed_total = data.get('completed_total')
         # completed_common = data.get('completed_common')
@@ -58,8 +58,10 @@ def signup_view(request):
         if email and password and name and student_number:
             # 인증 코드 생성 및 저장
             verification_code = generate_verification_code()
-            user = User.objects.create_user(email=email, password=password, name=name, student_number=student_number, verification_code=verification_code)
-
+            majors = Major.objects.get(title=prime_major)
+            
+            user = User.objects.create_user(email=email, password=password, name=name, student_number=student_number, verification_code=verification_code,major = majors )
+            user_major = UserMajor.create_usermajor(user=user, major=majors, prime=True, completed=0)
             # 인증 메일 전송
             send_mail(
                 'Email Verification',
