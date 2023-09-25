@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .serializers import *
+from Users.models import MyUser
 from rest_framework.response import Response
 from django.http import JsonResponse
 
@@ -40,3 +41,12 @@ class RoadmapFullView(generics.ListAPIView):
 
         return JsonResponse(roadmap_data['roadmaps'], safe=False)
 
+
+
+# 1. 전공에 따라서 어떤 track이 있는지와 본전공을 제외한 전공 데이터들을 보내줘야됨
+class TrackByMajor(generics.ListAPIView):
+    serializer_class = UserMajorTrackSerializer
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        queryset = MyUser.objects.filter(pk=pk)
+        return queryset
