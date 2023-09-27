@@ -140,26 +140,54 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
     #     return obj.major.title
 
     def get_major_tracks(self, obj):
-        major = obj.major  # MyUser 모델의 major 필드 값 가져오기
         student_year = obj.student_year
+        major = obj.major
+        all_tracks = []
+
         if major.title == "컴퓨터공학":
-            # MyUser의 major 필드 값을 기반으로 Track 모델 정보 가져오기
-            cse_tracks = CSETrack.objects.filter(major=major, student_year=student_year)
-            # 시리얼라이즈된 데이터를 리턴
+            cse_tracks = CSETrack.objects.filter(major=major, student_year=student_year).exclude(title="다전공 타전공")
             cse_serialized = TrackSerializer(cse_tracks, many=True).data
-            return {'CSE_tracks': cse_serialized}
+            all_tracks.append({'CSE_tracks': cse_serialized})
+            second_major_info = {
+                "second_major": [
+                    {"major1": "경영"},
+                    {"major2": "경제"}
+                ]
+            }
         elif major.title == "경영":
-            # MyUser의 major 필드 값을 기반으로 Track 모델 정보 가져오기
-            mgt_tracks = MGTTrack.objects.filter(major=major, student_year__student_year=student_year)
-            # 시리얼라이즈된 데이터를 리턴
+            mgt_tracks = MGTTrack.objects.filter(major=major, student_year__student_year=student_year).exclude(title="다전공 타전공")
             mgt_serialized = TrackSerializer(mgt_tracks, many=True).data
-            return {'MGT_tracks': mgt_serialized}
+            mgt_track_info = {'MGT_tracks': mgt_serialized}
+            
+            # Add second major information here
+            second_major_info = {
+                "second_major": [
+                    {"major": "컴퓨터공헉"},
+                    {"major": "경제"}
+                ]
+            }
+            mgt_track_info.update(second_major_info)
+            
+            all_tracks.append(mgt_track_info)
         elif major.title == "경제":
-            # MyUser의 major 필드 값을 기반으로 Track 모델 정보 가져오기
-            eco_tracks = ECOTrack.objects.filter(major=major, student_year=student_year)
-            # 시리얼라이즈된 데이터를 리턴
+            eco_tracks = ECOTrack.objects.filter(major=major, student_year=student_year).exclude(title="다전공 타전공")
             eco_serialized = TrackSerializer(eco_tracks, many=True).data
-            return {'ECO_tracks': eco_serialized}
-        else:
-            return None
+            all_tracks.append({'ECO_tracks': eco_serialized})
+            second_major_info = {
+                "second_major": [
+                    {"major": "컴퓨터공학"},
+                    {"major": "경제"}
+                ]
+            }
+        return all_tracks
 ############################################################################################################################################################
+
+
+class alllectures(serializers.ModelSerializer):
+    common_name = CommonLectureDetailSerializer(source='commonlecture', read_only=True)
+    eco_name = ECOLectureDetailSerializer(source='ecolecture', read_only=True)
+    mgt_name = MGTLectureDetailSerializer(source='mgtlecture', read_only=True)
+    cse_name = CSELectureDetailSerializer(source='cselecture', read_only=True)
+    class Meta:
+        model = CommonLecture
+        fields = "__all__"
