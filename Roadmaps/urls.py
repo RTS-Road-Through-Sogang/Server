@@ -3,7 +3,9 @@ from .views import *
 
 
 urlpatterns = [
-    path('<str:user_id>/',RoadmapFullView.as_view() ),
+    path('',RoadmapFullView.as_view() ),
 ############################################################################################################################################################
-    path('usermajortracks/<int:pk>/',TrackByMajor.as_view()),
+    path('usermajortracks/',TrackByMajor.as_view()),
+############################################################################################################################################################
+    path('completed_lecture/<str:title>/',DoneLectures.as_view() )
 ]

@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 from .models import *
 
+#############################################################################3
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,3 +25,5 @@ class UserPreviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
         fields = ('student_number', )
+
+############################################################################33
