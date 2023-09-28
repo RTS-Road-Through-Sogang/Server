@@ -139,7 +139,7 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
     # def get_major(self, obj):
     #     return obj.major.title
 
-    def get_major_tracks(self, obj):
+    def get_major_tracks(self, obj): #obj가 user_a
         student_year = obj.student_year
         major = obj.major
         all_tracks = []
@@ -162,7 +162,7 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
             # Add second major information here
             second_major_info = {
                 "second_major": [
-                    {"major": "컴퓨터공헉"},
+                    {"major": "컴퓨터공학"},
                     {"major": "경제"}
                 ]
             }
@@ -180,6 +180,11 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
                 ]
             }
         return all_tracks
+
+class CommonLectureListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommonLecture
+        fields = '__all__'  # 필요한 필드를 지정하거나 '__all__'을 사용하여 모든 필드를 직렬화할 수 있습니다.
 ############################################################################################################################################################
 
 
