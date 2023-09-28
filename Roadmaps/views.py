@@ -60,7 +60,78 @@ class TrackByMajor(APIView):
         
 
 # 1.5. 공통고르는건 똑같으니까 공통 데이터부터 보내주자.
+# #class CategoryCommonLectureListView(generics.ListAPIView):
+# #     serializer_class = CategoryCommonLecturesSerializer()
 
+# #     def get_queryset(self):
+# #         # URL 매개변수로 전달된 category_detail 값을 가져옵니다.
+# #         category_detail = self.kwargs['category_detail']
+
+# #         # Category 모델에서 detail 필드 값이 category_detail과 일치하는 카테고리를 가져옵니다.
+# #         category = Category.objects.get(detail=category_detail)
+# #         print(category_detail)
+# #         # 해당 카테고리에 속하는 CommonLecture 데이터를 가져와서 반환합니다.
+# #         common_lectures = CommonLecture.objects.filter(category23__detail=category.detail)
+        
+# #         return common_lectures
+# # class CategoryCommonLecturesView(generics.ListAPIView):
+# #     serializer_class = CategoryCommonLecturesSerializer
+
+#     def get_queryset(self):
+#         # URL에서 pk 값을 가져옵니다.
+#         pk = self.kwargs.get('pk')
+        
+#         # pk를 사용하여 사용자의 student_year를 가져옵니다.
+#         student_year = self.get_student_year(pk)  # 사용자 모델 및 필드 이름에 따라 조정 필요
+
+#         # 동적으로 필드 이름을 생성합니다.
+#         category_field_name = f'category{student_year}'
+
+#         # 이제 category_field_name을 사용하여 필요한 필드를 필터링하여 반환합니다.
+#         try:
+#             category = Category.objects.get(detail='서강인성')
+#         except Category.DoesNotExist:
+#             category = None
+
+#         if category:
+#             commonlectures = CommonLecture.objects.filter(**{category_field_name: category})
+#         else:
+#             commonlectures = CommonLecture.objects.none()
+
+#         return commonlectures
+
+#     def get_student_year(self, pk):
+#         # pk를 사용하여 사용자를 가져옵니다.
+#         user = MyUser.objects.get(pk=pk)  # 사용자 모델에 따라 조정 필요
+
+#         # 사용자 모델에서 student_year 필드를 가져옵니다.
+#         student_year = user.student_year  # 사용자 모델 및 필드 이름에 따라 조정 필요
+
+#         return student_year
+#     serializer_class = CategoryGroupSerializer  # 사용할 시리얼라이저 클래스 지정
+
+#     def get_queryset(self):
+#         user_id = self.kwargs['user_id']
+#         user = MyUser.objects.get(student_number=user_id)
+#         category_field_name = f"category{user.student_year}"
+#         # 필요한 데이터를 쿼리합니다.
+#         # 예: 공통 필수 교과목, 공통 선택 교과목에 해당하는 데이터를 가져옵니다.
+#         common_duty_lectures = CommonLecture.objects.filter(category_field_name=)  # 필터링 조건을 지정하세요
+#         common_choice_lectures = CommonLecture.objects.filter(...)  # 필터링 조건을 지정하세요
+
+#         # 필터링된 데이터를 반환합니다.
+#         return {
+#             '공통 필수 교과': common_duty_lectures,
+#             '공통 선택 교과': common_choice_lectures,
+#         }
+    
+#     def list(self, request, *args, **kwargs):
+#         # get_queryset()에서 반환된 데이터를 시리얼라이즈합니다.
+#         queryset = self.get_queryset()
+#         serializer = self.get_serializer(queryset)
+
+#         # JSON 형식으로 응답합니다.
+#         return Response(serializer.data)
 
 # 2. 프론트로부터 고른 track과 다전공일때의 부전공을 받았을때 부전공이 null인지 1개인지 2개인지를 확인.
 

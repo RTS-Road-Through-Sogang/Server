@@ -180,6 +180,72 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
                 ]
             }
         return all_tracks
+
+# class CommonLectureDetailSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = CommonLecture
+#         fields ='__all__'
+# class CategoryLectureSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Lecture
+#         fields = ('title', 'code', 'point')  # 원하는 필드 추가
+
+# 공통필수교과 과목들
+    # major = MajorSerializer()
+    # major_tracks = serializers.SerializerMethodField()
+    # # major = UserMajorSerializer(many=True, read_only=True)
+    # class Meta:
+    #     model = MyUser
+    #     fields = ('name', 'major', 'major_tracks')
+    
+    # # def get_major(self, obj):
+    # #     return obj.major.title
+
+    # def get_major_tracks(self, obj):
+    #     major = obj.major  # MyUser 모델의 major 필드 값 가져오기
+    #     student_year = obj.student_year
+    #     if major.title == "컴퓨터공학":
+    #         # MyUser의 major 필드 값을 기반으로 Track 모델 정보 가져오기
+    #         cse_tracks = CSETrack.objects.filter(major=major, student_year=student_year)
+    #         # 시리얼라이즈된 데이터를 리턴
+    #         cse_serialized = TrackSerializer(cse_tracks, many=True).data
+    #         return {'CSE_tracks': cse_serialized}
+
+# #class CategoryCommonLecturesSerializer(serializers.Serializer):
+# #     # common_lectures = CommonLectureDetailSerializer(many=True, source='commonlecture_set.filter_by_category', read_only=True)
+# #     common_lectures = serializers.SerializerMethodField()
+
+# #     class Meta:
+# #         model = Category
+# #         fields = ('detail', 'common_lectures')
+    
+# #     def get_common_lectures(self, obj):
+# #         detail = obj.detail
+# #         if detail == '서강인성':
+# #             common_lecture = CommonLecture.objects.filter(detail=category.)
+
+
+# class CategoryCommonLecturesSerializer(serializers.Serializer):
+
+#     category_common_lecture = serializers.SerializerMethodField()
+
+#     def get_category_common_lecture(self, obj):
+#         user = self.context['request'].user
+#         student_year = user.student_year
+#         category_field_name = f"category{student_year}"
+        
+#         category_name = "글쓰기"
+        
+#         try:
+#             category = Category.objects.get(detail=category_name)
+#         except Category.DoesNotExist:
+#             return []
+        
+#         lectures = CommonLecture.objects.filter(**{category_field_name: category})
+#         serialized_lectures = CommonLectureDetailSerializer(lectures, many=True).data
+#         return serialized_lectures
+
+
 ############################################################################################################################################################
 
 
