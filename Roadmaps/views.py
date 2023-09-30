@@ -168,7 +168,7 @@ class CommonChoiceLectureListView(generics.ListAPIView):
 ############################################################################################################################################################
 class DoneLectures(generics.ListAPIView):
     serializer_class = alllectures
-    def get_qeuryset(self):
+    def get_queryset(self):
         user_request = request.user
         completed_lecture = UserCommonLecture.objects.filter(user=user_request).values_list('commonlecture_id', flat=True)
         uncompleted_lectures = CommonLecture.objects.exclude(id__in=completed_lecture)

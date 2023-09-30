@@ -27,7 +27,7 @@ class Track(models.Model):  #다전공, 심화전공...
         related_name='MGT_studentyear_track' #학번에 해당하는 트랙
     )
     def __str__(self):
-        return f"{self.title} - {self.student_year}"
+        return f"{self.title} - {self.student_year} - {self.pk}"
     
 class MajorTrack(models.Model): #트랙당 전공이수학점이 달라서 해결하기 위함
     track = models.ForeignKey(
@@ -48,7 +48,7 @@ class MajorTrack(models.Model): #트랙당 전공이수학점이 달라서 해�
     # advance_point = models.IntegerField() #전공심화 학점
 
     def __str__(self):
-        return f"{self.major} - {self.track}"
+        return f"{self.major} - {self.track} - {self.pk}"
 
 # class StudentYearCategory(models.Model):
 #     student_year = models.ForeignKey(

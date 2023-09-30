@@ -3,7 +3,7 @@ from ECOclasses.models import *
 from Majors.models import *
 class Command(BaseCommand):
 
-    help = 'Initialize , Category'
+    help = 'Initialize , ECO'
     MajorTech = [  
         {
 
@@ -201,8 +201,9 @@ class Command(BaseCommand):
             )
         
         for majortrack in self.MajorTrack:
+            
             MajorTrack.objects.get_or_create(
-                track = Track.objects.get(pk=majortrack['track']),
+                track = Track.objects.get(pk=majortrack['track']+12),
                 major =  Major.objects.get(title="경제"),
                 complete_point = majortrack['complete_point'],
                 gicho_point = majortrack['gicho_point'],
