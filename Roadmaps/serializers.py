@@ -196,3 +196,21 @@ class alllectures(serializers.ModelSerializer):
     class Meta:
         model = CommonLecture
         fields = "__all__"
+########################################################################################33333
+# roadmap (맨처음거 만들고난 추후)만들기
+class RoadmapDetailCreateSerializer(serializers.Serializer):
+    roadmap_id = serializers.IntegerField()
+    # 여기서 roadmap_id를 받는걸로 되어있지만 추후에 프론트랑 이야기해서 변경해야함
+    def create(self, validated_data):
+        roadmap_id = validated_data.get('roadmap_id') 
+        roadmap = Roadmap.objects.get(pk=roadmap_id) # Get roadmap_id
+        titles = ['1-1', '1-2', '2-1', '2-2', '3-1', '3-2', '4-1', '4-2']
+
+        for title in titles:
+            RoadmapDetail.objects.create(
+                semester=title,
+                roadmap =roadmap  # Use roadmap_id here
+            )
+
+        return roadmap_id
+##################################################################################################33
