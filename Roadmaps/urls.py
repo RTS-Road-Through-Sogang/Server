@@ -19,4 +19,9 @@ urlpatterns = [
     path('eco_gicho_lecture/<int:track_pk>' , ECOGichoLectureListView.as_view()),
     path('eco_choice_lecture/<int:track_pk>' , ECOChoiceLectureListView.as_view()),
     path('eco_duty_lecture/<int:track_pk>' , ECODutyLectureListView.as_view()),
+    ###########################################################################33
+    path('create_roadmap_details/', RoadmapDetailCreateView.as_view(), name='create_roadmap_details'),
+    path('create_roadmap_detail_lecture/', RoadmapDetailLectureCreateView.as_view(), name='create_roadmap_detail_lecture'),
+
+
 ]

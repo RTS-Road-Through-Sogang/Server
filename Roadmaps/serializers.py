@@ -196,3 +196,91 @@ class alllectures(serializers.ModelSerializer):
     class Meta:
         model = CommonLecture
         fields = "__all__"
+########################################################################################33333
+# roadmap (맨처음거 만들고난 추후)만들기
+class RoadmapDetailCreateSerializer(serializers.Serializer):
+    roadmap_id = serializers.IntegerField()
+    # 여기서 roadmap_id를 받는걸로 되어있지만 추후에 프론트랑 이야기해서 변경해야함
+    def create(self, validated_data):
+        roadmap_id = validated_data.get('roadmap_id') 
+        roadmap = Roadmap.objects.get(pk=roadmap_id) # Get roadmap_id
+        titles = ['1-1', '1-2', '2-1', '2-2', '3-1', '3-2', '4-1', '4-2']
+
+        for title in titles:
+            RoadmapDetail.objects.create(
+                semester=title,
+                roadmap =roadmap  # Use roadmap_id here
+            )
+
+        return roadmap_id
+    #########################################################################################3
+class RoadmapDetailLectureCreateSerializer(serializers.ModelSerializer):
+    roadmap_detail_id = serializers.IntegerField()
+    lecture_type = serializers.CharField()
+    lecture_id = serializers.IntegerField()
+
+    class Meta:
+        model = RoadmapDetailLecture
+        fields = '__all__'
+
+    # user 어쩌구도 저장되도록 만들어야 함
+    def create(self, validated_data):
+        roadmap_detail_id = validated_data.get('roadmap_detail_id')
+        lecture_type = validated_data.get('lecture_type')
+        lecture_id = validated_data.get('lecture_id')
+        
+        try:
+            if lecture_type == 'commonlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                
+                return RoadmapDetailLecture.objects.create(
+                    roadmap_detail=roadmap_detail,
+                    commonlecture=commonlecture
+                )
+
+            elif lecture_type == 'cselecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                cselecture = CSELecture.objects.get(pk=lecture_id)
+
+                return RoadmapDetailLecture.objects.create(
+                    roadmap_detail=roadmap_detail,
+                    cselecture=cselecture
+                )
+
+            elif lecture_type == 'ecolecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                ecolecture = ECOLecture.objects.get(pk=lecture_id)
+
+                return RoadmapDetailLecture.objects.create(
+                    roadmap_detail=roadmap_detail,
+                    ecolecture=ecolecture
+                )
+
+            elif lecture_type == 'mgtlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)  
+
+                if roadmap_detail and commonlecture:
+                    return RoadmapDetailLecture.objects.create(
+                        roadmap_detail=roadmap_detail,
+                        commonlecture=commonlecture
+                    )
+                else:
+                    raise serializers.ValidationError("Invalid roadmap_detail or commonlecture")
+
+
+            else:
+                raise serializers.ValidationError("Invalid lecture type")
+        except RoadmapDetail.DoesNotExist as e:
+            raise serializers.ValidationError(f"RoadmapDetail with id {roadmap_detail_id} does not exist.")
+        except CommonLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"CommonLecture with id {lecture_id} does not exist.")
+        except CSELecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"CSELecture with id {lecture_id} does not exist.")
+        except ECOLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"ECOLecture with id {lecture_id} does not exist.")
+        except MGTLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"MGTLecture with id {lecture_id} does not exist.")
+
+

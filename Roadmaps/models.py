@@ -21,7 +21,7 @@ class Roadmap(models.Model):
     )
     
     def __str__(self):
-        return f"{self.student}_{self.title}"
+        return f"{self.student}_{self.title}-{self.pk}"
     
 class RoadmapDetail(models.Model):
     semester = models.CharField(max_length=20) #1-1 1-S
@@ -34,7 +34,7 @@ class RoadmapDetail(models.Model):
     )
 
     def __str__(self):
-        return f"{self.roadmap.student}_{self.roadmap.title}_{self.semester}"
+        return f"{self.roadmap.student}_{self.roadmap.title}_{self.semester}_{self.pk}"
     
 class RoadmapDetailLecture(models.Model):
     roadmap_detail = models.ForeignKey(

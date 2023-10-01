@@ -132,7 +132,7 @@ class Lecture(models.Model):
     advance = models.BooleanField() #심화 : 0이면 F 1이면 T
 
     def __str__(self):
-        return self.title
+        return f"{self.title}_{self.pk}"
 
 class UserCSELecture(models.Model):
     user = models.ForeignKey(
