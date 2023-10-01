@@ -176,3 +176,361 @@ class DoneLectures(generics.ListAPIView):
         if search_keyword is not None:
             uncompleted_lectures = uncompleted_lectures.filter(title__icontains=search_keyword)
         return uncompleted_lectures
+# 3. 이수한것들 등록하는 url
+########################################################################################################################################################################3
+
+# 4. 컴공
+class CSEGichoLectureListView(generics.ListAPIView):
+    serializer_class = CSELectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = CSETrack.objects.get(pk=track_pk)
+        major_track = track.track_CSEtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.gicho_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공입문교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = CSELecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+
+class CSEDutyLectureListView(generics.ListAPIView):
+    serializer_class = CSELectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = CSETrack.objects.get(pk=track_pk)
+        major_track = track.track_CSEtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.duty_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공필수교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = CSELecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+
+
+class CSEChoiceLectureListView(generics.ListAPIView):
+    serializer_class = CSELectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = CSETrack.objects.get(pk=track_pk)
+        major_track = track.track_CSEtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.choice_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공선택교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = CSELecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+##########################################################################################################################3333
+# 경영
+class MGTGichoLectureListView(generics.ListAPIView):
+
+    serializer_class = MGTLectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = MGTTrack.objects.get(pk=track_pk)
+        major_track = track.track_MGTtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.gicho_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공입문교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = MGTLecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+
+class MGTDutyLectureListView(generics.ListAPIView):
+    serializer_class = MGTLectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = MGTTrack.objects.get(pk=track_pk)
+        major_track = track.track_MGTtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.duty_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공필수교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = MGTLecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+
+
+class MGTChoiceLectureListView(generics.ListAPIView):
+    serializer_class = MGTLectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = MGTTrack.objects.get(pk=track_pk)
+        major_track = track.track_MGTtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.choice_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공선택교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = MGTLecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+#####################################################################################################################################
+#6.경제
+class ECOGichoLectureListView(generics.ListAPIView):
+
+    serializer_class = ECOLectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = ECOTrack.objects.get(pk=track_pk)
+        major_track = track.track_ECOtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.gicho_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공입문교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = MGTLecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+
+class ECODutyLectureListView(generics.ListAPIView):
+    serializer_class = ECOLectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = ECOTrack.objects.get(pk=track_pk)
+        major_track = track.track_ECOtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.duty_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공필수교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = ECOLecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+
+
+class ECOChoiceLectureListView(generics.ListAPIView):
+    serializer_class = ECOLectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = ECOTrack.objects.get(pk=track_pk)
+        major_track = track.track_ECOtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.choice_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공선택교과'
+        category_details = ['']
+        queryset = []
+
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        for category in categories:
+            
+            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+            lectures = ECOLecture.objects.filter(**{category_field_name: category})
+            queryset.append({
+                category.detail: category_point,
+                'lectures': self.serializer_class(lectures, many=True).data
+            })
+
+        return queryset
+
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)

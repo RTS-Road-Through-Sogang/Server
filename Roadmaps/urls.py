@@ -9,5 +9,14 @@ urlpatterns = [
     path('commondutylecturelists/',CommonDutyLectureListView.as_view()),
     path('commonchoicelecturelists/',CommonChoiceLectureListView.as_view()),
 ############################################################################################################################################################
-    path('completed_lecture/',DoneLectures.as_view() )
+    path('completed_lecture/',DoneLectures.as_view() ),
+    path('cse_gicho_lecture/<int:track_pk>' , CSEGichoLectureListView.as_view()),
+    path('cse_choice_lecture/<int:track_pk>' , CSEChoiceLectureListView.as_view()),
+    path('cse_duty_lecture/<int:track_pk>' , CSEDutyLectureListView.as_view()),
+    path('mgt_gicho_lecture/<int:track_pk>' , MGTGichoLectureListView.as_view()),
+    path('mgt_choice_lecture/<int:track_pk>' , MGTChoiceLectureListView.as_view()),
+    path('mgt_duty_lecture/<int:track_pk>' , MGTDutyLectureListView.as_view()),
+    path('eco_gicho_lecture/<int:track_pk>' , ECOGichoLectureListView.as_view()),
+    path('eco_choice_lecture/<int:track_pk>' , ECOChoiceLectureListView.as_view()),
+    path('eco_duty_lecture/<int:track_pk>' , ECODutyLectureListView.as_view()),
 ]
