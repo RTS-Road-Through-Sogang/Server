@@ -362,13 +362,15 @@ class MGTDutyLectureListView(generics.ListAPIView):
         category_point = self.get_category_point(category_name)
         categories = Category.objects.filter(title=category_name)  # Use filter instead of get
         for category in categories:
-            
+            major_techs = MajorTech.objects.all()
+            for major_tech in major_techs:
             # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = MGTLecture.objects.filter(**{category_field_name: category})
-            queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
-            })
+                lectures = MGTLecture.objects.filter(**{category_field_name: category}, tech=major_tech)
+                if lectures.exists():  # Check if there are any lectures for this combination
+                    queryset.append({
+                        'major_tech_title': major_tech.title,
+                        'lectures': self.serializer_class(lectures, many=True).data
+                    })
 
         return queryset
 
@@ -401,13 +403,15 @@ class MGTChoiceLectureListView(generics.ListAPIView):
         category_point = self.get_category_point(category_name)
         categories = Category.objects.filter(title=category_name)  # Use filter instead of get
         for category in categories:
-            
+            major_techs = MajorTech.objects.all()
+            for major_tech in major_techs:
             # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = MGTLecture.objects.filter(**{category_field_name: category})
-            queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
-            })
+                lectures = MGTLecture.objects.filter(**{category_field_name: category}, tech=major_tech)
+                if lectures.exists():  # Check if there are any lectures for this combination
+                    queryset.append({
+                        'major_tech_title': major_tech.title,
+                        'lectures': self.serializer_class(lectures, many=True).data
+                    })
 
         return queryset
 
@@ -481,13 +485,15 @@ class ECODutyLectureListView(generics.ListAPIView):
         category_point = self.get_category_point(category_name)
         categories = Category.objects.filter(title=category_name)  # Use filter instead of get
         for category in categories:
-            
+            major_techs = MajorTech.objects.all()
+            for major_tech in major_techs:
             # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = ECOLecture.objects.filter(**{category_field_name: category})
-            queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
-            })
+                lectures = ECOLecture.objects.filter(**{category_field_name: category}, tech=major_tech)
+                if lectures.exists():  # Check if there are any lectures for this combination
+                    queryset.append({
+                        'major_tech_title': major_tech.title,
+                        'lectures': self.serializer_class(lectures, many=True).data
+                    })
 
         return queryset
 
@@ -520,13 +526,15 @@ class ECOChoiceLectureListView(generics.ListAPIView):
         category_point = self.get_category_point(category_name)
         categories = Category.objects.filter(title=category_name)  # Use filter instead of get
         for category in categories:
-            
+            major_techs = MajorTech.objects.all()
+            for major_tech in major_techs:
             # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = ECOLecture.objects.filter(**{category_field_name: category})
-            queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
-            })
+                lectures = ECOLecture.objects.filter(**{category_field_name: category}, tech=major_tech)
+                if lectures.exists():  # Check if there are any lectures for this combination
+                    queryset.append({
+                        'major_tech_title': major_tech.title,
+                        'lectures': self.serializer_class(lectures, many=True).data
+                    })
 
         return queryset
 
