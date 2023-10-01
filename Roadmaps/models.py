@@ -34,7 +34,7 @@ class RoadmapDetail(models.Model):
     )
 
     def __str__(self):
-        return f"{self.roadmap.student}_{self.roadmap.title}_{self.semester}"
+        return f"{self.roadmap.student}_{self.roadmap.title}_{self.semester}_{self.pk}"
     
 class RoadmapDetailLecture(models.Model):
     roadmap_detail = models.ForeignKey(

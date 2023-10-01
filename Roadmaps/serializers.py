@@ -213,4 +213,74 @@ class RoadmapDetailCreateSerializer(serializers.Serializer):
             )
 
         return roadmap_id
-##################################################################################################33
+    #########################################################################################3
+class RoadmapDetailLectureCreateSerializer(serializers.ModelSerializer):
+    roadmap_detail_id = serializers.IntegerField()
+    lecture_type = serializers.CharField()
+    lecture_id = serializers.IntegerField()
+
+    class Meta:
+        model = RoadmapDetailLecture
+        fields = '__all__'
+
+    # user 어쩌구도 저장되도록 만들어야 함
+    def create(self, validated_data):
+        roadmap_detail_id = validated_data.get('roadmap_detail_id')
+        lecture_type = validated_data.get('lecture_type')
+        lecture_id = validated_data.get('lecture_id')
+        
+        try:
+            if lecture_type == 'commonlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                
+                return RoadmapDetailLecture.objects.create(
+                    roadmap_detail=roadmap_detail,
+                    commonlecture=commonlecture
+                )
+
+            elif lecture_type == 'cselecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                cselecture = CSELecture.objects.get(pk=lecture_id)
+
+                return RoadmapDetailLecture.objects.create(
+                    roadmap_detail=roadmap_detail,
+                    cselecture=cselecture
+                )
+
+            elif lecture_type == 'ecolecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                ecolecture = ECOLecture.objects.get(pk=lecture_id)
+
+                return RoadmapDetailLecture.objects.create(
+                    roadmap_detail=roadmap_detail,
+                    ecolecture=ecolecture
+                )
+
+            elif lecture_type == 'mgtlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)  
+
+                if roadmap_detail and commonlecture:
+                    return RoadmapDetailLecture.objects.create(
+                        roadmap_detail=roadmap_detail,
+                        commonlecture=commonlecture
+                    )
+                else:
+                    raise serializers.ValidationError("Invalid roadmap_detail or commonlecture")
+
+
+            else:
+                raise serializers.ValidationError("Invalid lecture type")
+        except RoadmapDetail.DoesNotExist as e:
+            raise serializers.ValidationError(f"RoadmapDetail with id {roadmap_detail_id} does not exist.")
+        except CommonLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"CommonLecture with id {lecture_id} does not exist.")
+        except CSELecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"CSELecture with id {lecture_id} does not exist.")
+        except ECOLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"ECOLecture with id {lecture_id} does not exist.")
+        except MGTLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"MGTLecture with id {lecture_id} does not exist.")
+
+

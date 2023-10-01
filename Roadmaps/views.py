@@ -556,6 +556,70 @@ class RoadmapDetailCreateView(APIView):
     def post(self, request, format=None):
         serializer = RoadmapDetailCreateSerializer(data=request.data)
         if serializer.is_valid():
-            roadmap_id = serializer.save()  # Save returns roadmap_id
+            roadmap_id = serializer.save() 
             return Response(f"RoadmapDetails created successfully for Roadmap {roadmap_id}", status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#########################################################################################
+# 로드맵에 과목 넣어주기
+class RoadmapDetailLectureCreateView(APIView):
+    def post(self, request, format=None):
+        # 1. Serializer 인스턴스 생성
+        serializer = RoadmapDetailLectureCreateSerializer(data=request.data)
+
+        # 2. 데이터 유효성 검사
+        if serializer.is_valid():
+            roadmap_detail_id = serializer.validated_data.get('roadmap_detail_id')
+            lecture_type = serializer.validated_data.get('lecture_type')
+            lecture_id = serializer.validated_data.get('lecture_id')
+            
+            try:
+                if lecture_type == 'commonlecture':
+                    roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                    commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                    obj = RoadmapDetailLecture.objects.create(
+                        roadmap_detail=roadmap_detail,
+                        commonlecture=commonlecture
+                    )
+                elif lecture_type == 'cselecture':
+                    roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                    cselecture = CSELecture.objects.get(pk=lecture_id)
+                    obj = RoadmapDetailLecture.objects.create(
+                        roadmap_detail=roadmap_detail,
+                        cselecture=cselecture
+                    )
+                elif lecture_type == 'ecolecture':
+                    roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                    ecolecture = ECOLecture.objects.get(pk=lecture_id)
+                    obj = RoadmapDetailLecture.objects.create(
+                        roadmap_detail=roadmap_detail,
+                        ecolecture=ecolecture
+                    )
+                elif lecture_type == 'mgtlecture':
+                    roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                    commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                    obj = RoadmapDetailLecture.objects.create(
+                        roadmap_detail=roadmap_detail,
+                        commonlecture=commonlecture
+                    )
+                else:
+                    raise serializers.ValidationError("Invalid lecture type")
+
+            except RoadmapDetail.DoesNotExist as e:
+                return Response({"error": f"RoadmapDetail with id {roadmap_detail_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            except CommonLecture.DoesNotExist as e:
+                return Response({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            except CSELecture.DoesNotExist as e:
+                return Response({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            except ECOLecture.DoesNotExist as e:
+                return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            except MGTLecture.DoesNotExist as e:
+                return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # 원하는 작업을 수행한 후 응답을 반환하거나, 다른 처리를 수행할 수 있습니다.
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        # 유효성 검사에 실패한 경우 에러 응답 반환
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+##################################################################################################
