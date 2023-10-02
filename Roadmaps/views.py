@@ -166,6 +166,7 @@ class CommonChoiceLectureListView(generics.ListAPIView):
 # 2. 프론트로부터 고른 track과 다전공일때의 부전공을 받았을때 부전공이 null인지 1개인지 2개인지를 확인.
 
 ############################################################################################################################################################
+# 검색결과를 보여주는 것
 class DoneLectures(generics.ListAPIView):
     serializer_class = alllectures
     def get_queryset(self):
@@ -176,7 +177,6 @@ class DoneLectures(generics.ListAPIView):
         if search_keyword is not None:
             uncompleted_lectures = uncompleted_lectures.filter(title__icontains=search_keyword)
         return uncompleted_lectures
-# 3. 이수한것들 등록하는 url
 ########################################################################################################################################################################3
 
 # 4. 컴공
@@ -623,3 +623,57 @@ class RoadmapDetailLectureCreateView(APIView):
 
 
 ##################################################################################################
+# 이수한 놈들 추가할 수 있는 코드
+class CompletedLectureCreateView(APIView):
+    def post(self, request, format=None):
+        # 1. Serializer 인스턴스 생성
+        serializer = CompletedLectureCreateSerializer(data=request.data)
+        user_id = self.request.user
+        # 2. 데이터 유효성 검사
+        if serializer.is_valid():
+            lecture_type = serializer.validated_data.get('lecture_type')
+            lecture_id = serializer.validated_data.get('lecture_id')
+            
+            try:
+                if lecture_type == 'commonlecture':
+                    commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                    obj = UserCommonLecture.objects.create(
+                        user=user_id,
+                        commonlecture=commonlecture
+                    )
+                elif lecture_type == 'cselecture':
+                    cselecture = CSELecture.objects.get(pk=lecture_id)
+                    obj = UserCSELecture.objects.create(
+                        user=user_id,
+                        cselecture=cselecture
+                    )
+                elif lecture_type == 'ecolecture':
+                    ecolecture = ECOLecture.objects.get(pk=lecture_id)
+                    obj = UserECOLecture.objects.create(
+                        user=user_id,
+                        ecolecture=ecolecture
+                    )
+                elif lecture_type == 'mgtlecture':
+                    commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                    obj = UserMGTLecture.objects.create(
+                        user=user_id,
+                        commonlecture=commonlecture
+                    )
+                else:
+                    raise serializers.ValidationError("Invalid lecture type")
+
+            except CommonLecture.DoesNotExist as e:
+                return Response({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            except CSELecture.DoesNotExist as e:
+                return Response({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            except ECOLecture.DoesNotExist as e:
+                return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            except MGTLecture.DoesNotExist as e:
+                return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # 원하는 작업을 수행한 후 응답을 반환하거나, 다른 처리를 수행할 수 있습니다.
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        # 유효성 검사에 실패한 경우 에러 응답 반환
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#################################################################################################

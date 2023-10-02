@@ -196,6 +196,7 @@ class alllectures(serializers.ModelSerializer):
     class Meta:
         model = CommonLecture
         fields = "__all__"
+        
 ########################################################################################33333
 # roadmap (맨처음거 만들고난 추후)만들기
 class RoadmapDetailCreateSerializer(serializers.Serializer):
@@ -283,4 +284,70 @@ class RoadmapDetailLectureCreateSerializer(serializers.ModelSerializer):
         except MGTLecture.DoesNotExist as e:
             raise serializers.ValidationError(f"MGTLecture with id {lecture_id} does not exist.")
 
+###################################################################################################################
+#처음 등록시 user lecture에 넣어주는 역할
+class CompletedLectureCreateSerializer(serializers.ModelSerializer):
+    lecture_type = serializers.CharField()
+    lecture_id = serializers.IntegerField()
 
+    class Meta:
+        model = RoadmapDetailLecture
+        fields = '__all__'
+
+    # user 어쩌구도 저장되도록 만들어야 함
+    def create(self, request, validated_data):
+        user_id = self.request.user
+        lecture_type = validated_data.get('lecture_type')
+        lecture_id = validated_data.get('lecture_id')
+        
+        try:
+            if lecture_type == 'commonlecture':
+                
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                
+                return UserCommonLecture.objects.create(
+                    user=user_id,
+                    commonlecture=commonlecture
+                )
+
+            elif lecture_type == 'cselecture':
+                cselecture = CSELecture.objects.get(pk=lecture_id)
+
+                return UserCSELecture.objects.create(
+                    user=user_id,
+                    cselecture=cselecture
+                )
+
+            elif lecture_type == 'ecolecture':
+                ecolecture = ECOLecture.objects.get(pk=lecture_id)
+
+                return UserECOLecture.objects.create(
+                    user=user_id,
+                    ecolecture=ecolecture
+                )
+
+            elif lecture_type == 'mgtlecture':
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)  
+
+                if commonlecture:
+                    return UserMGTLecture.objects.create(
+                        user=user_id,
+                        commonlecture=commonlecture
+                    )
+                else:
+                    raise serializers.ValidationError("Invalid roadmap_detail or commonlecture")
+
+
+            else:
+                raise serializers.ValidationError("Invalid lecture type")
+        except CommonLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"CommonLecture with id {lecture_id} does not exist.")
+        except CSELecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"CSELecture with id {lecture_id} does not exist.")
+        except ECOLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"ECOLecture with id {lecture_id} does not exist.")
+        except MGTLecture.DoesNotExist as e:
+            raise serializers.ValidationError(f"MGTLecture with id {lecture_id} does not exist.")
+        ########################################################################################
+        # 학점 계산 한거 보여주기
+        
