@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from Commonclasses.models import Lecture as CommonLecture
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
+from django.db.models import Q
+
 # Create your views here.
 
 
@@ -167,16 +169,24 @@ class CommonChoiceLectureListView(generics.ListAPIView):
 
 ############################################################################################################################################################
 # 검색결과를 보여주는 것
-class DoneLectures(generics.ListAPIView):
+class CompletedSerachListAPIView(generics.ListAPIView):
+    queryset = CommonLecture.objects.all()
     serializer_class = alllectures
-    def get_queryset(self):
-        user_request = request.user
-        completed_lecture = UserCommonLecture.objects.filter(user=user_request).values_list('commonlecture_id', flat=True)
-        uncompleted_lectures = CommonLecture.objects.exclude(id__in=completed_lecture)
-        search_keyword = self.request.query_params.get('title', None)
-        if search_keyword is not None:
-            uncompleted_lectures = uncompleted_lectures.filter(title__icontains=search_keyword)
-        return uncompleted_lectures
+
+    def list(self, request, *args, **kwargs):
+        keyword = request.query_params.get('keyword', None)
+        queryset = self.get_queryset()
+        queryset = queryset.filter(flag=True)
+        try:
+            conditions = Q()
+            if keyword:
+                conditions |= Q(title__icontains=keyword)
+            queryset = queryset.filter(conditions)
+        except Exception as e:
+            return Response({'message': 'Filtering Error Occurred, Sorry'}, status=status.HTTP_404_NOT_FOUND)
+        serializer = alllectures(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 ########################################################################################################################################################################3
 
 # 4. 컴공

@@ -188,14 +188,12 @@ class CommonLectureListSerializer(serializers.ModelSerializer):
 ############################################################################################################################################################
 
 
-class alllectures(serializers.ModelSerializer):
+class alllectures(serializers.Serializer):
     common_name = CommonLectureDetailSerializer(source='commonlecture', read_only=True)
     eco_name = ECOLectureDetailSerializer(source='ecolecture', read_only=True)
     mgt_name = MGTLectureDetailSerializer(source='mgtlecture', read_only=True)
     cse_name = CSELectureDetailSerializer(source='cselecture', read_only=True)
-    class Meta:
-        model = CommonLecture
-        fields = "__all__"
+    
         
 ########################################################################################33333
 # roadmap (맨처음거 만들고난 추후)만들기
