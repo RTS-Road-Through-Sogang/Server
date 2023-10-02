@@ -22,6 +22,8 @@ urlpatterns = [
     ###########################################################################33
     path('create_roadmap_details/', RoadmapDetailCreateView.as_view(), name='create_roadmap_details'),
     path('create_roadmap_detail_lecture/', RoadmapDetailLectureCreateView.as_view(), name='create_roadmap_detail_lecture'),
+    path('completed_create_lecture/', CompletedLectureCreateView.as_view(), name='create_roadmap_detail_lecture'),
+
 
 
 ]
