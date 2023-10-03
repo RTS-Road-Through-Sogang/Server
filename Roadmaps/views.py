@@ -170,22 +170,51 @@ class CommonChoiceLectureListView(generics.ListAPIView):
 ############################################################################################################################################################
 # 검색결과를 보여주는 것
 class CompletedSerachListAPIView(generics.ListAPIView):
-    queryset = CommonLecture.objects.all()
-    serializer_class = alllectures
+    serializer_class = None
+
+    def get_serializer_class(self):
+        self.major = self.request.data.get('major')  # 이 부분을 추가하세요
+        if self.major == '경제':
+            return ECOLectureDetailSerializer
+        elif self.major == '컴퓨터공학':
+            return CSELectureDetailSerializer
+        elif self.major == '경영':
+            return MGTLectureDetailSerializer
+        elif self.major == '공통':
+            return CommonLectureDetailSerializer
+
+    def get_queryset(self):
+        major = self.request.data.get('major', None)
+        keyword = self.request.data.get('keyword',None)
+        conditions = Q(title__icontains=keyword) if keyword else Q()
+
+        if major:
+            if major == '경제':
+                return EcoLecture.objects.filter(conditions)
+            elif major == '컴퓨터공학':
+                return CSELecture.objects.filter(conditions)
+            elif major == '경영':
+                return MgtLecture.objects.filter(conditions)
+            elif major == '공통':
+                return CommonLecture.objects.filter(conditions)
+            else:
+                return []
 
     def list(self, request, *args, **kwargs):
-        keyword = request.query_params.get('keyword', None)
-        print(keyword)
+        self.major = self.request.data.get('major')
+        self.keyword = self.request.data.get('keyword')
         queryset = self.get_queryset()
-        try:
-            conditions = Q()
-            if keyword:
-                conditions |= Q(title__icontains=keyword)
-            queryset = queryset.filter(conditions)
-        except Exception as e:
-            return Response({'message': 'Filtering Error Occurred, Sorry'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = alllectures(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serializer_class = self.get_serializer_class()
+
+        if queryset and serializer_class:
+            serializer = serializer_class(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response([])
+
+
+
+
 
 ########################################################################################################################################################################3
 

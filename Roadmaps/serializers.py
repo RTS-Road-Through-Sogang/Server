@@ -22,12 +22,10 @@ class UserMajorSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserMajor
         fields = ['major']
-class CommonLectureDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CommonLecture
-        fields ='__all__'
+
 
 class ECOLectureDetailSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = EcoLecture
         fields ='__all__'
@@ -189,10 +187,11 @@ class CommonLectureListSerializer(serializers.ModelSerializer):
 
 
 class alllectures(serializers.Serializer):
-    common_name = CommonLectureDetailSerializer(source='commonlecture', read_only=True)
-    eco_name = ECOLectureDetailSerializer(source='ecolecture', read_only=True)
-    mgt_name = MGTLectureDetailSerializer(source='mgtlecture', read_only=True)
-    cse_name = CSELectureDetailSerializer(source='cselecture', read_only=True)
+    common_name = CommonLectureDetailSerializer(many=True,read_only=True)
+    eco_name = ECOLectureDetailSerializer(many=True,read_only=True)
+    mgt_name = MGTLectureDetailSerializer(many=True,read_only=True)
+    cse_name = CSELectureDetailSerializer(many=True,read_only=True)
+    
     
         
 ########################################################################################33333
