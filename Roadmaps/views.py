@@ -47,6 +47,38 @@ class RoadmapFullView(generics.ListAPIView):
             roadmap_data['roadmaps'].append(roadmap_info)
 
         return JsonResponse(roadmap_data['roadmaps'], safe=False)
+##########################################################################################################################################################
+class RoadmapDefaultView(generics.ListAPIView):
+    queryset = Roadmap.objects.all()
+    serializer_class = RoadMapSerializer
+
+    
+    
+    def get(self, request, *args, **kwargs):
+        logged_user = request.user
+        user_id = logged_user.student_number
+        
+        user = MyUser.objects.get(student_number=user_id)
+        roadmaps = Roadmap.objects.filter(student=user)
+        print(roadmaps)
+        roadmap_data = {'roadmaps': []}
+
+        for roadmap in roadmaps:
+            roadmap_info = RoadMapSerializer(roadmap).data
+            roadmap_details = RoadmapDetail.objects.filter(roadmap=roadmap)
+            roadmap_info['roadmap_detail'] = []  
+
+            for detail in roadmap_details:
+                detail_data = RoadMapDetailSerializer(detail).data
+                semester = detail_data['semester']
+                detail_lectures = RoadmapDetailLecture.objects.filter(roadmap_detail=detail,completed=True)
+                lectures_data = RoadMapDetailLectureSerializer(detail_lectures, many=True).data
+                detail_data['roadmapdetaillecture'] = {semester: lectures_data}  
+                roadmap_info['roadmap_detail'].append(detail_data['roadmapdetaillecture']) 
+
+            roadmap_data['roadmaps'].append(roadmap_info)
+
+        return JsonResponse(roadmap_data['roadmaps'], safe=False)
 
 
 ############################################################################################################################################################
@@ -1034,7 +1066,7 @@ class RoadmapDetailCreateView(APIView):
             return Response(f"RoadmapDetails created successfully for Roadmap {roadmap_id}", status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #########################################################################################
-# 로드맵에 과목 넣어주기
+# 로드맵에 과목 넣어주기 ()
 class RoadmapDetailLectureCreateView(APIView):
     def post(self, request, format=None):
         # 1. Serializer 인스턴스 생성
@@ -1097,54 +1129,120 @@ class RoadmapDetailLectureCreateView(APIView):
 
 
 ##################################################################################################
-# 이수한 놈들 추가할 수 있는 코드
+# 이수한 놈들 추가할 수 있는 코드(completed=True로 만들어주고 action에 따라 달라짐)
 class CompletedLectureCreateView(APIView):
     def post(self, request, format=None):
-        serializer = CompletedLectureCreateSerializer(data=request.data)
-        user_id = self.request.user
+        action = request.data.get('action')
         
-        if serializer.is_valid():
-            lecture_type = serializer.validated_data.get('lecture_type')
-            lecture_id = serializer.validated_data.get('lecture_id')
-            
-            try:
-                if lecture_type == 'commonlecture':
-                    commonlecture = CommonLecture.objects.get(pk=lecture_id)
-                    obj = UserCommonLecture.objects.create(
-                        user=user_id,
-                        commonlecture=commonlecture
-                    )
-                elif lecture_type == 'cselecture':
-                    cselecture = CSELecture.objects.get(pk=lecture_id)
-                    obj = UserCSELecture.objects.create(
-                        user=user_id,
-                        cselecture=cselecture
-                    )
-                elif lecture_type == 'ecolecture':
-                    ecolecture = ECOLecture.objects.get(pk=lecture_id)
-                    obj = UserECOLecture.objects.create(
-                        user=user_id,
-                        ecolecture=ecolecture
-                    )
-                elif lecture_type == 'mgtlecture':
-                    commonlecture = CommonLecture.objects.get(pk=lecture_id)
-                    obj = UserMGTLecture.objects.create(
-                        user=user_id,
-                        commonlecture=commonlecture
-                    )
-                else:
-                    raise serializers.ValidationError("Invalid lecture type")
+        if action == 'add_roadmap_lecture':
+            serializer = RoadmapDetailLectureCreateSerializer(data=request.data)
+            create_method = self.create_roadmap_lecture
+        elif action == 'add_completed_lecture':
+            serializer = CompletedLectureCreateSerializer(data=request.data)
+            create_method = self.create_completed_lecture
+        else:
+            return Response({"error": "Invalid action."}, status=status.HTTP_400_BAD_REQUEST)
 
-            except CommonLecture.DoesNotExist as e:
-                return Response({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
-            except CSELecture.DoesNotExist as e:
-                return Response({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
-            except ECOLecture.DoesNotExist as e:
-                return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
-            except MGTLecture.DoesNotExist as e:
-                return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        if serializer.is_valid():
+            return create_method(serializer)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def create_roadmap_lecture(self, serializer):
+        roadmap_detail_id = serializer.validated_data.get('roadmap_detail_id')
+        lecture_type = serializer.validated_data.get('lecture_type')
+        lecture_id = serializer.validated_data.get('lecture_id')
+        
+        try:
+            if lecture_type == 'commonlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.create(
+                    completed = True,
+                    roadmap_detail=roadmap_detail,
+                    commonlecture=commonlecture
+                )
+            elif lecture_type == 'cselecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                cselecture = CSELecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.create(
+                    completed = True,
+                    roadmap_detail=roadmap_detail,
+                    cselecture=cselecture
+                )
+            elif lecture_type == 'ecolecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                ecolecture = ECOLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.create(
+                    completed = True,
+                    roadmap_detail=roadmap_detail,
+                    ecolecture=ecolecture
+                )
+            elif lecture_type == 'mgtlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.create(
+                    completed = True,
+                    roadmap_detail=roadmap_detail,
+                    commonlecture=commonlecture
+                )
+            else:
+                raise serializers.ValidationError("Invalid lecture type")
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        except RoadmapDetail.DoesNotExist as e:
+            return Response({"error": f"RoadmapDetail with id {roadmap_detail_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        except CommonLecture.DoesNotExist as e:
+            return Response({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        except CSELecture.DoesNotExist as e:
+            return Response({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        except ECOLecture.DoesNotExist as e:
+            return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        except MGTLecture.DoesNotExist as e:
+            return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+    def create_completed_lecture(self, serializer):
+        user_id = self.request.user
+        lecture_type = serializer.validated_data.get('lecture_type')
+        lecture_id = serializer.validated_data.get('lecture_id')
+        
+        try:
+            if lecture_type == 'commonlecture':
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                obj = UserCommonLecture.objects.create(
+                    user=user_id,
+                    commonlecture=commonlecture
+                )
+            elif lecture_type == 'cselecture':
+                cselecture = CSELecture.objects.get(pk=lecture_id)
+                obj = UserCSELecture.objects.create(
+                    user=user_id,
+                    cselecture=cselecture
+                )
+            elif lecture_type == 'ecolecture':
+                ecolecture = ECOLecture.objects.get(pk=lecture_id)
+                obj = UserECOLecture.objects.create(
+                    user=user_id,
+                    ecolecture=ecolecture
+                )
+            elif lecture_type == 'mgtlecture':
+                mgtlecture = MGTLecture.objects.get(pk=lecture_id)
+                obj = UserMGTLecture.objects.create(
+                    user=user_id,
+                    mgtlecture = mgtlecture
+                )
+            else:
+                raise serializers.ValidationError("Invalid lecture type")
 
             return Response({"message": "Object created successfully", "data": serializer.data}, status=status.HTTP_201_CREATED)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#################################################################################################
+        except CommonLecture.DoesNotExist as e:
+            return Response({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        except CSELecture.DoesNotExist as e:
+            return Response({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        except ECOLecture.DoesNotExist as e:
+            return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        except MGTLecture.DoesNotExist as e:
+            return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+#################################################################################3
