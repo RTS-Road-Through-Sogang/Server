@@ -4,7 +4,7 @@ from CSEclasses.models import *
 
 class Command(BaseCommand):
     Lectures = [
-        {   'title': '미적분학1',
+        {   'title': '미적분학I',
             'code':'STS2005',
             'point': 3,
             'semester_one': 3,
@@ -21,7 +21,7 @@ class Command(BaseCommand):
             'category21_d': '필수',
             'tech' : None
         },
-        {   'title': '미적분학2',
+        {   'title': '미적분학II',
             'code':'STS2006',
             'point': 3,
             'semester_one': 3,
@@ -38,9 +38,9 @@ class Command(BaseCommand):
             'category21_d': '필수',
             'tech' : None
         },
-        {   'title': '일반물리실험1',
+        {   'title': '일반물리실험I',
             'code':'PHY1101',
-            'point': 3,
+            'point': 1,
             'semester_one': 3,
             'semester_two': 3,
             'teamplay': 1,
@@ -55,7 +55,7 @@ class Command(BaseCommand):
             'category21_d': '필수',
             'tech' : None
         },
-        {   'title': '일반물리1',
+        {   'title': '일반물리I',
             'code':'PHY1001',
             'point': 3,
             'semester_one': 3,
@@ -72,7 +72,7 @@ class Command(BaseCommand):
             'category21_d': '필수',
             'tech' : None
         },
-        {   'title': '응용수학1',
+        {   'title': '응용수학I',
             'code':'MAT2410',
             'point': 3,
             'semester_one': 3,
@@ -89,7 +89,7 @@ class Command(BaseCommand):
             'category21_d': '필수',
             'tech' : None
         },
-        {   'title': '응용수학2',
+        {   'title': '응용수학II',
             'code':'MAT2420',
             'point': 3,
             'semester_one': 3,
@@ -106,7 +106,60 @@ class Command(BaseCommand):
             'category21_d': '필수',
             'tech' : None
         },
-        
+        {
+            'title': '집합론',
+            'code':'MAT2010',
+            'point': 3,
+            'semester_one': 3,
+            'semester_two': 3,
+            'teamplay': 1,
+            'former': None,
+            'grade_recommend': 1,
+            'season_open': 1,
+            'category23': '전공입문교과',
+            'category22': '전공입문교과',
+            'category21': '전공입문교과',
+            'category23_d': '선택',
+            'category22_d': '선택',
+            'category21_d': '선택',
+            'tech' : None
+        },
+        {
+            'title': '선형대수학',
+            'code':'MAT2110',
+            'point': 3,
+            'semester_one': 3,
+            'semester_two': 3,
+            'teamplay': 1,
+            'former': None,
+            'grade_recommend': 1,
+            'season_open': 1,
+            'category23': '전공입문교과',
+            'category22': '전공입문교과',
+            'category21': '전공입문교과',
+            'category23_d': '선택',
+            'category22_d': '선택',
+            'category21_d': '선택',
+            'tech' : None
+        },
+        {
+            'title': '정수론',
+            'code':'MAT2120',
+            'point': 3,
+            'semester_one': 3,
+            'semester_two': 3,
+            'teamplay': 1,
+            'former': None,
+            'grade_recommend': 1,
+            'season_open': 1,
+            'category23': '전공입문교과',
+            'category22': '전공입문교과',
+            'category21': '전공입문교과',
+            'category23_d': '선택',
+            'category22_d': '선택',
+            'category21_d': '선택',
+            'tech' : None
+        },
     ]
     def handle(self, *args, **options):
         for lecture in self.Lectures:
