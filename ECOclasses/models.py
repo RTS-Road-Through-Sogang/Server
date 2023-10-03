@@ -132,7 +132,7 @@ class Lecture(models.Model):
     advance = models.BooleanField() #심화 : 0이면 F 1이면 T
 
     def __str__(self):
-        return self.title
+        return f"{self.title}_{self.pk}"
 
 class UserECOLecture(models.Model):
     user = models.ForeignKey(
@@ -150,4 +150,4 @@ class UserECOLecture(models.Model):
         blank=True
     )
     def __str__(self):
-        return f"{self.user} has completed {self.ecolecture.title}"
+        return f"{self.user} has completed {self.ecolecture.title} _ {self.pk}"

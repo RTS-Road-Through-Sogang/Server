@@ -37,6 +37,7 @@ class RoadmapDetail(models.Model):
         return f"{self.roadmap.student}_{self.roadmap.title}_{self.semester}_{self.pk}"
     
 class RoadmapDetailLecture(models.Model):
+    completed = models.BooleanField(null=True, default = False)
     roadmap_detail = models.ForeignKey(
         RoadmapDetail,
         on_delete=models.CASCADE,
