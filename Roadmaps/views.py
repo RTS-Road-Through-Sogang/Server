@@ -175,8 +175,8 @@ class CompletedSerachListAPIView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         keyword = request.query_params.get('keyword', None)
+        print(keyword)
         queryset = self.get_queryset()
-        queryset = queryset.filter(flag=True)
         try:
             conditions = Q()
             if keyword:
@@ -636,10 +636,9 @@ class RoadmapDetailLectureCreateView(APIView):
 # 이수한 놈들 추가할 수 있는 코드
 class CompletedLectureCreateView(APIView):
     def post(self, request, format=None):
-        # 1. Serializer 인스턴스 생성
         serializer = CompletedLectureCreateSerializer(data=request.data)
         user_id = self.request.user
-        # 2. 데이터 유효성 검사
+        
         if serializer.is_valid():
             lecture_type = serializer.validated_data.get('lecture_type')
             lecture_id = serializer.validated_data.get('lecture_id')
@@ -681,9 +680,7 @@ class CompletedLectureCreateView(APIView):
             except MGTLecture.DoesNotExist as e:
                 return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
 
-            # 원하는 작업을 수행한 후 응답을 반환하거나, 다른 처리를 수행할 수 있습니다.
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"message": "Object created successfully", "data": serializer.data}, status=status.HTTP_201_CREATED)
 
-        # 유효성 검사에 실패한 경우 에러 응답 반환
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #################################################################################################
