@@ -9,7 +9,7 @@ urlpatterns = [
     path('commondutylecturelists/',CommonDutyLectureListView.as_view()),
     path('commonchoicelecturelists/',CommonChoiceLectureListView.as_view()),
 ############################################################################################################################################################
-    path('completed_lecture/',DoneLectures.as_view() ),
+    path('completed_lecture/',CompletedSerachListAPIView.as_view() ),
     path('cse_gicho_lecture/<int:track_pk>' , CSEGichoLectureListView.as_view()),
     path('cse_choice_lecture/<int:track_pk>' , CSEChoiceLectureListView.as_view()),
     path('cse_duty_lecture/<int:track_pk>' , CSEDutyLectureListView.as_view()),
