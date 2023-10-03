@@ -203,23 +203,114 @@ class CSEGichoLectureListView(generics.ListAPIView):
         else:
             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
 
-    def get_queryset(self, request):
-        student_year = self.request.user.student_year
-        category_field_name = f"category{student_year}"
+    def get_queryset(self):
         category_name = '전공입문교과'
-        category_details = ['']
         queryset = []
-        user_request = request.user
+        user_request = self.request.user
+        track_pk = self.kwargs['track_pk']
+        track = CSETrack.objects.get(pk=track_pk)
         completed_lecture = UserCSELecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
         category_point = self.get_category_point(category_name)
-        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
-        for category in categories:
-            
-            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = CSELecture.objects.filter(**{category_field_name: category}).exclude(id__in=completed_lecture)
+        if track.title == ('단일전공' or '융합과정'):
+            if track.title=='단일전공':
+                queryset.append({
+                    'track': '단일전공',
+                    '이수 학점': category_point
+                })
+            elif track.title=='융합과정':
+                queryset.append({
+                    'track': '융합과정',
+                    '이수 학점': category_point
+                })
+            # 필수 과목
+            duty_lectures = [
+                '미적분학II', '일반물리실험I', '일반물리I', '응용수학I', '응용수학II'
+            ]
+            duty_category_point = 13
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
             queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+
+            # 선택 과목
+            choice_lectures = [
+                '집합론', '선형대수학', '정수론'
+            ]
+            choice_category_point = 3
+
+            filtered_choice_lectures = CSELecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures, many=True).data
+            })
+        
+        elif track.title == '다전공 1전공':
+            queryset.append({
+                'track': '다전공 1전공',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '응용수학I', '응용수학II'
+            ]
+            duty_category_point = 6
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+                
+        elif track.title == '다전공 타전공':
+            queryset.append({
+                'track': '다전공 타전공',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '고급응용C프로그래밍', '기초C언어'
+            ]
+            duty_category_point = 3
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+
+        elif track.title == '교직과정':
+            queryset.append({
+                'track': '교직과정',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '응용수학I', '응용수학II', '일반물리실험I', '일반물리I', '일반물리II'
+            ]
+            duty_category_point = 13
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
             })
 
         return queryset
@@ -243,32 +334,123 @@ class CSEDutyLectureListView(generics.ListAPIView):
             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
 
     def get_queryset(self):
-        student_year = self.request.user.student_year
-        category_field_name = f"category{student_year}"
-        print(category_field_name)
         category_name = '전공필수교과'
-        category_details = ['']
         queryset = []
-        user_request = request.user
+        user_request = self.request.user
+        track_pk = self.kwargs['track_pk']
+        track = CSETrack.objects.get(pk=track_pk)
         completed_lecture = UserCSELecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
         category_point = self.get_category_point(category_name)
-        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
-        for category in categories:
-            
-            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = CSELecture.objects.filter(**{category_field_name: category}).exclude(id__in=completed_lecture)
+        if track.title == ('단일전공' or '융합과정' or '다전공 1전공'):
+            if track.title=='단일전공':
+                queryset.append({
+                    'track': '단일전공',
+                    '이수 학점': category_point
+                })
+            elif track.title=='융합과정':
+                queryset.append({
+                    'track': '융합과정',
+                    '이수 학점': category_point
+                })
+            elif track.title=='다전공 1전공':
+                queryset.append({
+                    'track': '다전공 1전공',
+                    '이수 학점': category_point
+                })
+            # 필수 과목
+            duty_lectures = [
+                '컴퓨터프로그래밍I (구: 기초공학설계)', '컴퓨터프로그래밍II (구: C프로그래밍)', '이산구조', '컴퓨터공학설계및실험I', '디지털회로개론', '컴퓨터공학실험II', '자료구조', '운영체제', '멀티코어 프로그래밍', '고급소프트웨어실습I', '캡스톤디자인II'
+            ]
+            duty_category_point = 33
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
             queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+
+            # 선택 과목
+            choice_lectures = [
+                '캡스톤디자인I', '인턴쉽I'
+            ]
+            choice_category_point = 3
+
+            filtered_choice_lectures = CSELecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures, many=True).data
+            })
+        
+        elif track.title == '다전공 타전공':
+            queryset.append({
+                'track': '다전공 타전공',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '자료구조', '알고리즘설계와분석'
+            ]
+            duty_category_point = 6
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+
+        elif track.title == '교직과정':
+            queryset.append({
+                'track': '교직과정',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '컴퓨터프로그래밍I (구: 기초공학설계)', '컴퓨터프로그래밍II (구: C프로그래밍)', '이산구조', '컴퓨터공학설계및실험I', '디지털회로개론', '컴퓨터공학실험II', '자료구조', '운영체제', '시스템프로그래밍', '고급소프트웨어실습I', '캡스톤디자인II', '컴퓨터교과교육론', '컴퓨터학교과교재연구및지도법', '컴퓨터학교과논리및논술'
+            ]
+            duty_category_point = 42
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+
+            # 선택 과목
+            choice_lectures = [
+                '캡스톤디자인I', '인턴쉽I'
+            ]
+            choice_category_point = 3
+
+            filtered_choice_lectures = CSELecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures, many=True).data
             })
 
         return queryset
 
+
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         return Response(queryset)
-
-
+    
 class CSEChoiceLectureListView(generics.ListAPIView):
     serializer_class = CSELectureDetailSerializer
 
@@ -278,28 +460,201 @@ class CSEChoiceLectureListView(generics.ListAPIView):
         track = CSETrack.objects.get(pk=track_pk)
         major_track = track.track_CSEtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
         if major_track is not None:
-            return major_track.choice_point
+            return major_track.duty_point
         else:
             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
 
     def get_queryset(self):
-        student_year = self.request.user.student_year
-        category_field_name = f"category{student_year}"
-        print(category_field_name)
         category_name = '전공선택교과'
-        category_details = ['']
         queryset = []
-        user_request = request.user
+        user_request = self.request.user
+        track_pk = self.kwargs['track_pk']
+        track = CSETrack.objects.get(pk=track_pk)
         completed_lecture = UserCSELecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
         category_point = self.get_category_point(category_name)
-        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
-        for category in categories:
-            
-            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = CSELecture.objects.filter(**{category_field_name: category}).exclude(id__in=completed_lecture)
+        if track.title == '단일전공':
             queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
+                'track': '단일전공',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '알고리즘설계와분석', '컴퓨터아키텍쳐', '프로그래밍언어', '데이터베이스시스템', '소프트웨어공학', '컴퓨터네트워크', '기초인공지능'
+            ]
+            duty_category_point = 12
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+
+            # 선택 과목
+            choice_lectures = [] #**전체중에서 지금까지 담은 전공과목을 제외하고 남은 전공과목들인데 이는 프론트가 지금까지 담은 과목을 처리해줘야됨
+            choice_category_point = 24
+
+            filtered_choice_lectures = CSELecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures, many=True).data
+            })
+        
+        elif track.title == '융합과정':
+            queryset.append({
+                'track': '융합과정',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '알고리즘설계와분석', '컴퓨터아키텍쳐', '프로그래밍언어', '데이터베이스시스템', '소프트웨어공학', '컴퓨터네트워크', '기초인공지능'
+            ]
+            duty_category_point = 12
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+            
+            choice_lectures = [] #**전체중에서 지금까지 담은 전공과목을 제외하고 남은 전공과목들인데 이는 프론트가 지금까지 담은 과목을 처리해줘야됨
+            choice_category_point = 12
+            # 융합과정은 타전공의 전공과목 중 한 전공 내에서만 21학점을 이수해야됨. 이걸 여기서 어떻게 처리를 해줘야될지가 관건
+
+            filtered_choice_lectures = CSELecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures, many=True).data
+            })
+
+        elif track.title == '다전공 1전공':
+            queryset.append({
+                'track': '다전공 1전공',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '알고리즘설계와분석', '컴퓨터아키텍쳐', '프로그래밍언어', '데이터베이스시스템', '소프트웨어공학', '컴퓨터네트워크', '기초인공지능'
+            ]
+            duty_category_point = 12
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+
+            # 선택 과목
+            choice_lectures = [] #**전체중에서 지금까지 담은 전공과목을 제외하고 남은 전공과목들인데 이는 프론트가 지금까지 담은 과목을 처리해줘야됨
+            choice_category_point = 12
+
+            filtered_choice_lectures = CSELecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures, many=True).data
+            })
+
+        elif track.title == '다전공 타전공':
+            queryset.append({
+                'track': '다전공 타전공',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_system_lectures = [
+                '컴퓨터아키텍쳐', '프로그래밍언어', '멀티코어 프로그래밍', '데이터베이스시스템', '컴퓨터네트워크'
+            ]
+            duty_system_point = 9
+            filtered_duty_system_lectures = CSELecture.objects.filter(
+                title__in=duty_system_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수_시스템 및 이론 그룹',
+                'category_point': duty_system_point,
+                'lectures': self.serializer_class(filtered_duty_system_lectures, many=True).data
+            })
+            
+            duty_ai_lectures = [
+                '소프트웨어공학', '기초머신러닝', '기초컴퓨터그래픽스', '기초인공지능', '암호학기초'
+            ]
+            duty_ai_point = 9
+            filtered_duty_ai_lectures = CSELecture.objects.filter(
+                title__in=duty_ai_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수_인공지능 및 응용 그룹',
+                'category_point': duty_ai_point,
+                'lectures': self.serializer_class(filtered_duty_ai_lectures, many=True).data
+            })
+
+            # 선택 과목
+            choice_lectures = [] #**전체중에서 지금까지 담은 전공과목을 제외하고 남은 전공과목들인데 이는 프론트가 지금까지 담은 과목을 처리해줘야됨
+            choice_category_point = 15
+
+            filtered_choice_lectures = CSELecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures, many=True).data
+            })
+
+        elif track.title == '교직과정':
+            queryset.append({
+                'track': '교직과정',
+                '이수 학점': category_point
+            })
+            # 필수 과목
+            duty_lectures = [
+                '알고리즘설계와분석', '컴퓨터아키텍쳐', '프로그래밍언어', '데이터베이스시스템', '소프트웨어공학', '컴퓨터네트워크', '기초인공지능'
+            ]
+            duty_category_point = 12
+            filtered_duty_lectures = CSELecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_duty_lectures, many=True).data
+            })
+
+            # 선택 과목
+            choice_lectures = [] #**전체중에서 지금까지 담은 전공과목을 제외하고 남은 전공과목들인데 이는 프론트가 지금까지 담은 과목을 처리해줘야됨
+
+            choice_category_point = 3
+
+            filtered_choice_lectures = CSELecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+
+            queryset.append({
+                'category_detail': '선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures, many=True).data
             })
 
         return queryset
@@ -308,6 +663,86 @@ class CSEChoiceLectureListView(generics.ListAPIView):
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         return Response(queryset)
+
+# class CSEDutyLectureListView(generics.ListAPIView):
+#     serializer_class = CSELectureDetailSerializer
+
+#     # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+#     def get_category_point(self, category_name):
+#         track_pk = self.kwargs['track_pk']
+#         track = CSETrack.objects.get(pk=track_pk)
+#         major_track = track.track_CSEtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+#         if major_track is not None:
+#             return major_track.duty_point
+#         else:
+#             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+#     def get_queryset(self):
+#         student_year = self.request.user.student_year
+#         category_field_name = f"category{student_year}"
+#         print(category_field_name)
+#         category_name = '전공필수교과'
+#         category_details = ['']
+#         queryset = []
+#         user_request = request.user
+#         completed_lecture = UserCSELecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
+#         category_point = self.get_category_point(category_name)
+#         categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+#         for category in categories:
+            
+#             # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+#             lectures = CSELecture.objects.filter(**{category_field_name: category}).exclude(id__in=completed_lecture)
+#             queryset.append({
+#                 category.detail: category_point,
+#                 'lectures': self.serializer_class(lectures, many=True).data
+#             })
+
+#         return queryset
+
+#     def list(self, request, *args, **kwargs):
+#         queryset = self.get_queryset()
+#         return Response(queryset)
+
+
+# class CSEChoiceLectureListView(generics.ListAPIView):
+#     serializer_class = CSELectureDetailSerializer
+
+#     # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+#     def get_category_point(self, category_name):
+#         track_pk = self.kwargs['track_pk']
+#         track = CSETrack.objects.get(pk=track_pk)
+#         major_track = track.track_CSEtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+#         if major_track is not None:
+#             return major_track.choice_point
+#         else:
+#             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+#     def get_queryset(self):
+#         student_year = self.request.user.student_year
+#         category_field_name = f"category{student_year}"
+#         print(category_field_name)
+#         category_name = '전공선택교과'
+#         category_details = ['']
+#         queryset = []
+#         user_request = request.user
+#         completed_lecture = UserCSELecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
+#         category_point = self.get_category_point(category_name)
+#         categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+#         for category in categories:
+            
+#             # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+#             lectures = CSELecture.objects.filter(**{category_field_name: category}).exclude(id__in=completed_lecture)
+#             queryset.append({
+#                 category.detail: category_point,
+#                 'lectures': self.serializer_class(lectures, many=True).data
+#             })
+
+#         return queryset
+
+
+#     def list(self, request, *args, **kwargs):
+#         queryset = self.get_queryset()
+#         return Response(queryset)
 ##########################################################################################################################3333
 # 경영
 class MGTGichoLectureListView(generics.ListAPIView):
