@@ -1065,6 +1065,46 @@ class RoadmapDetailCreateView(APIView):
             roadmap_id = serializer.save() 
             return Response(f"RoadmapDetails created successfully for Roadmap {roadmap_id}", status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# 로드맵 디테일 이름 변경 또는 추가 또는 삭제
+class RoadmapDetailUpdateDeleteView(APIView):
+    def delete(self, request, pk, format=None):
+        try:
+            roadmap_detail = RoadmapDetail.objects.get(pk=pk)
+            roadmap_detail.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except RoadmapDetail.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk, format=None):
+        try:
+            roadmap_detail = RoadmapDetail.objects.get(pk=pk)
+            serializer = RoadmapDetailSerializers(roadmap_detail, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except RoadmapDetail.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+# 로드맵 수정 및 만들어주기
+class RoadmapUpdateDeleteView(APIView):
+    def delete(self, request, pk, format=None):
+        try:
+            roadmap_detail = Roadmap.objects.get(pk=pk)
+            roadmap_detail.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Roadmap.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk, format=None):
+        try:
+            roadmap_detail = Roadmap.objects.get(pk=pk)
+            serializer = RoadmapSerializers(roadmap_detail, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Roadmap.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 #########################################################################################
 # 로드맵에 과목 넣어주기 ()
 class RoadmapDetailLectureCreateView(APIView):
@@ -1147,6 +1187,7 @@ class CompletedLectureCreateView(APIView):
             return create_method(serializer)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 
     def create_roadmap_lecture(self, serializer):
         roadmap_detail_id = serializer.validated_data.get('roadmap_detail_id')
@@ -1180,7 +1221,7 @@ class CompletedLectureCreateView(APIView):
                 )
             elif lecture_type == 'mgtlecture':
                 roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
-                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                commonlecture = MGTLecture.objects.get(pk=lecture_id)
                 obj = RoadmapDetailLecture.objects.create(
                     completed = True,
                     roadmap_detail=roadmap_detail,
@@ -1245,4 +1286,82 @@ class CompletedLectureCreateView(APIView):
             return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except MGTLecture.DoesNotExist as e:
             return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
-#################################################################################3
+#################################################################################
+# 렉쳐 넣은 것들 수정하기 위해서 삭제하기
+class RoadmapDetailLectureDeleteAPIView(generics.DestroyAPIView):
+    def destroy(self, request, *args, **kwargs):
+
+
+        roadmap_detail_id = request.data.get('roadmap_detail_id')
+        lecture_type = request.data.get('lecture_type')
+        lecture_id = request.data.get('lecture_id')
+        try:
+            if lecture_type == 'commonlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.filter(roadmap_detail=roadmap_detail, commonlecture=commonlecture)
+                obj.delete()
+            elif lecture_type == 'cselecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                cselecture = CSELecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.filter(roadmap_detail=roadmap_detail, cselecture=cselecture)
+                
+                obj.delete()
+            elif lecture_type == 'ecolecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                ecolecture = ECOLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.filter(roadmap_detail=roadmap_detail, ecolecture=ecolecture)
+                
+                obj.delete()
+            elif lecture_type == 'mgtlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                mgtlecture = MGTLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.filter(roadmap_detail=roadmap_detail, mgtlecture=mgtlecture)
+                
+                obj.delete()
+            
+            return Response({"message": f"Lecture with id {lecture_id} deleted successfully."}, status=status.HTTP_200_OK)
+        except RoadmapDetailLecture.DoesNotExist as e:
+            return Response({"error": f"Lecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+##################################################################################################################################
+class CompletedLectureDeleteView(generics.DestroyAPIView):
+    def destroy(self, request, *args, **kwargs):
+        roadmap_detail_id = request.data.get('roadmap_detail_id')
+        lecture_type = request.data.get('lecture_type')
+        lecture_id = request.data.get('lecture_id')
+        try:
+            if lecture_type == 'commonlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                commonlecture = CommonLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.filter(roadmap_detail=roadmap_detail, commonlecture=commonlecture)
+                user_obj = UserCommonLecture.objects.filter(user=request.user, commonlecture=commonlecture)
+                user_obj.delete()
+                obj.delete()
+                user_obj = UserCommonLecture.objects.filter(user=request.user, commonlecture=commonlecture)
+            elif lecture_type == 'cselecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                cselecture = CSELecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.filter(roadmap_detail=roadmap_detail, cselecture=cselecture)
+                user_obj = UserCSELecture.objects.filter(user=request.user, cselecture=cselecture)
+                user_obj.delete()
+                obj.delete()
+            elif lecture_type == 'ecolecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                ecolecture = ECOLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.filter(roadmap_detail=roadmap_detail, ecolecture=ecolecture)
+                user_obj = UserECOLecture.objects.filter(user=request.user, ecolecture=ecolecture)
+                user_obj.delete()
+                obj.delete()
+            elif lecture_type == 'mgtlecture':
+                roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
+                mgtlecture = MGTLecture.objects.get(pk=lecture_id)
+                obj = RoadmapDetailLecture.objects.filter(roadmap_detail=roadmap_detail, mgtlecture=mgtlecture)
+                user_obj = UserMGTLecture.objects.filter(user=request.user, mgtlecture=mgtlecture)
+                user_obj.delete()
+                obj.delete()
+            
+            return Response({"message": f"Lecture with id {lecture_id} deleted successfully."}, status=status.HTTP_200_OK)
+        except RoadmapDetailLecture.DoesNotExist as e:
+            return Response({"error": f"Lecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+############################################################################################################################################
