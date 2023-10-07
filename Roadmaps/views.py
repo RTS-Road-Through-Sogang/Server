@@ -1065,6 +1065,46 @@ class RoadmapDetailCreateView(APIView):
             roadmap_id = serializer.save() 
             return Response(f"RoadmapDetails created successfully for Roadmap {roadmap_id}", status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# 로드맵 디테일 이름 변경 또는 추가 또는 삭제
+class RoadmapDetailUpdateDeleteView(APIView):
+    def delete(self, request, pk, format=None):
+        try:
+            roadmap_detail = RoadmapDetail.objects.get(pk=pk)
+            roadmap_detail.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except RoadmapDetail.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk, format=None):
+        try:
+            roadmap_detail = RoadmapDetail.objects.get(pk=pk)
+            serializer = RoadmapDetailSerializers(roadmap_detail, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except RoadmapDetail.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+# 로드맵 수정 및 만들어주기
+class RoadmapUpdateDeleteView(APIView):
+    def delete(self, request, pk, format=None):
+        try:
+            roadmap_detail = Roadmap.objects.get(pk=pk)
+            roadmap_detail.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Roadmap.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk, format=None):
+        try:
+            roadmap_detail = Roadmap.objects.get(pk=pk)
+            serializer = RoadmapSerializers(roadmap_detail, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Roadmap.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 #########################################################################################
 # 로드맵에 과목 넣어주기 ()
 class RoadmapDetailLectureCreateView(APIView):

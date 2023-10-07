@@ -191,11 +191,19 @@ class alllectures(serializers.Serializer):
     eco_name = ECOLectureDetailSerializer(many=True,read_only=True)
     mgt_name = MGTLectureDetailSerializer(many=True,read_only=True)
     cse_name = CSELectureDetailSerializer(many=True,read_only=True)
+########################################################################################
+class RoadmapDetailSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = RoadmapDetail
+        fields = "__all__"
     
+class RoadmapSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Roadmap
+        fields = "__all__"
     
-        
 ########################################################################################33333
-# roadmap (맨처음거 만들고난 추후)만들기
+# roadmap (맨처음거 만들고난 추후)만들기 새로만들기 누르면 자동으로 roadmap_id가 흘러들어간다
 class RoadmapDetailCreateSerializer(serializers.Serializer):
     roadmap_id = serializers.IntegerField()
     # 여기서 roadmap_id를 받는걸로 되어있지만 추후에 프론트랑 이야기해서 변경해야함
