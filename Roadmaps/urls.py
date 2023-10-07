@@ -29,10 +29,13 @@ urlpatterns = [
     # 로드맵 수정해주고 삭제함
     path('create_roadmap/<int:pk>/', RoadmapUpdateDeleteView.as_view(), name='create_roadmap_details'),
     ##############################################################################################################
-    # 로드맵 디테일 렉처에 과목들 넣어줌
+    # 로드맵 디테일 렉처에 과목들 넣어줌 그리고 삭제도 해줌 (업데이트 시)
     path('create_roadmap_detail_lecture/', RoadmapDetailLectureCreateView.as_view(), name='create_roadmap_detail_lecture'),
+    path('create_roadmap_detail_lecture/delete/', RoadmapDetailLectureDeleteAPIView.as_view(), name='create_roadmap_detail_lecture'),
+
     # 이수 과목들 등록해줌
     path('completed_create_lecture/', CompletedLectureCreateView.as_view(), name='create_roadmap_detail_lecture'),
+    path('completed_create_lecture/delete/', CompletedLectureDeleteView.as_view(), name='create_roadmap_detail_lecture'),
 
 
 ]
