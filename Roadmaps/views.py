@@ -821,27 +821,55 @@ class MGTGichoLectureListView(generics.ListAPIView):
             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
 
     def get_queryset(self):
-        student_year = self.request.user.student_year
-        category_field_name = f"category{student_year}"
-        print(category_field_name)
         category_name = '전공입문교과'
-        category_details = ['']
         queryset = []
-        user_request = request.user
-        completed_lecture = UserMGTLecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
+        user_request = self.request.user
+        track_pk = self.kwargs['track_pk']
+        track = MGTTrack.objects.get(pk=track_pk)
+        completed_lecture = UserMGTLecture.objects.filter(user=user_request).values_list('mgtlecture_id', flat=True)
         category_point = self.get_category_point(category_name)
-        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
-        for category in categories:
-            
-            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = MGTLecture.objects.filter(**{category_field_name: category}).exclude(id__in=completed_lecture)
-            queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
+        queryset.append({
+                    'track': 'all',
+                    '이수 학점': category_point
+                })
+        choice_lectures_1 = [
+                '경제학원론 I', '경제학원론 II'
+            ]
+        choice_1_category_point = 3
+        filtered_choice_lectures_1 = MGTLecture.objects.filter(
+                title__in=choice_lectures_1,
+            ).exclude(id__in=completed_lecture)
+        queryset.append({
+                'category_detail': '선택1',
+                'category_point': choice_1_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures_1, many=True).data
+            })
+        choice_lectures_2 = [
+                '경영통계학', '경제통계학', '통계학입문', '응용수학I'
+            ]
+        choice_2_category_point = 3
+        filtered_choice_lectures_2 = MGTLecture.objects.filter(
+                title__in=choice_lectures_2,
+            ).exclude(id__in=completed_lecture)
+        queryset.append({
+                'category_detail': '선택2',
+                'category_point': choice_2_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures_2, many=True).data
+            })
+        choice_lectures_3 = [
+                '대학수학', '미적분학I', '미적분II'
+            ]
+        choice_3_category_point = 3
+        filtered_choice_lectures_3 = MGTLecture.objects.filter(
+                title__in=choice_lectures_3,
+            ).exclude(id__in=completed_lecture)
+        queryset.append({
+                'category_detail': '선택3',
+                'category_point': choice_3_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures_3, many=True).data
             })
 
         return queryset
-
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -868,7 +896,7 @@ class MGTDutyLectureListView(generics.ListAPIView):
         category_details = ['']
         queryset = []
         user_request = request.user
-        completed_lecture = UserMGTLecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
+        completed_lecture = UserMGTLecture.objects.filter(user=user_request).values_list('mgtlecture_id', flat=True)
         category_point = self.get_category_point(category_name)
         categories = Category.objects.filter(title=category_name)  # Use filter instead of get
         for category in categories:
@@ -879,6 +907,7 @@ class MGTDutyLectureListView(generics.ListAPIView):
                 if lectures.exists():  # Check if there are any lectures for this combination
                     queryset.append({
                         'major_tech_title': major_tech.title,
+                        'category_point': category_point,
                         'lectures': self.serializer_class(lectures, many=True).data
                     })
 
@@ -887,9 +916,8 @@ class MGTDutyLectureListView(generics.ListAPIView):
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         return Response(queryset)
-
-
-class MGTChoiceLectureListView(generics.ListAPIView):
+    
+class MGTDutyChoiceLectureListView(generics.ListAPIView):
     serializer_class = MGTLectureDetailSerializer
 
     # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
@@ -907,20 +935,62 @@ class MGTChoiceLectureListView(generics.ListAPIView):
         category_field_name = f"category{student_year}"
         print(category_field_name)
         category_name = '전공선택교과'
-        category_details = ['']
+        category_detail = '필수'
         queryset = []
         user_request = request.user
-        completed_lecture = UserMGTLecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
+        completed_lecture = UserMGTLecture.objects.filter(user=user_request).values_list('mgtlecture_id', flat=True)
         category_point = self.get_category_point(category_name)
-        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        categories = Category.objects.filter(title=category_name, detail=category_detail)  # Use filter instead of get
         for category in categories:
             major_techs = MajorTech.objects.all()
             for major_tech in major_techs:
-            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
                 lectures = MGTLecture.objects.filter(**{category_field_name: category}, tech=major_tech).exclude(id__in=completed_lecture)
                 if lectures.exists():  # Check if there are any lectures for this combination
                     queryset.append({
                         'major_tech_title': major_tech.title,
+                        'category_point': category_point,
+                        'lectures': self.serializer_class(lectures, many=True).data
+                    })
+
+        return queryset
+
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+    
+class MGTChoiceLectureListView(generics.ListAPIView):  ## 남은걸 뽑아줘야됨 밑에는 그냥 복붙임...
+    serializer_class = MGTLectureDetailSerializer
+
+    # 프론트로부터 user가 고른 track의 pk를 받아서, related_name을 통해서 track_CSEtrack을 통해서 각 category_point를 불러옴.
+    def get_category_point(self, category_name):
+        track_pk = self.kwargs['track_pk']
+        track = MGTTrack.objects.get(pk=track_pk)
+        major_track = track.track_MGTtrack.first()  # 첫 번째 MajorTrack을 선택합니다.
+        if major_track is not None:
+            return major_track.choice_point
+        else:
+            return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
+
+    def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        print(category_field_name)
+        category_name = '전공선택교과'
+        category_detail = '선택'
+        queryset = []
+        user_request = request.user
+        completed_lecture = UserMGTLecture.objects.filter(user=user_request).values_list('mgtlecture_id', flat=True)
+        category_point = self.get_category_point(category_name)
+        categories = Category.objects.filter(title=category_name, detail=category_detail)  # Use filter instead of get
+        for category in categories:
+            major_techs = MajorTech.objects.all()
+            for major_tech in major_techs:
+                lectures = MGTLecture.objects.filter(**{category_field_name: category}, tech=major_tech).exclude(id__in=completed_lecture)
+                if lectures.exists():  # Check if there are any lectures for this combination
+                    queryset.append({
+                        'major_tech_title': major_tech.title,
+                        'category_point': category_point,
                         'lectures': self.serializer_class(lectures, many=True).data
                     })
 
@@ -947,27 +1017,42 @@ class ECOGichoLectureListView(generics.ListAPIView):
             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
 
     def get_queryset(self):
-        student_year = self.request.user.student_year
-        category_field_name = f"category{student_year}"
-        print(category_field_name)
         category_name = '전공입문교과'
-        category_details = ['']
         queryset = []
-        user_request = request.user
-        completed_lecture = UserECOLecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
+        user_request = self.request.user
+        track_pk = self.kwargs['track_pk']
+        track = ECOTrack.objects.get(pk=track_pk)
+        completed_lecture = UserECOLecture.objects.filter(user=user_request).values_list('ecolecture_id', flat=True)
         category_point = self.get_category_point(category_name)
-        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
-        for category in categories:
-            
-            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-            lectures = MGTLecture.objects.filter(**{category_field_name: category}).exclude(id__in=completed_lecture)
-            queryset.append({
-                category.detail: category_point,
-                'lectures': self.serializer_class(lectures, many=True).data
+        queryset.append({
+                    'track': 'all',
+                    '이수 학점': category_point
+                })
+        duty_lectures = [
+                '회계학원론'
+            ]
+        duty_category_point = 3
+        filtered_choice_lectures_1 = ECOLecture.objects.filter(
+                title__in=duty_lectures,
+            ).exclude(id__in=completed_lecture)
+        queryset.append({
+                'category_detail': '필수',
+                'category_point': duty_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures_1, many=True).data
             })
-
+        choice_lectures = [
+                '경제수리기초', '미적분학 I', '미적분학 II'
+            ]
+        choice_category_point = 3
+        filtered_choice_lectures_2 = ECOLecture.objects.filter(
+                title__in=choice_lectures,
+            ).exclude(id__in=completed_lecture)
+        queryset.append({
+                'category_detail': '선택',
+                'category_point': choice_category_point,
+                'lectures': self.serializer_class(filtered_choice_lectures_2, many=True).data
+            })
         return queryset
-
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -989,12 +1074,11 @@ class ECODutyLectureListView(generics.ListAPIView):
     def get_queryset(self):
         student_year = self.request.user.student_year
         category_field_name = f"category{student_year}"
-        print(category_field_name)
         category_name = '전공필수교과'
         category_details = ['']
         queryset = []
-        user_request = request.user
-        completed_lecture = UserECOLecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
+        user_request = request.user #self.request.user 일수도
+        completed_lecture = UserECOLecture.objects.filter(user=user_request).values_list('ecolecture_id', flat=True)
         category_point = self.get_category_point(category_name)
         categories = Category.objects.filter(title=category_name)  # Use filter instead of get
         for category in categories:
@@ -1029,33 +1113,68 @@ class ECOChoiceLectureListView(generics.ListAPIView):
             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
 
     def get_queryset(self):
-        student_year = self.request.user.student_year
-        category_field_name = f"category{student_year}"
-        print(category_field_name)
-        category_name = '전공선택교과'
-        category_details = ['']
+        user_request = self.request.user
+        track_pk = self.kwargs['track_pk']
+        track = ECOTrack.objects.get(pk=track_pk)
+        completed_lecture = UserECOLecture.objects.filter(user=user_request).values_list('ecolecture_id', flat=True)
         queryset = []
-        user_request = request.user
-        completed_lecture = UserECOLecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
-        category_point = self.get_category_point(category_name)
-        categories = Category.objects.filter(title=category_name)  # Use filter instead of get
-        for category in categories:
-            major_techs = MajorTech.objects.all()
-            for major_tech in major_techs:
-            # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-                lectures = ECOLecture.objects.filter(**{category_field_name: category}, tech=major_tech).exclude(id__in=completed_lecture)
-                if lectures.exists():  # Check if there are any lectures for this combination
+        if track.title == '단일전공':
+            category_point = 27
+        else:
+            category_point = 21
+        queryset.append({
+                    'track': track.title,
+                    '이수 학점': category_point
+                })
+        queryset.append({
+                    '금융경제 필수': 3,
+                    '금융경제 선택 필수': 9,
+                    '글로벌경제 필수': 6,
+                    '글로벌경제 선택 필수': 6,
+                    '계량경제 필수': 3,
+                    '계량경제 선택 필수': 9,
+                    '산업경제 필수': 3,
+                    '산업경제 선택 필수': 9,
+                    '공공경제 필수': 3,
+                    '공공경제 선택 필수': 9
+                })
+        
+        major_techs = MajorTech.objects.all()
+        for major_tech in major_techs:
+            lectures = ECOLecture.objects.filter(tech=major_tech).exclude(id__in=completed_lecture)
+            duty_lectures = lectures.filter(category_detail='필수')
+            duty_choice_lectures = lectures.filter(category_detail='선택 필수')
+            if lectures.exists():  # Check if there are any lectures for this combination
                     queryset.append({
                         'major_tech_title': major_tech.title,
-                        'lectures': self.serializer_class(lectures, many=True).data
+                        'duty_lectures': self.serializer_class(duty_lectures, many=True).data,
+                        'duty_choice_lectures': self.serializer_class(duty_choice_lectures, many=True).data
                     })
-
         return queryset
-
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         return Response(queryset)
+    
+    
+        # category_name = '전공선택교과'
+        # category_details = ['']
+        # queryset = []
+        # user_request = request.user #self.request.user 일수도
+        # completed_lecture = UserECOLecture.objects.filter(user=user_request).values_list('ecolecture_id', flat=True)
+        # category_point = self.get_category_point(category_name)
+        # categories = Category.objects.filter(title=category_name)  # Use filter instead of get
+        # for category in categories:
+        #     major_techs = MajorTech.objects.all()
+        #     for major_tech in major_techs:
+        #     # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
+        #         lectures = ECOLecture.objects.filter(**{category_field_name: category}, tech=major_tech).exclude(id__in=completed_lecture)
+        #         if lectures.exists():  # Check if there are any lectures for this combination
+        #             queryset.append({
+        #                 'major_tech_title': major_tech.title,
+        #                 'lectures': self.serializer_class(lectures, many=True).data
+        #             })
+
 ####################################################################################################################################################333
 # 로드맵 디테일 자동으로 완성 작성
 class RoadmapDetailCreateView(APIView):
