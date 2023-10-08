@@ -23,9 +23,20 @@ urlpatterns = [
     path('eco_choice_lecture/<int:track_pk>/' , ECOChoiceLectureListView.as_view()),
     path('eco_duty_lecture/<int:track_pk>/' , ECODutyLectureListView.as_view()),
     ###########################################################################33
+    # 로드맵 만들면 자동으로 1-1 부터 4-2까지 만들어줌
     path('create_roadmap_details/', RoadmapDetailCreateView.as_view(), name='create_roadmap_details'),
+    # 로드맵 디테일 수정해주고 삭제함
+    path('create_roadmap_details/<int:pk>/', RoadmapDetailUpdateDeleteView.as_view(), name='create_roadmap_details'),
+    # 로드맵 수정해주고 삭제함
+    path('create_roadmap/<int:pk>/', RoadmapUpdateDeleteView.as_view(), name='create_roadmap_details'),
+    ##############################################################################################################
+    # 로드맵 디테일 렉처에 과목들 넣어줌 그리고 삭제도 해줌 (업데이트 시)
     path('create_roadmap_detail_lecture/', RoadmapDetailLectureCreateView.as_view(), name='create_roadmap_detail_lecture'),
+    path('create_roadmap_detail_lecture/delete/', RoadmapDetailLectureDeleteAPIView.as_view(), name='create_roadmap_detail_lecture'),
+
+    # 이수 과목들 등록해줌
     path('completed_create_lecture/', CompletedLectureCreateView.as_view(), name='create_roadmap_detail_lecture'),
+    path('completed_create_lecture/delete/', CompletedLectureDeleteView.as_view(), name='create_roadmap_detail_lecture'),
 
 
 ]
