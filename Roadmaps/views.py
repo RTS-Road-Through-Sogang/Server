@@ -1085,7 +1085,7 @@ class ECODutyLectureListView(generics.ListAPIView):
             major_techs = MajorTech.objects.all()
             for major_tech in major_techs:
             # 프론트측에서 이미 앞서 공통에서 미적분학을  담았을때, 미적분학은 안담게하고 3학점은 올라가있게 해놔야됨.
-                lectures = ECOLecture.objects.filter(**{category_field_name: category}, tech=major_tech).exclude(id__in=completed_lecture)
+                lectures = ECOLecture.objects.filter(**{category_field_name: category}).exclude(id__in=completed_lecture)
                 if lectures.exists():  # Check if there are any lectures for this combination
                     queryset.append({
                         'major_tech_title': major_tech.title,
@@ -1113,6 +1113,9 @@ class ECOChoiceLectureListView(generics.ListAPIView):
             return None  # 또는 적절한 디폴트값을 반환할 수 있습니다.
 
     def get_queryset(self):
+        student_year = self.request.user.student_year
+        category_field_name = f"category{student_year}"
+        
         user_request = self.request.user
         track_pk = self.kwargs['track_pk']
         track = ECOTrack.objects.get(pk=track_pk)
@@ -1142,14 +1145,20 @@ class ECOChoiceLectureListView(generics.ListAPIView):
         major_techs = MajorTech.objects.all()
         for major_tech in major_techs:
             lectures = ECOLecture.objects.filter(tech=major_tech).exclude(id__in=completed_lecture)
-            duty_lectures = lectures.filter(category_detail='필수')
-            duty_choice_lectures = lectures.filter(category_detail='선택 필수')
+            duty_lectures = lectures.filter(**{f"{category_field_name}__detail": '필수'})
+            duty_choice_lectures = lectures.filter(**{f"{category_field_name}__detail": '선택 필수'})
             if lectures.exists():  # Check if there are any lectures for this combination
                     queryset.append({
                         'major_tech_title': major_tech.title,
                         'duty_lectures': self.serializer_class(duty_lectures, many=True).data,
                         'duty_choice_lectures': self.serializer_class(duty_choice_lectures, many=True).data
                     })
+        lectures = ECOLecture.objects.filter(tech=None).exclude(id__in=completed_lecture)
+        choice_lectures = lectures.filter(**{f"{category_field_name}__title": '전공선택교과'})
+        queryset.append({
+            'major_tech_title': 'None',
+            'choice_lectures': self.serializer_class(choice_lectures, many=True).data
+        })
         return queryset
 
     def list(self, request, *args, **kwargs):
