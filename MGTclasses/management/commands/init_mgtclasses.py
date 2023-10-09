@@ -11,7 +11,11 @@ class Command(BaseCommand):
             
         }, 
         {
-            'title' : '재무보험'
+            'title' : '재무'
+            
+        }, 
+        {
+            'title' : '보험'
             
         }, 
         {
@@ -19,17 +23,29 @@ class Command(BaseCommand):
             
         }, 
         {
-            'title' : '마케팅'
+            'title' : '전략'
             
         }, 
         {
-            'title' : 'BA/LSOM/MIS'
+            'title' : '마케팅'
             
-        }, 
+        },
         {
             'title' : '국제경영'
             
         }, 
+        {
+            'title' : 'BA'
+            
+        },
+        {
+            'title' : 'LSOM'
+            
+        },
+        {
+            'title' : 'MIS'
+            
+        },
         {
             'title' : '기타'
             
