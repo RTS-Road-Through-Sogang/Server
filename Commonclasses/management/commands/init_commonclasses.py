@@ -186,7 +186,7 @@ class Command(BaseCommand):
             'category22': '전공 진로 탐색',
             'category21': '전공 진로 탐색'
         },
-        {   'title': '기초인공지능프로그래밍(구 컴퓨팅사고력)',
+        {   'title': '기초인공지능프로그래밍(구: 컴퓨팅사고력)',
             'code':'COR1010',
             'point': 3,
             'semester_one': 3,
