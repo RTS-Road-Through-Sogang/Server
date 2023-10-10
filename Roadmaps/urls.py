@@ -14,7 +14,7 @@ urlpatterns = [
     ############################################################################################################################
     path('cse_gicho_lecture/<int:track_pk>/' , CSEGichoLectureListView.as_view()),
     path('cse_choice_lecture/<int:track_pk>/' , CSEChoiceLectureListView.as_view()),
-    path('cse_duty_lecture/<int:track_pk>/' , CSEDutyLectureListView.as_view()),
+    path('cse_duty_lecture/<int:track_pk>/' , CSEDutyLectureListView.as_view()), # 무조건 pk = 1
     path('mgt_gicho_lecture/<int:track_pk>/' , MGTGichoLectureListView.as_view()),
     path('mgt_duty_choice_lecture/<int:track_pk>/' , MGTDutyChoiceLectureListView.as_view()),
     path('mgt_choice_lecture/<int:track_pk>/' , MGTChoiceLectureListView.as_view()),
