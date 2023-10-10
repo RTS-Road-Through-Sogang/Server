@@ -11,6 +11,9 @@ from CSEclasses.models import Lecture as CSELecture
 from CSEclasses.models import Track as CSETrack 
 from ECOclasses.models import Track as ECOTrack
 from MGTclasses.models import Track as MGTTrack
+from CSEclasses.models import MajorTech as CSETech
+from ECOclasses.models import MajorTech as ECOTech
+from MGTclasses.models import MajorTech as MGTTech
 
 from Users.models import *
 from Roadmaps.models import *

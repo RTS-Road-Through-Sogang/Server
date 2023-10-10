@@ -203,7 +203,7 @@ class Command(BaseCommand):
         for majortrack in self.MajorTrack:
             
             MajorTrack.objects.get_or_create(
-                track = Track.objects.get(pk=majortrack['track']+12),
+                track = Track.objects.get(pk=majortrack['track']),
                 major =  Major.objects.get(title="경제"),
                 complete_point = majortrack['complete_point'],
                 gicho_point = majortrack['gicho_point'],
