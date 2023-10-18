@@ -4,7 +4,12 @@ from .serializers import *
 from Users.models import MyUser
 from rest_framework.response import Response
 from django.http import JsonResponse
+
 from Commonclasses.models import Lecture as CommonLecture
+from CSEclasses.models import Track as CSETrack
+from MGTclasses.models import Track as MGTTrack
+from ECOclasses.models import Track as ECOTrack
+
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from django.db.models import Q
@@ -205,7 +210,7 @@ class CompletedSerachListAPIView(generics.ListAPIView):
     serializer_class = None
 
     def get_serializer_class(self):
-        self.major = self.request.data.get('major')  # 이 부분을 추가하세요
+        self.major = self.request.data.get('major') 
         if self.major == '경제':
             return ECOLectureDetailSerializer
         elif self.major == '컴퓨터공학':
@@ -1206,13 +1211,33 @@ class ECOChoiceLectureListView(generics.ListAPIView):
 
 ####################################################################################################################################################333
 # 로드맵 디테일 자동으로 완성 작성
-class RoadmapDetailCreateView(APIView):
-    def post(self, request, format=None):
-        serializer = RoadmapDetailCreateSerializer(data=request.data)
-        if serializer.is_valid():
-            roadmap_id = serializer.save() 
-            return Response(f"RoadmapDetails created successfully for Roadmap {roadmap_id}", status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class RoadmapDetailCreateView(generics.CreateAPIView):
+    serializer_class = RoadmapDetailCreateSerializers
+    queryset = RoadmapDetail.objects.all()
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Assuming the title is provided in the request data
+        semester = serializer.validated_data.get('semester')
+        roadmap_id = serializer.validated_data.get('roadmap').id
+        print(roadmap_id)
+        # Assuming you're using the authenticated user
+        user = request.user
+        roadmap =Roadmap.objects.get(pk = roadmap_id)
+        print(roadmap)
+
+        # Create the Roadmap
+        roadmapdetail = RoadmapDetail.objects.create(
+            semester = semester,
+            
+            roadmap = roadmap
+            
+        )
+
+        return Response({'id': roadmapdetail.id}, status=status.HTTP_201_CREATED)
+        
+
 # 로드맵 디테일 이름 변경 또는 추가 또는 삭제
 class RoadmapDetailUpdateDeleteView(APIView):
     def delete(self, request, pk, format=None):
@@ -1233,6 +1258,8 @@ class RoadmapDetailUpdateDeleteView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except RoadmapDetail.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+class RoadmapDetailCreateAPIView(generics.CreateAPIView):
+    queryset = RoadmapDetail.objects.all()
 # 로드맵 수정 및 만들어주기
 class RoadmapUpdateDeleteView(APIView):
     def delete(self, request, pk, format=None):
@@ -1245,14 +1272,40 @@ class RoadmapUpdateDeleteView(APIView):
 
     def put(self, request, pk, format=None):
         try:
-            roadmap_detail = Roadmap.objects.get(pk=pk)
-            serializer = RoadmapSerializers(roadmap_detail, data=request.data)
+            user = request.user
+            roadmap_detail = Roadmap.objects.get(pk=pk, student=user)
+            serializer = RoadmapsSerializers(roadmap_detail, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Roadmap.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class RoadmapCreateAPIView(generics.CreateAPIView):
+    queryset = Roadmap.objects.all()
+    serializer_class = RoadMapSerializers
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Assuming the title is provided in the request data
+        title = serializer.validated_data.get('title')
+
+        # Assuming you're using the authenticated user
+        user = request.user
+
+       
+
+        # Create the Roadmap
+        roadmap = Roadmap.objects.create(
+            student=user,
+            title=title
+        )
+
+        return Response({'id': roadmap.id}, status=status.HTTP_201_CREATED)
 #########################################################################################
 # 로드맵에 과목 넣어주기 ()
 class RoadmapDetailLectureCreateView(APIView):
@@ -1513,3 +1566,32 @@ class CompletedLectureDeleteView(generics.DestroyAPIView):
             return Response({"error": f"Lecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
 
 ############################################################################################################################################
+class Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
+    queryset = Roadmap.objects.all()
+    serializer_class = RoadMapSerializers
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Assuming the title is provided in the request data
+        title = serializer.validated_data.get('title')
+
+        # Assuming you're using the authenticated user
+        user = request.user
+
+        # Create the Roadmap
+        roadmap = Roadmap.objects.create(
+            student=user,
+            title=title
+        )
+
+        # Create RoadmapDetails
+        titles = ['1-1', '1-2', '2-1', '2-2', '3-1', '3-2', '4-1', '4-2']
+        for title in titles:
+            RoadmapDetail.objects.create(
+                semester=title,
+                roadmap=roadmap
+            )
+
+        return Response({'id': roadmap.id}, status=status.HTTP_201_CREATED)
