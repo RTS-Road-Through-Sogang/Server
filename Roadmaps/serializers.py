@@ -154,7 +154,7 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
         all_tracks = []
 
         if major.title == "컴퓨터공학":
-            cse_tracks = CSETrack.objects.filter(major=major, student_year=student_year).exclude(title="다전공 타전공")
+            cse_tracks = CSETrack.objects.filter(major=major, student_year__student_year=student_year).exclude(title="다전공 타전공")
             cse_serialized = TrackSerializer(cse_tracks, many=True).data
             all_tracks.append({'CSE_tracks': cse_serialized})
             second_major_info = {
@@ -179,15 +179,16 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
             
             all_tracks.append(mgt_track_info)
         elif major.title == "경제":
-            eco_tracks = ECOTrack.objects.filter(major=major, student_year=student_year).exclude(title="다전공 타전공")
+            eco_tracks = ECOTrack.objects.filter(major=major, student_year__student_year=student_year).exclude(title="다전공 타전공")
             eco_serialized = TrackSerializer(eco_tracks, many=True).data
             all_tracks.append({'ECO_tracks': eco_serialized})
             second_major_info = {
                 "second_major": [
                     {"major": "컴퓨터공학"},
-                    {"major": "경제"}
+                    {"major": "경영"}
                 ]
             }
+        all_tracks.append(second_major_info)
         return all_tracks
 
 class CommonLectureListSerializer(serializers.ModelSerializer):

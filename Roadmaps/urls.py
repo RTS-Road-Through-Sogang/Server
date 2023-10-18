@@ -13,15 +13,17 @@ urlpatterns = [
     path('completed_lecture_search/',CompletedSerachListAPIView.as_view() ),
     ############################################################################################################################
     path('cse_gicho_lecture/<int:track_pk>/' , CSEGichoLectureListView.as_view()),
+    path('cse_duty_lecture/<int:track_pk>/' , CSEDutyLectureListView.as_view()),
+    path('cse_duty_choice_lecture/<int:track_pk>/' , CSEDutyChoiceLectureListView.as_view()),
     path('cse_choice_lecture/<int:track_pk>/' , CSEChoiceLectureListView.as_view()),
-    path('cse_duty_lecture/<int:track_pk>/' , CSEDutyLectureListView.as_view()), # 무조건 pk = 1
     path('mgt_gicho_lecture/<int:track_pk>/' , MGTGichoLectureListView.as_view()),
+    path('mgt_duty_lecture/<int:track_pk>/' , MGTDutyLectureListView.as_view()),
     path('mgt_duty_choice_lecture/<int:track_pk>/' , MGTDutyChoiceLectureListView.as_view()),
     path('mgt_choice_lecture/<int:track_pk>/' , MGTChoiceLectureListView.as_view()),
-    path('mgt_duty_lecture/<int:track_pk>/' , MGTDutyLectureListView.as_view()),
     path('eco_gicho_lecture/<int:track_pk>/' , ECOGichoLectureListView.as_view()),
-    path('eco_choice_lecture/<int:track_pk>/' , ECOChoiceLectureListView.as_view()),
     path('eco_duty_lecture/<int:track_pk>/' , ECODutyLectureListView.as_view()),
+    path('eco_duty_choice_lecture/<int:track_pk>/' , ECODutyChoiceLectureListView.as_view()),
+    path('eco_choice_lecture/<int:track_pk>/' , ECOChoiceLectureListView.as_view()),
     ###########################################################################33
     # 로드맵 만들고 자동으로 로드맵디테일 생성 (ㅇ)
     path('roadmap_roadmapdetail_create/', Roadmap_Roadmapdetail_CreatedAPIView.as_view()),
