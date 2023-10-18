@@ -2,9 +2,9 @@ from django.db import models
 from django.conf import settings
 
 from Commonclasses.models import Lecture as CommonLecture
-from CSEclasses.models import Track, Lecture as CSELecture
-from MGTclasses.models import Track, Lecture as MGTLecture
-from ECOclasses.models import Track, Lecture as ECOLecture
+from CSEclasses.models import Track as CSETrack, Lecture as CSELecture
+from MGTclasses.models import Track as MGTTrack, Lecture as MGTLecture
+from ECOclasses.models import Track as ECOTrack, Lecture as ECOLecture
 
 # Create your models here.
 class Roadmap(models.Model):
@@ -13,12 +13,8 @@ class Roadmap(models.Model):
         on_delete=models.CASCADE,
         related_name='student_roadmap'
     )
-    title = models.CharField(max_length = 10) #1안 2안
-    track = models.ForeignKey(  #다전공, 심화전공...
-        Track,
-        on_delete=models.CASCADE,
-        related_name='track_roadmap'
-    )
+    title = models.CharField(max_length = 20) #1안 2안
+    
     
     def __str__(self):
         return f"{self.student}_{self.title}-{self.pk}"

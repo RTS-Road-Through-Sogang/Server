@@ -108,6 +108,14 @@ class RoadMapSerializer(serializers.ModelSerializer):
         model = Roadmap
         fields = ['student', 'title', 'major', 'track', 'roadmap_detail']
 
+# 그냥 생성을 위해서 필요함
+class RoadMapSerializers(serializers.ModelSerializer):
+    student = serializers.StringRelatedField(source='student.student_number')
+
+    class Meta:
+        model = Roadmap
+        fields ="__all__"
+
 ############################################################################################################################################################
 # Track 반환을 위한 Serializers
 class StudentYearSerializer(serializers.ModelSerializer):
@@ -204,6 +212,12 @@ class RoadmapSerializers(serializers.ModelSerializer):
     class Meta:
         model = Roadmap
         fields = "__all__"
+
+class RoadmapsSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = Roadmap
+        fields = ['title']
     
 ########################################################################################33333
 # roadmap (맨처음거 만들고난 추후)만들기 새로만들기 누르면 자동으로 roadmap_id가 흘러들어간다
@@ -358,4 +372,8 @@ class CompletedLectureCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(f"MGTLecture with id {lecture_id} does not exist.")
         ########################################################################################
         # 학점 계산 한거 보여주기
-        
+
+class RoadmapDetailCreateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = RoadmapDetail
+        fields = '__all__'
