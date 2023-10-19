@@ -5,7 +5,7 @@ from Majors.models import *
 class Command(BaseCommand):
     Lectures = [
         {
-            'title': '성찰과 성장',
+            'title': '성찰과성장',
             'code':'COR1007',
             'point': 1,
             'semester_one': 3,
@@ -17,7 +17,7 @@ class Command(BaseCommand):
             'category22': '서강인성',
             'category21': '서강인성'
         },
-        {   'title': '인문사회 글쓰기',
+        {   'title': '인문사회글쓰기',
             'code':'COR1012',
             'point': 3,
             'semester_one': 3,
@@ -29,7 +29,7 @@ class Command(BaseCommand):
             'category22': '글쓰기',
             'category21': '글쓰기'
         },
-        {   'title': '자연계 글쓰기',
+        {   'title': '자연계글쓰기',
             'code':'COR1013',
             'point': 3,
             'semester_one': 3,
@@ -41,7 +41,7 @@ class Command(BaseCommand):
             'category22': '글쓰기',
             'category21': '글쓰기'
         },
-        {   'title': '영어글로벌 의사소통1',
+        {   'title': '영어글로벌의사소통I',
             'code':'COR1003',
             'point': 3,
             'semester_one': 3,
@@ -49,11 +49,11 @@ class Command(BaseCommand):
             'teamplay': 3,
             'grade_recommend': 1,
             'season_open': 1,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '독일언어와 문화1',
+        {   'title': '독일언어와문화I',
             'code':'LCS2001',
             'point': 3,
             'semester_one': 3,
@@ -61,11 +61,11 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 1,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '프랑스언어와 문화1',
+        {   'title': '프랑스언어와문화I',
             'code':'LCS2003',
             'point': 3,
             'semester_one': 3,
@@ -73,11 +73,11 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 1,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '중국언어와 문화1',
+        {   'title': '중국언어와문화I',
             'code':'LCS2005',
             'point': 3,
             'semester_one': 3,
@@ -85,11 +85,11 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 1,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '일본언어와 문화1',
+        {   'title': '일본언어와문화I',
             'code':'LCS2007',
             'point': 3,
             'semester_one': 3,
@@ -97,11 +97,11 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 1,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '초급 라틴어',
+        {   'title': '초급라틴어',
             'code':'LCU4021',
             'point': 3,
             'semester_one': 3,
@@ -109,11 +109,11 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 0,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '초급 스페인어',
+        {   'title': '초급스페인어',
             'code':'LCU4030',
             'point': 3,
             'semester_one': 3,
@@ -121,11 +121,11 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 0,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '초급 이탈리아어',
+        {   'title': '초급이탈리아어',
             'code':'LCU4025',
             'point': 3,
             'semester_one': 3,
@@ -133,11 +133,11 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 0,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '초급 러시아어',
+        {   'title': '초급러시아어',
             'code':'LCU4035',
             'point': 3,
             'semester_one': 3,
@@ -145,11 +145,11 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 0,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
-        {   'title': '초급 아랍어',
+        {   'title': '초급아랍어',
             'code':'LCU4105',
             'point': 3,
             'semester_one': 3,
@@ -157,12 +157,12 @@ class Command(BaseCommand):
             'teamplay': 1,
             'grade_recommend': 1,
             'season_open': 0,
-            'category23': '글로벌 언어1',
-            'category22': '글로벌 언어1',
-            'category21': '글로벌 언어1'
+            'category23': '글로벌 언어I',
+            'category22': '글로벌 언어I',
+            'category21': '글로벌 언어I'
         },
         
-        {   'title': '알바트로스 세미나',
+        {   'title': '알바트로스세미나',
             'code':'COR1015',
             'point': 3,
             'semester_one': 3,
@@ -174,7 +174,7 @@ class Command(BaseCommand):
             'category22': '전공 진로 탐색',
             'category21': '전공 진로 탐색'
         },
-        {   'title': '알바트로스 세미나(경영)',
+        {   'title': '알바트로스세미나(경영)',
             'code':'COR1016',
             'point': 3,
             'semester_one': 3,
@@ -186,7 +186,7 @@ class Command(BaseCommand):
             'category22': '전공 진로 탐색',
             'category21': '전공 진로 탐색'
         },
-        {   'title': '기초인공지능프로그래밍(구: 컴퓨팅사고력)',
+        {   'title': '기초인공지능프로그래밍(구 컴퓨팅사고력)',
             'code':'COR1010',
             'point': 3,
             'semester_one': 3,
@@ -210,7 +210,7 @@ class Command(BaseCommand):
         #     'category22': '소프트웨어',
         #     'category21': None
         # },
-        {   'title': '철학적 인간학',
+        {   'title': '철학적인간학',
             'code':'HFS2001',
             'point': 3,
             'semester_one': 1,
@@ -222,7 +222,7 @@ class Command(BaseCommand):
             'category22': '인간과 신앙',
             'category21': '인간과 신앙'
         },
-        {   'title': '신학적 인간학',
+        {   'title': '신학적인간학',
             'code':'HFS2002',
             'point': 3,
             'semester_one': 1,
@@ -234,7 +234,7 @@ class Command(BaseCommand):
             'category22': '인간과 신앙',
             'category21': '인간과 신앙'
         },
-        {   'title': '그리스도교 윤리',
+        {   'title': '그리스도교윤리',
             'code':'HFS2003',
             'point': 3,
             'semester_one': 1,
@@ -246,7 +246,7 @@ class Command(BaseCommand):
             'category22': '인간과 신앙',
             'category21': '인간과 신앙'
         },
-        {   'title': '그리스도교 신앙과 영성',
+        {   'title': '그리스도교신앙과 영성',
             'code':'HFU4012',
             'point': 3,
             'semester_one': 1,
@@ -270,7 +270,7 @@ class Command(BaseCommand):
             'category22': '인간과 신앙',
             'category21': '인간과 신앙'
         },
-        {   'title': '현대세계와 윤리문제',
+        {   'title': '현대세계와윤리문제',
             'code':'ETS2001',
             'point': 3,
             'semester_one': 3,
@@ -282,7 +282,7 @@ class Command(BaseCommand):
             'category22': '인간과 사상',
             'category21': '인간과 사상'
         },
-        {   'title': '논리와 비판적 사고',
+        {   'title': '논리와비판적사고',
             'code':'ETS2002',
             'point': 3,
             'semester_one': 3,
@@ -294,7 +294,7 @@ class Command(BaseCommand):
             'category22': '인간과 사상',
             'category21': '인간과 사상'
         },
-        {   'title': '종교와 세계문화',
+        {   'title': '종교와세계문화',
             'code':'ETS2004',
             'point': 3,
             'semester_one': 3,
@@ -306,7 +306,7 @@ class Command(BaseCommand):
             'category22': '인간과 사상',
             'category21': '인간과 사상'
         },
-        {   'title': '현대 한국의 형성',
+        {   'title': '현대한국의형성',
             'code':'CHS2002',
             'point': 3,
             'semester_one': 3,
@@ -318,7 +318,7 @@ class Command(BaseCommand):
             'category22': '인간과 사상',
             'category21': '인간과 사상'
         },
-        {   'title': '현대 동아시아의 형성',
+        {   'title': '현대동아시아의형성',
             'code':'CHS2003',
             'point': 3,
             'semester_one': 3,
@@ -330,7 +330,7 @@ class Command(BaseCommand):
             'category22': '인간과 사상',
             'category21': '인간과 사상'
         },
-        {   'title': '현대 서양의 형성',
+        {   'title': '현대서양의형성',
             'code':'CHS2004',
             'point': 3,
             'semester_one': 3,
@@ -342,7 +342,7 @@ class Command(BaseCommand):
             'category22': '인간과 사상',
             'category21': '인간과 사상'
         },
-        {   'title': '현대 사회의 이해',
+        {   'title': '현대사회의이해',
             'code':'SHS2001',
             'point': 3,
             'semester_one': 3,
@@ -354,7 +354,7 @@ class Command(BaseCommand):
             'category22': '인간과 사회',
             'category21': '인간과 사회'
         },
-        {   'title': '한국과 세계',
+        {   'title': '한국과세계',
             'code':'SHS2002',
             'point': 3,
             'semester_one': 3,
@@ -366,7 +366,7 @@ class Command(BaseCommand):
             'category22': '인간과 사회',
             'category21': '인간과 사회'
         },
-        {   'title': '커뮤니케이션과 사회',
+        {   'title': '커뮤니케이션과사회',
             'code':'SHS2003',
             'point': 3,
             'semester_one': 3,
@@ -378,7 +378,7 @@ class Command(BaseCommand):
             'category22': '인간과 사회',
             'category21': '인간과 사회'
         },
-        {   'title': '생활속의 심리학',
+        {   'title': '생활속의심리학',
             'code':'SHS2007',
             'point': 3,
             'semester_one': 3,
@@ -402,7 +402,7 @@ class Command(BaseCommand):
             'category22': '인간과 사회',
             'category21': '인간과 사회'
         },
-        {   'title': '자연과 인간',
+        {   'title': '자연과인간',
             'code':'STS2001',
             'point': 3,
             'semester_one': 3,
@@ -414,7 +414,7 @@ class Command(BaseCommand):
             'category22': '인간과 과학',
             'category21': '인간과 과학'
         },
-        {   'title': '생명과 환경',
+        {   'title': '생명과환경',
             'code':'STS2002',
             'point': 3,
             'semester_one': 3,
@@ -426,7 +426,7 @@ class Command(BaseCommand):
             'category22': '인간과 과학',
             'category21': '인간과 과학'
         },
-        {   'title': '우주와 원자시대',
+        {   'title': '우주와원자시대',
             'code':'STS4011',
             'point': 3,
             'semester_one': 3,
@@ -474,7 +474,7 @@ class Command(BaseCommand):
             'category22': '인간과 과학',
             'category21': '인간과 과학'
         },
-        {   'title': '미적분학1',
+        {   'title': '미적분학I',
             'code':'STS2005',
             'point': 3,
             'semester_one': 3,
