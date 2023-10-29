@@ -111,7 +111,7 @@ class CommonDutyLectureListView(generics.ListAPIView):
             return 1
         elif category_name == '글쓰기':
             return 3
-        elif category_name == '글로벌 언어1':
+        elif category_name == '글로벌 언어I':
             return 3
         elif category_name == '전공 진로 탐색':
             return 1
@@ -122,7 +122,7 @@ class CommonDutyLectureListView(generics.ListAPIView):
     def get_queryset(self):
         student_year = self.request.user.student_year
         category_field_name = f"category{student_year}"
-        category_names = ['서강인성', '글쓰기', '글로벌 언어1', '전공 진로 탐색', '소프트웨어']
+        category_names = ['서강인성', '글쓰기', '글로벌 언어I', '전공 진로 탐색', '소프트웨어']
         queryset = []
 
         for category_name in category_names:
@@ -131,19 +131,19 @@ class CommonDutyLectureListView(generics.ListAPIView):
 
             if (self.request.user.major.title == '경영' or self.request.user.major.title == '경제') and category_name == '글쓰기':
                 lectures = CommonLecture.objects.filter(
-                    **{category_field_name: category, 'title': '인문사회 글쓰기'}
+                    **{category_field_name: category, 'title': '인문사회글쓰기'}
                 )
             elif self.request.user.major.title == '컴퓨터공학' and category_name == '글쓰기':
                 lectures = CommonLecture.objects.filter(
-                    **{category_field_name: category, 'title': '자연계 글쓰기'}
+                    **{category_field_name: category, 'title': '자연계글쓰기'}
                 )
             elif self.request.user.major.title == '경영' and category_name == '전공 진로 탐색':
                 lectures = CommonLecture.objects.filter(
-                    **{category_field_name: category, 'title': '알바트로스 세미나(경영)'}
+                    **{category_field_name: category, 'title': '알바트로스세미나(경영)'}
                 )
             elif (self.request.user.major.title == '경제' or self.request.user.major.title == '컴퓨터공학') and category_name == '전공 진로 탐색':
                 lectures = CommonLecture.objects.filter(
-                    **{category_field_name: category, 'title': '알바트로스 세미나'}
+                    **{category_field_name: category, 'title': '알바트로스세미나'}
                 )
             else:
                 lectures = CommonLecture.objects.filter(**{category_field_name: category})
@@ -187,7 +187,7 @@ class CommonChoiceLectureListView(generics.ListAPIView):
             if self.request.user.major.title == '컴퓨터공학' and category_name == '인간과 과학':
         # '경영' 전공인 경우 '글쓰기' 카테고리에 대한 추가 필터링
                 lectures = CommonLecture.objects.filter(
-                **{category_field_name: category, 'title': '미적분학1'}  # 필터링 조건 추가
+                **{category_field_name: category, 'title': '미적분학I'}  # 필터링 조건 추가
                 )
             else:
                 lectures = CommonLecture.objects.filter(**{category_field_name: category})
@@ -425,7 +425,7 @@ class CSEDutyLectureListView(generics.ListAPIView):
                 })
             # 필수 과목
             duty_lectures = [
-                '컴퓨터프로그래밍I (구: 기초공학설계)', '컴퓨터프로그래밍II (구: C프로그래밍)', '이산구조', '컴퓨터공학설계및실험I', '디지털회로개론', '컴퓨터공학실험II', '자료구조', '운영체제', '멀티코어 프로그래밍', '고급소프트웨어실습I', '캡스톤디자인II'
+                '컴퓨터프로그래밍I(구 기초공학설계)', '컴퓨터프로그래밍II(구 C프로그래밍)', '이산구조', '컴퓨터공학설계및실험I', '디지털회로개론', '컴퓨터공학실험II', '자료구조', '운영체제', '멀티코어 프로그래밍', '고급소프트웨어실습I', '캡스톤디자인II'
             ]
             duty_category_point = 33
             filtered_duty_lectures = CSELecture.objects.filter(
@@ -481,7 +481,7 @@ class CSEDutyLectureListView(generics.ListAPIView):
             })
             # 필수 과목
             duty_lectures = [
-                '컴퓨터프로그래밍I (구: 기초공학설계)', '컴퓨터프로그래밍II (구: C프로그래밍)', '이산구조', '컴퓨터공학설계및실험I', '디지털회로개론', '컴퓨터공학실험II', '자료구조', '운영체제', '시스템프로그래밍', '고급소프트웨어실습I', '캡스톤디자인II', '컴퓨터교과교육론', '컴퓨터학교과교재연구및지도법', '컴퓨터학교과논리및논술'
+                '컴퓨터프로그래밍I(구 기초공학설계)', '컴퓨터프로그래밍II(구 C프로그래밍)', '이산구조', '컴퓨터공학설계및실험I', '디지털회로개론', '컴퓨터공학실험II', '자료구조', '운영체제', '시스템프로그래밍', '고급소프트웨어실습I', '캡스톤디자인II', '컴퓨터교과교육론', '컴퓨터학교과교재연구및지도법', '컴퓨터학교과논리및논술'
             ]
             duty_category_point = 42
             filtered_duty_lectures = CSELecture.objects.filter(

@@ -73,9 +73,9 @@ class Lecture(models.Model):
     code = models.CharField(max_length=30)
     point = models.IntegerField(choices=[(1,'1point'),(2,'2point'),(3,'3point')])
     eta = models.URLField(blank=True)
-    semester_one = models.IntegerField(choices=[(1,'low'),(2,'mid'),(3,'high')], blank=True)
-    semester_two = models.IntegerField(choices=[(1,'low'),(2,'mid'),(3,'high')], blank=True)
-    teamplay = models.IntegerField(choices=[(1,'none'),(2,'little'),(3,'average'),(4,'much'),(5,'full')], blank=True)
+    semester_one = models.IntegerField(choices=[(0,'none'),(1,'sometimes'),(2,'little'),(3,'many')], blank=True)
+    semester_two = models.IntegerField(choices=[(0,'none'),(1,'sometimes'),(2,'little'),(3,'many')], blank=True)
+    teamplay = models.IntegerField(choices=[(0,'none'),(1,'little'),(2,'average'),(3,'much'),(4,'full')], blank=True)
     former = models.ForeignKey(
         'self',
         on_delete=models.CASCADE,
