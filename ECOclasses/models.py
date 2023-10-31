@@ -18,7 +18,7 @@ class Track(models.Model):  #다전공, 심화전공...
     major = models.ForeignKey(
         Major,
         on_delete=models.CASCADE,
-        related_name='ECO_track' #전공에 해당하는 트랙들. 
+        related_name='ECO_track' #전공에 해당하는 트랙들
     )
     title = models.CharField(max_length=30) #(단일전공, 융합과정, 다전공  1전공, 다전공 타전공, 교직) (심화전공 = 단일전공/융합과정 , 일반전공 = 다전공 1전공, 다전공 타전공, 교직과정)
     student_year = models.ForeignKey(
