@@ -59,13 +59,7 @@ class Lecture(models.Model):
     semester_one = models.IntegerField(choices=[(1,'low'),(2,'mid'),(3,'high')], blank=True)
     semester_two = models.IntegerField(choices=[(1,'low'),(2,'mid'),(3,'high')], blank=True)
     teamplay = models.IntegerField(choices=[(1,'none'),(2,'little'),(3,'average'),(4,'much'),(5,'full')], blank=True)
-    former = models.ForeignKey(
-        'self',
-        on_delete=models.CASCADE,
-        related_name='common_latter', #후수강
-        null=True,
-        blank=True
-    )
+    former = models.CharField(max_length=30)
     grade_recommend = models.CharField(max_length=10)
     season_open = models.BooleanField()
 
