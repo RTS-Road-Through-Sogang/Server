@@ -133,17 +133,20 @@ class CommonDutyLectureListView(generics.ListAPIView):
         track_pk = self.kwargs['track_pk']
         major = self.request.user.major.title
         if major == '경영':
-            points = MGTMajorTrack.objects.filter(track=track_pk)
+            track = MGTTrack.objects.get(pk=track_pk)
+            points = MGTMajorTrack.objects.filter(track)
             queryset.append({
                 'lectures': self.mgtserializer_class(points).data
             })
         elif major == '경제':
-            points = ECOMajorTrack.objects.filter(track=track_pk)
+            track = ECOTrack.objects.get(pk=track_pk)
+            points = ECOMajorTrack.objects.filter(track)
             queryset.append({
                 'lectures': self.ecoserializer_class(points).data
             })
         elif major == '컴퓨터공학':
-            points = CSEMajorTrack.objects.filter(track=track_pk)
+            track = CSETrack.objects.get(pk=track_pk)
+            points = CSEMajorTrack.objects.filter(track)
             queryset.append({
                 'lectures': self.cseserializer_class(points).data
             })
