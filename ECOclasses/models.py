@@ -82,7 +82,7 @@ class Lecture(models.Model):
         null=True,
         blank=True
     )
-    grade_recommend = models.IntegerField(choices=[(1,'1'),(2,'2'),(3,'3'),(4,'4')], blank=True)
+    grade_recommend = models.CharField(max_length=10)    
     season_open = models.BooleanField()
 
     category21 = models.ForeignKey(
