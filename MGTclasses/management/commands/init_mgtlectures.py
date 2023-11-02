@@ -2236,6 +2236,9 @@ class Command(BaseCommand):
                 #     'tech': '기타'
                 # } 
             ]
+    for data in Lecture:
+         if 'label' not in data:
+            data['label'] = data['title']
     def handle(self, *args, **options):
             i=0
             for lecture in self.Lecture:
