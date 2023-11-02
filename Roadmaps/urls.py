@@ -7,7 +7,7 @@ urlpatterns = [
     path('default/',RoadmapDefaultView.as_view()),
 ############################################################################################################################################################
     path('usermajortracks/',TrackByMajor.as_view()),
-    path('commondutylecturelists/',CommonDutyLectureListView.as_view()),
+    path('commondutylecturelists/<int:track_pk>/',CommonDutyLectureListView.as_view()),
     path('commonchoicelecturelists/',CommonChoiceLectureListView.as_view()),
 ############################################################################################################################################################
     path('completed_lecture_search/',CompletedSerachListAPIView.as_view() ),
