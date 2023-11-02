@@ -487,6 +487,9 @@ class Command(BaseCommand):
             'category21': '인간과 과학'
         },
     ]
+    for data in Lecture:
+         if 'label' not in data:
+            data['label'] = data['title']
     def handle(self, *args, **options):
         for lecture in self.Lectures:
             lec = Lecture(

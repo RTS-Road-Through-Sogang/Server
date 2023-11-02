@@ -1721,6 +1721,9 @@ class Command(BaseCommand):
             'tech': None
         },
     ]
+    for data in Lecture:
+         if 'label' not in data:
+            data['label'] = data['title']
     def handle(self, *args, **options):
         for lecture in self.Lectures:
             lec = Lecture(

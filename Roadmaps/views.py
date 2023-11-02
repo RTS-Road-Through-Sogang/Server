@@ -1343,7 +1343,7 @@ class ECOChoiceLectureListView(generics.ListAPIView):  ## 남은걸 뽑아줘야
         queryset = self.get_queryset()
         return Response(queryset)
 ####################################################################################################################################################333
-# 로드맵 디테일 자동으로 완성 작성
+# 로드맵 디테일 생성하기 작성
 class RoadmapDetailCreateView(generics.CreateAPIView):
     serializer_class = RoadmapDetailCreateSerializers
     queryset = RoadmapDetail.objects.all()
@@ -1352,14 +1352,15 @@ class RoadmapDetailCreateView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
 
         # Assuming the title is provided in the request data
-        semester = serializer.validated_data.get('semester')
+        
         roadmap_id = serializer.validated_data.get('roadmap').id
-        print(roadmap_id)
+        
         # Assuming you're using the authenticated user
         user = request.user
         roadmap =Roadmap.objects.get(pk = roadmap_id)
-        print(roadmap)
-
+        semester_count = RoadmapDetail.objects.filter(roadmap=roadmap, semester__contains="추가학기").count()
+        i =semester_count+1
+        semester = f"추가학기{i}"
         # Create the Roadmap
         roadmapdetail = RoadmapDetail.objects.create(
             semester = semester,
@@ -1707,20 +1708,21 @@ class Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        # Assuming the title is provided in the request data
-        title = serializer.validated_data.get('title')
+
 
         # Assuming you're using the authenticated user
         user = request.user
-
+        roadmaps_count = Roadmap.objects.filter(student=user).count()
+        
+        new_title = f"#{roadmaps_count + 1}"
         # Create the Roadmap
         roadmap = Roadmap.objects.create(
             student=user,
-            title=title
+            title=new_title
         )
 
         # Create RoadmapDetails
-        titles = ['1-1', '1-2', '2-1', '2-2', '3-1', '3-2', '4-1', '4-2']
+        titles = ['1-1', '1-하계','1-2','1-동계', '2-1', '2-하계', '2-2','2-동계', '3-1','3-하계', '3-2','3-동계' , '4-1','4-하계', '4-2','4-동계']
         for title in titles:
             RoadmapDetail.objects.create(
                 semester=title,
