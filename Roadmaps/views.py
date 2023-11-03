@@ -101,6 +101,10 @@ class TrackByMajor(APIView):
 # 1.5. 공통고르는건 똑같으니까 공통 데이터부터 보내주자.
 class CommonDutyLectureListView(generics.ListAPIView):
     serializer_class = CommonLectureListSerializer
+    mgtserializer_class = MGTMajorTrackSerializer
+    ecoserializer_class = ECOMajorTrackSerializer
+    cseserializer_class = CSEMajorTrackSerializer
+
 
     def get_category_point(self, category_name):
         # category_name을 기반으로 포인트를 동적으로 설정
@@ -124,7 +128,32 @@ class CommonDutyLectureListView(generics.ListAPIView):
         category_field_name = f"category{student_year}"
         category_names = ['서강인성', '글쓰기', '글로벌 언어I', '전공 진로 탐색', '소프트웨어']
         queryset = []
+#####################################
+        #student_year, track, major, submajor를 받아와서 채워줘야됨
+        track_pk = self.kwargs['track_pk']
+        major = self.request.user.major.title
+        if major == '경영':
+            track = MGTTrack.objects.get(pk=track_pk)
+            points = MGTMajorTrack.objects.filter(track)
+            queryset.append({
+                'lectures': self.mgtserializer_class(points).data
+            })
+        elif major == '경제':
+            track = ECOTrack.objects.get(pk=track_pk)
+            points = ECOMajorTrack.objects.filter(track)
+            queryset.append({
+                'lectures': self.ecoserializer_class(points).data
+            })
+        elif major == '컴퓨터공학':
+            track = CSETrack.objects.get(pk=track_pk)
+            points = CSEMajorTrack.objects.filter(track)
+            queryset.append({
+                'lectures': self.cseserializer_class(points).data
+            })
 
+        # track = CSETrack.objects.get(pk=track_pk)
+        # major_track = track.track_CSEtrack.first()
+#####################################
         for category_name in category_names:
             category_point = self.get_category_point(category_name)
             category = Category.objects.get(detail=category_name)

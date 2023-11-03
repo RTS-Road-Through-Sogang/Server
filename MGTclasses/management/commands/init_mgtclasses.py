@@ -130,7 +130,7 @@ class Command(BaseCommand):
             'gicho_point' : 9 ,
             'duty_point' : 15 ,
             'duty_choice_point' : 9,
-            'choice_point' : 15
+            'choice_point' : 27
         },
         {
             # 다전공 1전공 22 학번 쭉
@@ -160,7 +160,7 @@ class Command(BaseCommand):
             'gicho_point' : 9 ,
             'duty_point' : 15 ,
             'duty_choice_point' : 9,
-            'choice_point' : 15
+            'choice_point' : 27
         },
         {
             # 다전공 1전공 23학번 쭉
@@ -190,7 +190,7 @@ class Command(BaseCommand):
             'gicho_point' : 9 ,
             'duty_point' : 15 ,
             'duty_choice_point' : 9,
-            'choice_point' : 15
+            'choice_point' : 27
         }
     ]
     
