@@ -11,6 +11,9 @@ from CSEclasses.models import Lecture as CSELecture
 from CSEclasses.models import Track as CSETrack 
 from ECOclasses.models import Track as ECOTrack
 from MGTclasses.models import Track as MGTTrack
+from CSEclasses.models import MajorTrack as CSEMajorTrack 
+from ECOclasses.models import MajorTrack as ECOMajorTrack
+from MGTclasses.models import MajorTrack as MGTMajorTrack
 from CSEclasses.models import MajorTech as CSETech
 from ECOclasses.models import MajorTech as ECOTech
 from MGTclasses.models import MajorTech as MGTTech
@@ -123,6 +126,19 @@ class StudentYearSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentYear
         fields = ('student_year',)
+
+class CSEMajorTrackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CSEMajorTrack
+        fields = ('complete_point','gicho_point','duty_point','duty_choice_point','choice_point',)
+class MGTMajorTrackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MGTMajorTrack
+        fields = ('complete_point','gicho_point','duty_point','duty_choice_point','choice_point',)
+class ECOMajorTrackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ECOMajorTrack
+        fields = ('complete_point','gicho_point','duty_point','duty_choice_point','choice_point',)
 
 class TrackSerializer(serializers.Serializer):
     title = serializers.CharField()
