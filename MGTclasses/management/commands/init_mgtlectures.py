@@ -552,8 +552,8 @@ class Command(BaseCommand):
                     'semester_one': 0,
                     'semester_two': 0,
                     'teamplay': 4,
-                   'grade_recommend': "3~4",
-                  'season_open': 0,
+                    'grade_recommend': "3~4",
+                    'season_open': 0,
                     'category23': '전공선택교과',
                     'category22': '전공선택교과',
                     'category21': '전공선택교과',
@@ -1246,7 +1246,7 @@ class Command(BaseCommand):
                     'category21_d': None,
                     'tech': None
                 },
-               
+
                 {
                     'title': '보험학원론',
                     'code': 'MGT4331',
@@ -1360,7 +1360,7 @@ class Command(BaseCommand):
                     'title': '회계감사',
                     'code': 'MGT4407',
                     'point': 3,
-                     'former': '중급회계2, 원가회계',
+                    'former': '중급회계2, 원가회계',
                     'semester_one': 3,
                     'semester_two': 0,
                     'teamplay': 0,
@@ -1447,7 +1447,7 @@ class Command(BaseCommand):
                     'category21_d': None,
                     'tech': None
                 },
-             
+
                 {
                     'title': '시계열자료분석과예측',
                     'code': 'MGTG705',
@@ -1502,7 +1502,7 @@ class Command(BaseCommand):
                     'category21_d': None,
                     'tech': None
                 },
-               
+                
                 {
                     'title': '마케팅전략',
                     'code': 'MGT4501',
@@ -1671,7 +1671,7 @@ class Command(BaseCommand):
                     'point': 3,
                     'former': None,
                     'semester_one': 0,
-                     'semester_two': 0,
+                    'semester_two': 0,
                     'teamplay': 4,
                     'grade_recommend': 1,
                     'season_open': 0,
@@ -1679,7 +1679,7 @@ class Command(BaseCommand):
                     'category22': '전공선택교과',
                     'category21': '전공선택교과',
                     'category23_d': None,
-                 'category22_d': None,
+                    'category22_d': None,
                     'category21_d': None,
                     'tech': '마케팅'
                 },
@@ -2228,7 +2228,7 @@ class Command(BaseCommand):
     
     
     for data in Lecture:
-         if 'label' not in data:
+        if 'label' not in data:
             data['label'] = data['title']
     def handle(self, *args, **options):
             i=0
