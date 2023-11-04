@@ -53,6 +53,8 @@ from Users.models import MyUser
 
 class Lecture(models.Model):
     title = models.CharField(max_length=30)
+    label= models.CharField(max_length=30)
+
     code = models.CharField(max_length=30)
     point = models.IntegerField(choices=[(1,'1point'),(2,'2point'),(3,'3point')])
     eta = models.URLField(blank=True)

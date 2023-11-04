@@ -487,25 +487,24 @@ class Command(BaseCommand):
             'category21': '인간과 과학'
         },
     ]
-    for data in Lecture:
-         if 'label' not in data:
-            data['label'] = data['title']
+
     def handle(self, *args, **options):
-        for lecture in self.Lectures:
+        for data in self.Lectures:  # 수정된 부분
             lec = Lecture(
-            title = lecture['title'], 
-            code = lecture['code'], 
-            point = lecture['point'], 
-            semester_one = lecture['semester_one'], 
-            semester_two = lecture['semester_two'], 
-            teamplay = lecture['teamplay'], 
-            season_open = lecture['season_open'], 
-            grade_recommend = lecture['grade_recommend'], 
-            category23 = Category.objects.get( detail = lecture['category23']),
-            category22 = Category.objects.get( detail = lecture['category22'])            
+                label = data['title'],
+                title = data['title'], 
+                code = data['code'], 
+                point = data['point'], 
+                semester_one = data['semester_one'], 
+                semester_two = data['semester_two'], 
+                teamplay = data['teamplay'], 
+                season_open = data['season_open'], 
+                grade_recommend = data['grade_recommend'], 
+                category23 = Category.objects.get( detail = data['category23']),
+                category22 = Category.objects.get( detail = data['category22'])            
             )
-            if (lecture['category21']) is not None:
-                lec.category21 = Category.objects.get( detail = lecture['category21'])
+            if data['category21'] is not None:
+                lec.category21 = Category.objects.get( detail = data['category21'])
             lec.save()
         self.stdout.write(self.style.SUCCESS('Lectures initialized'))
         return 0
