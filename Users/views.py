@@ -33,7 +33,7 @@ def generate_verification_code():
 @csrf_exempt
 def signup_view(request):
     if request.method == 'POST':
-        data = request.POST
+        data = json.loads(request.body)
 
         email = data.get('email')
         password = data.get('password')
