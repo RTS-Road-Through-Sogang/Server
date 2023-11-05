@@ -2226,15 +2226,17 @@ class Command(BaseCommand):
     ]
             
     
-    
-    for data in Lecture:
-        if 'label' not in data:
-            data['label'] = data['title']
+
     def handle(self, *args, **options):
             i=0
+            for data in self.Lecture:
+                if 'former' not in data:
+                    data['former'] = None
             for lecture in self.Lecture:
                 lec = Lecture(
                 title = lecture['title'], 
+                label = lecture['title'],
+
                 code = lecture['code'], 
                 point = lecture['point'], 
                 semester_one = lecture['semester_one'], 
@@ -2246,16 +2248,12 @@ class Command(BaseCommand):
                 category22 = Category.objects.get( title = lecture['category22'], detail = lecture['category22_d']),            
                 category21 = Category.objects.get( title = lecture['category21'], detail = lecture['category21_d']),
                 teach = 0,
-                advance = 0
+                advance = 0,
+                former = lecture['former']
                 )
                 if (lecture['tech']) is not None:
                     lec.tech = MajorTech.objects.get( title = lecture['tech'])
-                former_code = lecture.get('former')
-                if former_code:
-                    try:
-                        lec.former = Lecture.objects.get(code=former_code)
-                    except Lecture.DoesNotExist:
-                        pass
+                
                 lec.save()
                 
             self.stdout.write(self.style.SUCCESS('MGT Lectures initialized'))

@@ -8,8 +8,8 @@ class Command(BaseCommand):
             'title': '회계학원론', ##
             'code':'MGT2003',
             'point': 3,
-            'semester_one': 3, #6+ 
-            'semester_two': 3,
+            'semester_one': 3, #6+6+7
+            'semester_two': 3, #7+7+5
             'teamplay': 4,
             'grade_recommend': '1~2',
             'season_open': 1,
@@ -25,8 +25,8 @@ class Command(BaseCommand):
             'title': '경제수리기초', ## ## #
             'code':'ECO2003',
             'point': 3,
-            'semester_one': 2, #2
-            'semester_two': 2,
+            'semester_one': 2, #2+2
+            'semester_two': 2, #2
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -42,8 +42,8 @@ class Command(BaseCommand):
             'title': '미적분학I', ##
             'code':'STS2005',
             'point': 3,
-            'semester_one': 3, #14+
-            'semester_two': 2,
+            'semester_one': 3, #14+15+15
+            'semester_two': 2, #1+1+1
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -59,8 +59,8 @@ class Command(BaseCommand):
             'title': '미적분학II', ##
             'code':'STS2006',
             'point': 3,
-            'semester_one': 2, #1+
-            'semester_two': 3,
+            'semester_one': 2, #1+1+1
+            'semester_two': 3, #11+11+10
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -76,8 +76,8 @@ class Command(BaseCommand):
             'title': '경제학원론I', ## ## ##
             'code':'ECO2001',
             'point': 3,
-            'semester_one': 3, #9+
-            'semester_two': 3,
+            'semester_one': 3, #9+7+
+            'semester_two': 3, #5
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -93,8 +93,8 @@ class Command(BaseCommand):
             'title': '경제학원론II', ## ## ##
             'code':'ECO2002',
             'point': 3,
-            'semester_one': 3, #5+
-            'semester_two': 3,
+            'semester_one': 3, #5+4+
+            'semester_two': 3, #7
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -110,8 +110,8 @@ class Command(BaseCommand):
             'title': '경제통계학', ## ## ##
             'code':'ECO2004',
             'point': 3,
-            'semester_one': 3, #4+
-            'semester_two': 2,
+            'semester_one': 3, #4+3+
+            'semester_two': 2, #3
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -128,8 +128,8 @@ class Command(BaseCommand):
             'code':'ECO2006',
             'point': 3,
             # 'former': 'ECO2001, ECO2003(혹은 STS2005나 STS2006)',
-            'semester_one': 3, #4+
-            'semester_two': 3,
+            'semester_one': 3, #4+5
+            'semester_two': 3, #3
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 0,
@@ -146,8 +146,8 @@ class Command(BaseCommand):
             'code':'ECO2007',
             'point': 3,
             # 'former': 'ECO2001, ECO2002, ECO2003(혹은 STS2005나 STS2006)',
-            'semester_one': 3, #3+
-            'semester_two': 3,
+            'semester_one': 3, #3+3+
+            'semester_two': 3, #4+
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 1,
@@ -164,10 +164,10 @@ class Command(BaseCommand):
             'code':'ECO2009', 
             'point': 3,
             # 'former': 'ECO2004 (혹은 MGT2002 또는 MAT3020 또는 MAT2410)',
-            'semester_one': 3, #2
-            'semester_two': 3,
+            'semester_one': 3, #2+4+
+            'semester_two': 3, #3
             'teamplay': 4,
-            'grade_recommend': '2',
+            'grade_recommend': '2~3',
             'season_open': 0,
             'category23': '전공필수교과',
             'category22': '전공필수교과',
@@ -182,10 +182,10 @@ class Command(BaseCommand):
             'code':'ECO3008',
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2,
-            'semester_two': 1,
+            'semester_one': 2, #1+1
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -200,10 +200,10 @@ class Command(BaseCommand):
             'code':'ECO3011',
             'point': 3,
             # 'former': 'ECO2007',
-            'semester_one': 2,
-            'semester_two': 1,
+            'semester_one': 2, #1+1
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -218,10 +218,10 @@ class Command(BaseCommand):
             'code':'ECO3022',
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1,
-            'semester_two': 2,
+            'semester_one': 1, #1+1
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -236,10 +236,10 @@ class Command(BaseCommand):
             'code':'ECO4008',
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2,
-            'semester_two': 2,
+            'semester_one': 2, #1+1
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -254,10 +254,10 @@ class Command(BaseCommand):
             'code':'ECO4009',
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020), ECO2006',
-            'semester_one': 1,
-            'semester_two': 1,
+            'semester_one': 1, #1
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -272,10 +272,10 @@ class Command(BaseCommand):
             'code':'ECO4010',
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1,
-            'semester_two': 1,
+            'semester_one': 1, #1
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -290,10 +290,10 @@ class Command(BaseCommand):
             'code':'ECO4025',
             'point': 3,
             # 'former': 'ECO2006',
-            'semester_one': 2,
+            'semester_one': 2, #1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -308,10 +308,10 @@ class Command(BaseCommand):
             'code':'ECO4032',
             'point': 3,
             # 'former': 'ECO2009',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 1,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -339,33 +339,33 @@ class Command(BaseCommand):
             'category21_d': '선택 필수',
             'tech': '금융경제'
         }, 
-        {
-            'title': '금융시장행태주의분석(캡스톤디자인)',
-            'code':'ECO4033',
-            'point': 3,
-            # 'former': 'ECO2001, ECO2002',
-            'semester_one': 0,
-            'semester_two': 0,
-            'teamplay': 4,
-            'grade_recommend': '1',
-            'season_open': 0,
-            'category23': '전공선택교과',
-            'category22': '전공선택교과',
-            'category21': '전공선택교과',
-            'category23_d': '선택 필수',
-            'category22_d': '선택 필수',
-            'category21_d': '선택 필수',
-            'tech': '금융경제'
-        }, 
+        # {
+        #     'title': '금융시장행태주의분석(캡스톤디자인)',
+        #     'code':'ECO4033',
+        #     'point': 3,
+        #     # 'former': 'ECO2001, ECO2002',
+        #     'semester_one': 0, #1
+        #     'semester_two': 0,
+        #     'teamplay': 4,
+        #     'grade_recommend': '1',
+        #     'season_open': 0,
+        #     'category23': '전공선택교과',
+        #     'category22': '전공선택교과',
+        #     'category21': '전공선택교과',
+        #     'category23_d': '선택 필수',
+        #     'category22_d': '선택 필수',
+        #     'category21_d': '선택 필수',
+        #     'tech': '금융경제'
+        # }, 
         {
             'title': '국제무역론', ## ## ##
             'code':'ECO3010',
             'point': 3,
             # 'former': 'ECO2006',
-            'semester_one': 1,
-            'semester_two': 2,
+            'semester_one': 1, #1
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -380,10 +380,10 @@ class Command(BaseCommand):
             'code':'ECO3011',
             'point': 3,
             # 'former': 'ECO2007',
-            'semester_one': 2,
-            'semester_two': 2,
+            'semester_one': 2, #1+1
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -398,10 +398,10 @@ class Command(BaseCommand):
             'code':'ECO3012',
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2,
+            'semester_one': 2, #1+1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -416,10 +416,10 @@ class Command(BaseCommand):
             'code':'ECO4010',
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1,
-            'semester_two': 2,
+            'semester_one': 1, #1
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -472,7 +472,7 @@ class Command(BaseCommand):
             'semester_one': 0,
             'semester_two': 1,
             'teamplay': 4,
-            'grade_recommend': '1',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -486,10 +486,10 @@ class Command(BaseCommand):
             'title': '계랑경제학I',
             'code':'ECO2009',
             'point': 3,
-            'semester_one': 0,
-            'semester_two': 0,
+            'semester_one': 0, #2+4
+            'semester_two': 0, #3+
             'teamplay': 4,
-            'grade_recommend': '1',
+            'grade_recommend': '2~3',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -504,7 +504,7 @@ class Command(BaseCommand):
             'code':'ECO2005',
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
-            'semester_one': 1,
+            'semester_one': 1, #1+
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '2',
@@ -524,7 +524,7 @@ class Command(BaseCommand):
             'semester_one': 0,
             'semester_two': 1,
             'teamplay': 4,
-            'grade_recommend': '2',
+            'grade_recommend': '2~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -539,8 +539,8 @@ class Command(BaseCommand):
             'code':'ECO4004',
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
-            'semester_one': 1,
-            'semester_two': 1,
+            'semester_one': 1, #1
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '3',
             'season_open': 0,
@@ -557,8 +557,8 @@ class Command(BaseCommand):
             'code':'ECO4004',
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
-            'semester_one': 1,
-            'semester_two': 1,
+            'semester_one': 1, #1
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '3',
             'season_open': 0,
@@ -576,9 +576,9 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004, ECO2006, ECO2009',
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -594,9 +594,9 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004, ECO2006, ECO2009',
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -612,9 +612,9 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004, ECO2006, ECO2009',
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -629,10 +629,10 @@ class Command(BaseCommand):
             'code':'ECO4032',
             'point': 3,
             # 'former': 'ECO2009',
-            'semester_one': 1,
-            'semester_two': 0,
+            'semester_one': 1, #1
+            'semester_two': 1,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -647,8 +647,8 @@ class Command(BaseCommand):
             'code':'ECOG030',
             'point': 3,
             'former': 'ECO2009',
-            'semester_one': 2,
-            'semester_two': 2,
+            'semester_one': 2, #1+1
+            'semester_two': 2, #1
             'teamplay': 4,
             'grade_recommend': '4',
             'season_open': 0,
@@ -682,10 +682,10 @@ class Command(BaseCommand):
             'code':'ECO3001',
             'point': 3,
             # 'former': 'ECO2004, ECO2006',
-            'semester_one': 2,
-            'semester_two': 2,
+            'semester_one': 2, #1+1
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -700,10 +700,10 @@ class Command(BaseCommand):
             'code':'ECO3003',
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020), ECO2006',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -718,10 +718,10 @@ class Command(BaseCommand):
             'code':'ECO4005',
             'point': 3,
             'former': 'ECO2006',
-            'semester_one': 1,
-            'semester_two': 1,
+            'semester_one': 1, #1
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -736,10 +736,10 @@ class Command(BaseCommand):
             'code':'ECO4005',
             'point': 3,
             'former': 'ECO2006',
-            'semester_one': 1,
-            'semester_two': 1,
+            'semester_one': 1, #1
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -754,10 +754,10 @@ class Command(BaseCommand):
             'code':'ECO4006',
             'point': 3,
             'former': 'ECO2006',
-            'semester_one': 1,
-            'semester_two': 2,
+            'semester_one': 1, 
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -773,9 +773,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 1,
-            'semester_two': 2,
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -791,9 +791,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -808,10 +808,10 @@ class Command(BaseCommand):
             'code':'ECO4025',
             'point': 3,
             # 'former': 'ECO2006',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -826,10 +826,10 @@ class Command(BaseCommand):
             'code':'ECO3009',
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2,
-            'semester_two': 1,
+            'semester_one': 2, #1+1
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -844,10 +844,10 @@ class Command(BaseCommand):
             'code':'ECO3002',
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020), ECO2006',
-            'semester_one': 2,
+            'semester_one': 2, #1+1
             'semester_two': 1,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -862,10 +862,10 @@ class Command(BaseCommand):
             'code':'ECO3004',
             'point': 3,
             # 'former': 'ECO2006',
-            'semester_one': 2,
-            'semester_two': 2,
+            'semester_one': 2, #1+1
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -881,9 +881,9 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
             'semester_one': 0,
-            'semester_two': 2,
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -934,10 +934,10 @@ class Command(BaseCommand):
             'code':'ECO3012',
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2,
+            'semester_one': 2, #1+1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -970,8 +970,8 @@ class Command(BaseCommand):
             'code':'ECO2008',
             'point': 3,
             # 'former': 'ECO2001, ECO2003 (혹은 STS2005나 STS2006)',
-            'semester_one': 2,
-            'semester_two': 1,
+            'semester_one': 2, #1+1+
+            'semester_two': 1, #1+
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 0,
@@ -988,8 +988,8 @@ class Command(BaseCommand):
             'code':'ECO2008',
             'point': 3,
             # 'former': 'ECO2001, ECO2003 (혹은 STS2005나 STS2006)',
-            'semester_one': 2,
-            'semester_two': 1,
+            'semester_one': 2, #1+1+
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 0,
@@ -1045,7 +1045,7 @@ class Command(BaseCommand):
             'semester_one': 1,
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '1',
+            'grade_recommend': '2~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1061,9 +1061,9 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
             'semester_one': 1,
-            'semester_two': 2,
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1096,10 +1096,10 @@ class Command(BaseCommand):
             'code':'ECO3021',
             'point': 3,
             # 'former': 'ECO2003(혹은 STS2005나 STS2006), ECO2007',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1114,10 +1114,10 @@ class Command(BaseCommand):
             'code':'ECO3021',
             'point': 3,
             # 'former': 'ECO2003(혹은 STS2005나 STS2006), ECO2007',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1132,10 +1132,10 @@ class Command(BaseCommand):
             'code':'ECO3023',
             'point': 3,            
             # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1150,10 +1150,10 @@ class Command(BaseCommand):
             'code':'ECO3024',
             'point': 3,
             'former': None,
-            'semester_one': 1,
+            'semester_one': 1, #2+
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '1',
+            'grade_recommend': '1~3',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1168,10 +1168,10 @@ class Command(BaseCommand):
             'code':'ECO3026',
             'point': 3,
             # 'former': 'ECO2001, ECO2004',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1186,10 +1186,10 @@ class Command(BaseCommand):
             'code':'ECO4037',
             'point': 3,
             # 'former': 'ECO2003, ECO2004, ECO2006',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 1,
             'teamplay': 4,
-            'grade_recommend': '2',
+            'grade_recommend': '2~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1207,7 +1207,7 @@ class Command(BaseCommand):
             'semester_one': 0,
             'semester_two': 1,
             'teamplay': 4,
-            'grade_recommend': '1',
+            'grade_recommend': '2~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1240,10 +1240,10 @@ class Command(BaseCommand):
             'code':'ECO4001',
             'point': 3,
             'former': 'ECO2006',
-            'semester_one': 0,
-            'semester_two': 2,
+            'semester_one': 0, 
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1259,9 +1259,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 2,
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1277,9 +1277,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 2,
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1295,9 +1295,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2007',
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1313,9 +1313,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2007',
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1331,9 +1331,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2007',
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1349,9 +1349,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2007',
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1384,10 +1384,10 @@ class Command(BaseCommand):
             'code':'ECO4018',
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1,
-            'semester_two': 1,
+            'semester_one': 1, #1
+            'semester_two': 1, #1
             'teamplay': 4,
-            'grade_recommend': '2',
+            'grade_recommend': '2~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1492,7 +1492,7 @@ class Command(BaseCommand):
             'code':'ECO4029',
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '4',
@@ -1510,10 +1510,10 @@ class Command(BaseCommand):
             'code':'ECO4030',
             'point': 3,
             'former': 'ECO2006',
-            'semester_one': 1,
+            'semester_one': 1, #1+1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1528,10 +1528,10 @@ class Command(BaseCommand):
             'code':'ECO4030',
             'point': 3,
             'former': 'ECO2006',
-            'semester_one': 1,
+            'semester_one': 1, #1+1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1546,10 +1546,10 @@ class Command(BaseCommand):
             'code':'ECO4030',
             'point': 3,
             'former': 'ECO2006',
-            'semester_one': 1,
+            'semester_one': 1, #1+1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1565,9 +1565,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 2,
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '2',
+            'grade_recommend': '2~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1583,9 +1583,9 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 2,
+            'semester_two': 2, #1
             'teamplay': 4,
-            'grade_recommend': '2',
+            'grade_recommend': '2~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1600,8 +1600,8 @@ class Command(BaseCommand):
             'code':'ECOG010',
             'point': 3,
             'former': 'ECO2006',
-            'semester_one': 2,
-            'semester_two': 1,
+            'semester_one': 2, #1+1
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '4',
             'season_open': 0,
@@ -1636,8 +1636,8 @@ class Command(BaseCommand):
             'code':'ECOG020',
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2,
-            'semester_two': 2,
+            'semester_one': 2, #1+1
+            'semester_two': 2, #1
             'teamplay': 4,
             'grade_recommend': '4',
             'season_open': 0,
@@ -1672,10 +1672,10 @@ class Command(BaseCommand):
             'code':'ECOG040',
             'point': 3,
             'former': None,
-            'semester_one': 2,
+            'semester_one': 2, #1+1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '4',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1689,10 +1689,10 @@ class Command(BaseCommand):
             'title': 'AI와빅데이터를활용한경제정보처리', #0 ## #
             'code':'ECOG051',
             'point': 3,
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 1,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '2~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
@@ -1707,27 +1707,30 @@ class Command(BaseCommand):
             'code':'ECO4034',
             'point': 3,
             # 'former': 'ECO2001, ECO2002'
-            'semester_one': 1,
+            'semester_one': 1, #1
             'semester_two': 0,
             'teamplay': 4,
-            'grade_recommend': '3',
+            'grade_recommend': '3~4',
             'season_open': 0,
             'category23': '전공선택교과',
             'category22': '전공선택교과',
             'category21': '전공선택교과',
-            'category23_d': None,
-            'category22_d': None,
-            'category21_d': None,
-            'tech': None
+            'category23_d': '선택 필수',
+            'category22_d': '선택 필수',
+            'category21_d': '선택 필수',
+            'tech': '금융경제'
         },
     ]
-    for data in Lecture:
-        if 'label' not in data:
-            data['label'] = data['title']
+
     def handle(self, *args, **options):
+        for data in self.Lecture:
+                if 'former' not in data:
+                    data['former'] = None
         for lecture in self.Lectures:
             lec = Lecture(
             title = lecture['title'], 
+            label = lecture['title'],
+            former = lecture['former'],
             code = lecture['code'], 
             point = lecture['point'], 
             semester_one = lecture['semester_one'], 
@@ -1743,13 +1746,8 @@ class Command(BaseCommand):
             )
             if (lecture['tech']) is not None:
                 lec.tech = MajorTech.objects.get( title = lecture['tech'])
-            former_code = lecture.get('former')
+            
 
-            if former_code:
-                    try:
-                        lec.former = Lecture.objects.get(code=former_code)
-                    except Lecture.DoesNotExist:
-                        pass
             lec.save()
         self.stdout.write(self.style.SUCCESS('Lectures initialized'))
         return 0

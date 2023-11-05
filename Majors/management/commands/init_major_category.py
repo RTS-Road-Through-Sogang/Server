@@ -35,7 +35,7 @@ class Command(BaseCommand):
         },
         {
             'title': '공통필수교과',
-            'detail': '글로벌 언어1',
+            'detail': '글로벌 언어I',
             'duty_point': 3
         },
         {

@@ -1641,15 +1641,18 @@ class Command(BaseCommand):
             'tech' : None
         },
     ]
-    for data in Lecture:
-        if 'label' not in data:
-            data['label'] = data['title']
+    
     def handle(self, *args, **options):
+        for data in self.Lecture:
+                if 'former' not in data:
+                    data['former'] = None
         for lecture in self.Lectures:
             lec = Lecture(
             title = lecture['title'], 
+            label = lecture['title'],
             code = lecture['code'], 
             point = lecture['point'], 
+            former = lecture['former'],
             semester_one = lecture['semester_one'], 
             semester_two = lecture['semester_two'], 
             teamplay = lecture['teamplay'], 
@@ -1663,13 +1666,7 @@ class Command(BaseCommand):
             )
             if (lecture['tech']) is not None:
                 lec.tech = MajorTech.objects.get( title = lecture['tech'])
-            former_code = lecture.get('former')
-
-            if former_code:
-                    try:
-                        lec.former = Lecture.objects.get(code=former_code)
-                    except Lecture.DoesNotExist:
-                        pass
+           
             lec.save()
         self.stdout.write(self.style.SUCCESS('Lectures initialized'))
         return 0
