@@ -37,7 +37,7 @@ CORS_ALLOW_ALL_ORIGINS= True
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:8000",
-    "ec2-54-180-25-161.ap-northeast-2.compute.amazonaws.com",
+    "http://ec2-54-180-25-161.ap-northeast-2.compute.amazonaws.com",
 ]
 
 STATIC_URL = '/static/'
