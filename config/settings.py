@@ -35,12 +35,14 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "http://localhost:3000",
     "http://localhost:3306",
+    "ec2-54-180-25-161.ap-northeast-2.compute.amazonaws.com"
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     ".ap-northeast-2.compute.amazonaws.com",
     "127.0.0.1",
     "http://localhost:3306",
+    "ec2-54-180-25-161.ap-northeast-2.compute.amazonaws.com"
 
 ]
 STATIC_URL = '/static/'
