@@ -59,7 +59,7 @@ class MyUser(AbstractBaseUser,PermissionsMixin):
     REQUIRED_FIELDS =['name', 'email']
 
     # 학번에서 몇학번인지 User에서 추출해서 student_year에 따로 저장
-    """def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if self.student_number and len(self.student_number) >= 4:
             year = self.student_number[2:4]
             try:
@@ -69,7 +69,7 @@ class MyUser(AbstractBaseUser,PermissionsMixin):
         else:
             student_year = None
         self.student_year = student_year
-        super(MyUser, self).save(*args, **kwargs)"""
+        super(MyUser, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
