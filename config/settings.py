@@ -33,7 +33,13 @@ ALLOWED_HOSTS = [
     "http://localhost:3000",
     "http://localhost:3306",
 ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    ".ap-northeast-2.compute.amazonaws.com",
+    "127.0.0.1",
+    "http://localhost:3306",
 
+]
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
