@@ -26,7 +26,7 @@ class Command(BaseCommand):
             'code':'ECO2003',
             'point': 3,
             'semester_one': 2, #2+2
-            'semester_two': 2, #2
+            'semester_two': 2, #2+1
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -77,7 +77,7 @@ class Command(BaseCommand):
             'code':'ECO2001',
             'point': 3,
             'semester_one': 3, #9+7+
-            'semester_two': 3, #5
+            'semester_two': 3, #5+2
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -94,7 +94,7 @@ class Command(BaseCommand):
             'code':'ECO2002',
             'point': 3,
             'semester_one': 3, #5+4+
-            'semester_two': 3, #7
+            'semester_two': 3, #7+3
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -111,7 +111,7 @@ class Command(BaseCommand):
             'code':'ECO2004',
             'point': 3,
             'semester_one': 3, #4+3+
-            'semester_two': 2, #3
+            'semester_two': 2, #3+2
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -129,7 +129,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2001, ECO2003(혹은 STS2005나 STS2006)',
             'semester_one': 3, #4+5
-            'semester_two': 3, #3
+            'semester_two': 3, #3+3
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 0,
@@ -147,7 +147,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2001, ECO2002, ECO2003(혹은 STS2005나 STS2006)',
             'semester_one': 3, #3+3+
-            'semester_two': 3, #4+
+            'semester_two': 3, #4+3
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 1,
@@ -165,7 +165,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004 (혹은 MGT2002 또는 MAT3020 또는 MAT2410)',
             'semester_one': 3, #2+4+
-            'semester_two': 3, #3
+            'semester_two': 3, #3+3
             'teamplay': 4,
             'grade_recommend': '2~3',
             'season_open': 0,
@@ -183,7 +183,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
             'semester_one': 2, #1+1
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -201,7 +201,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2007',
             'semester_one': 2, #1+1
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -219,7 +219,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
             'semester_one': 1, #1+1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -237,7 +237,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
             'semester_one': 2, #1+1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -255,7 +255,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020), ECO2006',
             'semester_one': 1, #1
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -273,7 +273,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
             'semester_one': 1, #1
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -309,7 +309,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2009',
             'semester_one': 1, #1
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -363,7 +363,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2006',
             'semester_one': 1, #1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -381,7 +381,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2007',
             'semester_one': 2, #1+1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -417,7 +417,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
             'semester_one': 1, #1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -487,7 +487,7 @@ class Command(BaseCommand):
             'code':'ECO2009',
             'point': 3,
             'semester_one': 0, #2+4
-            'semester_two': 0, #3+
+            'semester_two': 0, #3+3
             'teamplay': 4,
             'grade_recommend': '2~3',
             'season_open': 0,
@@ -522,7 +522,7 @@ class Command(BaseCommand):
             'code':'ECO3025',
             'point': 3,
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -540,7 +540,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
             'semester_one': 1, #1
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3',
             'season_open': 0,
@@ -558,7 +558,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
             'semester_one': 1, #1
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3',
             'season_open': 0,
@@ -576,7 +576,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004, ECO2006, ECO2009',
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -594,7 +594,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004, ECO2006, ECO2009',
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -612,7 +612,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004, ECO2006, ECO2009',
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -630,7 +630,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2009',
             'semester_one': 1, #1
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -648,7 +648,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2009',
             'semester_one': 2, #1+1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '4',
             'season_open': 0,
@@ -683,7 +683,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2004, ECO2006',
             'semester_one': 2, #1+1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -755,7 +755,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 1, 
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -773,7 +773,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 1,
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -791,7 +791,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -863,7 +863,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2006',
             'semester_one': 2, #1+1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -881,7 +881,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
             'semester_one': 0,
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1061,7 +1061,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2001, ECO2002',
             'semester_one': 1,
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1187,7 +1187,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2003, ECO2004, ECO2006',
             'semester_one': 1, #1
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1205,7 +1205,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': None,
             'semester_one': 0,
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1241,7 +1241,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0, 
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1259,7 +1259,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1277,7 +1277,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1565,7 +1565,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1583,7 +1583,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': 'ECO2006',
             'semester_one': 0,
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1637,7 +1637,7 @@ class Command(BaseCommand):
             'point': 3,
             # 'former': 'ECO2006, ECO2007',
             'semester_one': 2, #1+1
-            'semester_two': 2, #1
+            'semester_two': 2, #1+1
             'teamplay': 4,
             'grade_recommend': '4',
             'season_open': 0,
@@ -1690,7 +1690,7 @@ class Command(BaseCommand):
             'code':'ECOG051',
             'point': 3,
             'semester_one': 1, #1
-            'semester_two': 1,
+            'semester_two': 1, #1
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,

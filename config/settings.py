@@ -19,9 +19,6 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_URL = os.getenv('BASE_URL')
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -31,20 +28,18 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    ".ap-northeast-2.compute.amazonaws.com",
-    "127.0.0.1",
-    "http://localhost:3000",
-    "http://localhost:3306",
-    "ec2-54-180-25-161.ap-northeast-2.compute.amazonaws.com"
+    '*'
 ]
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    ".ap-northeast-2.compute.amazonaws.com",
-    "127.0.0.1",
-    "http://localhost:3306",
-    "ec2-54-180-25-161.ap-northeast-2.compute.amazonaws.com"
 
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS= True
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+    "ec2-54-180-25-161.ap-northeast-2.compute.amazonaws.com",
 ]
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
