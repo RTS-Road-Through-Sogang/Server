@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:8000",
-    "http://ec2-43-201-145-225.ap-northeast-2.compute.amazonaws.com",
+    "http://ec2-13-124-144-89.ap-northeast-2.compute.amazonaws.com",
 ]
 
 STATIC_URL = '/static/'
