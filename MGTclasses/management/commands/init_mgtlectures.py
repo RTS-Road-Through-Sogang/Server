@@ -2235,7 +2235,7 @@ class Command(BaseCommand):
             for data in self.Lectures:
                 a = data['title']
                 if 'eta' not in data:
-                    data['eta'] = f"https://everytime.kr/lecture/search?keyword={a}&condtion=name"
+                    data['eta'] = f"https://everytime.kr/lecture/search?keyword={a}&condition=name"
             for lecture in self.Lecture:
                 lec = Lecture(
                 title = lecture['title'], 
