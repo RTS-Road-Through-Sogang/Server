@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'Commonclasses',
     'MGTclasses',
     'ECOclasses',
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'Users.MyUser'
