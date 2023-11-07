@@ -29,6 +29,13 @@ User = get_user_model()
 def generate_verification_code():
     return str(random.randint(100000, 999999))
 
+@csrf_exempt
+def sending_email(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        email = data.get('email')
+
+
 
 @csrf_exempt
 def signup_view(request):
@@ -40,13 +47,7 @@ def signup_view(request):
         name = data.get('name')
         student_number = data.get('student_number')
         prime_major = data.get('major')
-        # 회원가입 시에 입력을 받나?
-        # completed_total = data.get('completed_total')
-        # completed_common = data.get('completed_common')
-        # completed_major = data.get('completed_major')
-        # completed_submajor1= data.get('completed_submajor1')
-        # completed_submajor2= data.get('completed_submajor2')
-        # completed_english= data.get('completed_english')
+        
 
         try:
             
