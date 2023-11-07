@@ -29,15 +29,8 @@ User = get_user_model()
 def generate_verification_code():
     return str(random.randint(100000, 999999))
 
-@csrf_exempt
-def sending_email(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        email = data.get('email')
 
-
-
-@csrf_exempt
+"""@csrf_exempt
 def signup_view(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -47,7 +40,7 @@ def signup_view(request):
         name = data.get('name')
         student_number = data.get('student_number')
         prime_major = data.get('major')
-        
+
 
         try:
             
@@ -93,8 +86,55 @@ def verify_email(request):
             return JsonResponse({'message': 'Invalid verification code'}, status=400)
     else:
         return JsonResponse({'message': 'Invalid request method'}, status=400)
-
+"""
         
+@csrf_exempt
+def sending_email(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            
+            validate_email(email)  # 이메일 형식 검증
+            validate_email_domain(email)  # 도메인 검증
+        except ValidationError as e:
+            return JsonResponse({'message': str(e)}, status=400)
+        verification_code = generate_verification_code()
+        # 인증 메일 전송
+        send_mail(
+                'Email Verification',
+                f'Your verification code is: {verification_code}',
+                'rtssogang@gmail.com',
+                [email],
+                fail_silently=False,
+            )
+        return JsonResponse({'message': f'이 숫자 6자리 검사해주세요 {verification_code} '})
+    else:
+        return JsonResponse({'message': 'post로 처리되어야함'}, status=400)    
+        
+
+
+@csrf_exempt
+def signup_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        email = data.get('email')
+        password = data.get('password')
+        name = data.get('name')
+        student_number = data.get('student_number')
+        prime_major = data.get('major')
+
+        if email and password and name and student_number:
+            # 인증 코드 생성 및 저장
+            majors = Major.objects.get(title=prime_major)
+            
+            user = User.objects.create_user(email=email, password=password, name=name, student_number=student_number,major = majors )
+            user_major = UserMajor.create_usermajor(user=user, major=majors, prime=True, completed=0)
+            
+            return JsonResponse({'message': 'signup completed'})
+        return JsonResponse({'message': 'email password name student name error'}, status=400)
+    else:
+        return JsonResponse({'message': 'only POST'}, status=400)
     
 @csrf_exempt
 def login_view(request):
