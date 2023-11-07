@@ -8,8 +8,8 @@ class Command(BaseCommand):
             'title': '회계학원론', ##
             'code':'MGT2003',
             'point': 3,
-            'semester_one': 3, #6+6+7
-            'semester_two': 3, #7+7+5
+            'semester_one': 19, #6+6+7
+            'semester_two': 19, #7+7+5
             'teamplay': 4,
             'grade_recommend': '1~2',
             'season_open': 1,
@@ -25,8 +25,8 @@ class Command(BaseCommand):
             'title': '경제수리기초', ## ## #
             'code':'ECO2003',
             'point': 3,
-            'semester_one': 2, #2+2
-            'semester_two': 2, #2+1
+            'semester_one': 6, #2+2+2
+            'semester_two': 5, #2+1+2
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -42,8 +42,8 @@ class Command(BaseCommand):
             'title': '미적분학I', ##
             'code':'STS2005',
             'point': 3,
-            'semester_one': 3, #14+15+15
-            'semester_two': 2, #1+1+1
+            'semester_one': 44, #14+15+15
+            'semester_two': 3, #1+1+1
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -59,8 +59,8 @@ class Command(BaseCommand):
             'title': '미적분학II', ##
             'code':'STS2006',
             'point': 3,
-            'semester_one': 2, #1+1+1
-            'semester_two': 3, #11+11+10
+            'semester_one': 3, #1+1+1
+            'semester_two': 32, #11+11+10
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -76,8 +76,8 @@ class Command(BaseCommand):
             'title': '경제학원론I', ## ## ##
             'code':'ECO2001',
             'point': 3,
-            'semester_one': 3, #9+7+
-            'semester_two': 3, #5+2
+            'semester_one': 24, #9+7+8
+            'semester_two': 5+2+3,
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -93,8 +93,8 @@ class Command(BaseCommand):
             'title': '경제학원론II', ## ## ##
             'code':'ECO2002',
             'point': 3,
-            'semester_one': 3, #5+4+
-            'semester_two': 3, #7+3
+            'semester_one': 5+4+5,
+            'semester_two': 7+3+5,
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -110,8 +110,8 @@ class Command(BaseCommand):
             'title': '경제통계학', ## ## ##
             'code':'ECO2004',
             'point': 3,
-            'semester_one': 3, #4+3+
-            'semester_two': 2, #3+2
+            'semester_one': 4+3+3,
+            'semester_two': 3+2+3,
             'teamplay': 4,
             'grade_recommend': '1',
             'season_open': 1,
@@ -127,9 +127,9 @@ class Command(BaseCommand):
             'title': '미시경제학I', ## ## ##
             'code':'ECO2006',
             'point': 3,
-            # 'former': 'ECO2001, ECO2003(혹은 STS2005나 STS2006)',
-            'semester_one': 3, #4+5
-            'semester_two': 3, #3+3
+            'former': '경제학원론I, 경제수리기초(혹은 미적분학I 이나 미적분학II)',
+            'semester_one': 4+5+4,
+            'semester_two': 3+3+4,
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 0,
@@ -145,9 +145,9 @@ class Command(BaseCommand):
             'title': '거시경제학I', ## ## ##
             'code':'ECO2007',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002, ECO2003(혹은 STS2005나 STS2006)',
-            'semester_one': 3, #3+3+
-            'semester_two': 3, #4+3
+            'former': '경제학원론I, 경제학원론II 경제수리기초(혹은 미적분학I 이나 미적분학II)',
+            'semester_one': 3+3+3,
+            'semester_two': 4+3+4,
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 1,
@@ -163,9 +163,9 @@ class Command(BaseCommand):
             'title': '계량경제학I', ## ## ##
             'code':'ECO2009', 
             'point': 3,
-            # 'former': 'ECO2004 (혹은 MGT2002 또는 MAT3020 또는 MAT2410)',
-            'semester_one': 3, #2+4+
-            'semester_two': 3, #3+3
+            'former': '경제통계학 (혹은 경영통계학 또는 통계학입문 또는 응용수학I)',
+            'semester_one': 2+4+2,
+            'semester_two': 3+3+4,
             'teamplay': 4,
             'grade_recommend': '2~3',
             'season_open': 0,
@@ -181,9 +181,9 @@ class Command(BaseCommand):
             'title': '금융경제학', ## ## #
             'code':'ECO3008',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2, #1+1
-            'semester_two': 1, #1+1
+            'former': '미시경제학I, 거시경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -199,9 +199,9 @@ class Command(BaseCommand):
             'title': '국제금융론', ## # ##
             'code':'ECO3011',
             'point': 3,
-            # 'former': 'ECO2007',
-            'semester_one': 2, #1+1
-            'semester_two': 1, #1+1
+            'former': '거시경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -217,9 +217,9 @@ class Command(BaseCommand):
             'title': '금융시장의빅데이터분석(캡스톤디자인)', ## ## ##
             'code':'ECO3022',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1, #1+1
-            'semester_two': 2, #1+1
+            'former': '경제학원론I, 경제학원론I',
+            'semester_one': 1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -235,9 +235,9 @@ class Command(BaseCommand):
             'title': '금융정책', ## ## ##
             'code':'ECO4008',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2, #1+1
-            'semester_two': 2, #1+1
+            'former': '미시경제학I, 거시경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -253,9 +253,9 @@ class Command(BaseCommand):
             'title': '파생상품시장', ## ## #
             'code':'ECO4009',
             'point': 3,
-            # 'former': 'ECO2004(혹은 MGT2002나 MAT3020), ECO2006',
-            'semester_one': 1, #1
-            'semester_two': 1, #1+1
+            'former': '경제통계학(혹은 경영통계학 이나 통계학입문), 미시경제학I',
+            'semester_one': 1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -271,9 +271,9 @@ class Command(BaseCommand):
             'title': '국제금융시장', ## ## #
             'code':'ECO4010',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1, #1
-            'semester_two': 1, #1+1
+            'former': '경제학원론I, 경제학원론II',
+            'semester_one': 1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -289,8 +289,8 @@ class Command(BaseCommand):
             'title': '기업금융론', ## #0
             'code':'ECO4025',
             'point': 3,
-            # 'former': 'ECO2006',
-            'semester_one': 2, #1
+            'former': '미시경제학I',
+            'semester_one': 1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -307,9 +307,9 @@ class Command(BaseCommand):
             'title': '금융시장계량분석(캡스톤디자인)', ## ## #
             'code':'ECO4032',
             'point': 3,
-            # 'former': 'ECO2009',
-            'semester_one': 1, #1
-            'semester_two': 1, #1
+            'former': '계량경제학I',
+            'semester_one': 1+1,
+            'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -325,7 +325,7 @@ class Command(BaseCommand):
             'title': '거시경제지표분석(캡스톤디자인)',
             'code':'ECO4033',
             'point': 3,
-            # 'former': 'ECO2007',
+            'former': '거시경제학I',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -343,7 +343,7 @@ class Command(BaseCommand):
         #     'title': '금융시장행태주의분석(캡스톤디자인)',
         #     'code':'ECO4033',
         #     'point': 3,
-        #     # 'former': 'ECO2001, ECO2002',
+        #     # 'former': '경제학원론I, 경제학원론II',
         #     'semester_one': 0, #1
         #     'semester_two': 0,
         #     'teamplay': 4,
@@ -361,9 +361,9 @@ class Command(BaseCommand):
             'title': '국제무역론', ## ## ##
             'code':'ECO3010',
             'point': 3,
-            # 'former': 'ECO2006',
-            'semester_one': 1, #1
-            'semester_two': 2, #1+1
+            'former': '미시경제학I',
+            'semester_one': 1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -379,9 +379,9 @@ class Command(BaseCommand):
             'title': '국제금융론', ## ## ##
             'code':'ECO3011',
             'point': 3,
-            # 'former': 'ECO2007',
-            'semester_one': 2, #1+1
-            'semester_two': 2, #1+1
+            'former': '거시경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -397,8 +397,8 @@ class Command(BaseCommand):
             'title': '개발경제학', ## # #
             'code':'ECO3012',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2, #1+1
+            'former': '미시경제학I, 거시경제학I',
+            'semester_one': 1+1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -415,9 +415,9 @@ class Command(BaseCommand):
             'title': '국제금융시장', ## ##
             'code':'ECO4010',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1, #1
-            'semester_two': 2, #1+1
+            'former': '경제학원론I, 경제학원론II',
+            'semester_one': 1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -433,7 +433,7 @@ class Command(BaseCommand):
             'title': '한국경제론',
             'code':'ECO4014',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
+            'former': '경제학원론I, 경제학원론II',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -468,7 +468,7 @@ class Command(BaseCommand):
             'title': '다국적기업과경제분석', ##
             'code':'ECO4036',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
             'semester_two': 1,
             'teamplay': 4,
@@ -486,8 +486,8 @@ class Command(BaseCommand):
             'title': '계랑경제학I',
             'code':'ECO2009',
             'point': 3,
-            'semester_one': 0, #2+4
-            'semester_two': 0, #3+3
+            'semester_one': 2+4+2,
+            'semester_two': 3+3+4,
             'teamplay': 4,
             'grade_recommend': '2~3',
             'season_open': 0,
@@ -503,8 +503,8 @@ class Command(BaseCommand):
             'title': '경제정보분석', ## #0
             'code':'ECO2005',
             'point': 3,
-            # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
-            'semester_one': 1, #1+
+            'former': '경제통계학(혹은 경영통계학 이나 통계학입문)',
+            'semester_one': 1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '2',
@@ -522,7 +522,7 @@ class Command(BaseCommand):
             'code':'ECO3025',
             'point': 3,
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -538,9 +538,9 @@ class Command(BaseCommand):
             'title': '경제수리통계학', ## ## #
             'code':'ECO4004',
             'point': 3,
-            # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
-            'semester_one': 1, #1
-            'semester_two': 1, #1+1
+            'former': '경제통계학(혹은 경영통계학 이나 통계학입문)',
+            'semester_one': 1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3',
             'season_open': 0,
@@ -556,9 +556,9 @@ class Command(BaseCommand):
             'title': '경제수리통계학',
             'code':'ECO4004',
             'point': 3,
-            # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
-            'semester_one': 1, #1
-            'semester_two': 1, #1+1
+            'former': '경제통계학(혹은 경영통계학 이나 통계학입문)',
+            'semester_one': 1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3',
             'season_open': 0,
@@ -574,9 +574,9 @@ class Command(BaseCommand):
             'title': '응용미시계량분석', ## ##
             'code':'ECO4035',
             'point': 3,
-            # 'former': 'ECO2004, ECO2006, ECO2009',
+            'former': '경제통계학, 미시경제학I, 계량경제학I',
             'semester_one': 0,
-            'semester_two': 1, #1+1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -592,9 +592,9 @@ class Command(BaseCommand):
             'title': '응용미시계량분석',
             'code':'ECO4035',
             'point': 3,
-            # 'former': 'ECO2004, ECO2006, ECO2009',
+            'former': '경제통계학, 미시경제학I, 계량경제학I',
             'semester_one': 0,
-            'semester_two': 1, #1+1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -610,9 +610,9 @@ class Command(BaseCommand):
             'title': '응용미시계량분석',
             'code':'ECO4035',
             'point': 3,
-            # 'former': 'ECO2004, ECO2006, ECO2009',
+            'former': '경제통계학, 미시경제학I, 계량경제학I',
             'semester_one': 0,
-            'semester_two': 1, #1+1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -628,9 +628,9 @@ class Command(BaseCommand):
             'title': '금융시장계량분석(캡스톤디자인)', ## #0
             'code':'ECO4032',
             'point': 3,
-            # 'former': 'ECO2009',
-            'semester_one': 1, #1
-            'semester_two': 1, #1
+            'former': '계량경제학I',
+            'semester_one': 1+1,
+            'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -646,9 +646,9 @@ class Command(BaseCommand):
             'title': '고급계량경제학I', ## ## ##
             'code':'ECOG030',
             'point': 3,
-            'former': 'ECO2009',
-            'semester_one': 2, #1+1
-            'semester_two': 2, #1+1
+            'former': '계량경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '4',
             'season_open': 0,
@@ -681,9 +681,9 @@ class Command(BaseCommand):
             'title': '산업경제학', ## ## ##
             'code':'ECO3001',
             'point': 3,
-            # 'former': 'ECO2004, ECO2006',
-            'semester_one': 2, #1+1
-            'semester_two': 2, #1+1
+            'former': '경제통계학, 미시경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -699,8 +699,8 @@ class Command(BaseCommand):
             'title': '기술경제학', #0 #
             'code':'ECO3003',
             'point': 3,
-            # 'former': 'ECO2004(혹은 MGT2002나 MAT3020), ECO2006',
-            'semester_one': 1, #1
+            'former': '경제통계학(혹은 경영통계학 이나 통계학입문), 미시경제학I',
+            'semester_one': 1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -717,9 +717,9 @@ class Command(BaseCommand):
             'title': '게임이론', ## # #
             'code':'ECO4005',
             'point': 3,
-            'former': 'ECO2006',
-            'semester_one': 1, #1
-            'semester_two': 1, #1
+            'former': '미시경제학I',
+            'semester_one': 1+1,
+            'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -735,9 +735,9 @@ class Command(BaseCommand):
             'title': '게임이론', ## #
             'code':'ECO4005',
             'point': 3,
-            'former': 'ECO2006',
-            'semester_one': 1, #1
-            'semester_two': 1, #1
+            'former': '미시경제학I',
+            'semester_one': 1+1,
+            'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -753,9 +753,9 @@ class Command(BaseCommand):
             'title': '정보경제학', ## ## #
             'code':'ECO4006',
             'point': 3,
-            'former': 'ECO2006',
-            'semester_one': 1, 
-            'semester_two': 2, #1+1
+            'former': '미시경제학I',
+            'semester_one': 1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -771,9 +771,9 @@ class Command(BaseCommand):
             'title': '정보경제학', ## ##
             'code':'ECO4006',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 1,
-            'semester_two': 2, #1+1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -789,9 +789,9 @@ class Command(BaseCommand):
             'title': '경쟁법과산업규제의경제학', ## ##
             'code':'ECO4007',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
-            'semester_two': 1, #1+1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -807,8 +807,8 @@ class Command(BaseCommand):
             'title': '기업금융론', ## #0
             'code':'ECO4025',
             'point': 3,
-            # 'former': 'ECO2006',
-            'semester_one': 1, #1
+            'former': '미시경제학I',
+            'semester_one': 1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -825,9 +825,9 @@ class Command(BaseCommand):
             'title': '공공경제학', ## # #
             'code':'ECO3009',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2, #1+1
-            'semester_two': 1, #1
+            'former': '미시경제학I, 거시경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -843,8 +843,8 @@ class Command(BaseCommand):
             'title': '노동경제학', ## # ##
             'code':'ECO3002',
             'point': 3,
-            # 'former': 'ECO2004(혹은 MGT2002나 MAT3020), ECO2006',
-            'semester_one': 2, #1+1
+            'former': '경제통계학(혹은 경영통계학 이나 통계학입문), 미시경제학I',
+            'semester_one': 1+1+1,
             'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -861,9 +861,9 @@ class Command(BaseCommand):
             'title': '도시경제학', ## ## ##
             'code':'ECO3004',
             'point': 3,
-            # 'former': 'ECO2006',
-            'semester_one': 2, #1+1
-            'semester_two': 2, #1+1
+            'former': '미시경제학I',
+            'semester_one': 1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -879,9 +879,9 @@ class Command(BaseCommand):
             'title': '환경경제학', ## ## ##
             'code':'ECO3005',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
+            'former': '미시경제학I, 거시경제학I',
             'semester_one': 0,
-            'semester_two': 2, #1+1
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -897,7 +897,7 @@ class Command(BaseCommand):
             'title': '교육경제학',
             'code':'ECO3006',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
+            'former': '미시경제학I, 거시경제학I',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -915,7 +915,7 @@ class Command(BaseCommand):
             'title': '농업경제학',
             'code':'ECO3007',
             'point': 3,
-            # 'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -933,8 +933,8 @@ class Command(BaseCommand):
             'title': '개발경제학', ## ##
             'code':'ECO3012',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2, #1+1
+            'former': '미시경제학I, 거시경제학I',
+            'semester_one': 1+1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -969,9 +969,9 @@ class Command(BaseCommand):
             'title': '수리경제학', ## ##
             'code':'ECO2008',
             'point': 3,
-            # 'former': 'ECO2001, ECO2003 (혹은 STS2005나 STS2006)',
-            'semester_one': 2, #1+1+
-            'semester_two': 1, #1+
+            'former': '경제학원론I, 경제수리기초 (혹은 미적분학I 이나 미적분학II)',
+            'semester_one': 1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 0,
@@ -987,9 +987,9 @@ class Command(BaseCommand):
             'title': '수리경제학', ## #
             'code':'ECO2008',
             'point': 3,
-            # 'former': 'ECO2001, ECO2003 (혹은 STS2005나 STS2006)',
-            'semester_one': 2, #1+1+
-            'semester_two': 1, #1
+            'former': '경제학원론I, 경제수리기초 (혹은 미적분학I 이나 미적분학II)',
+            'semester_one': 1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '2',
             'season_open': 0,
@@ -1005,7 +1005,7 @@ class Command(BaseCommand):
             'title': '경제학설사I',
             'code':'ECO2010',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
+            'former': '경제학원론I, 경제학원론II',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1023,7 +1023,7 @@ class Command(BaseCommand):
             'title': '근대경제사',
             'code':'ECO2011',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
+            'former': '경제학원론I, 경제학원론II',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1041,7 +1041,7 @@ class Command(BaseCommand):
             'title': '동태계획법', #
             'code':'ECO2012',
             'point': 3,
-            # 'former': 'ECO2003(혹은 STS2005나 STS2006)',
+            'former': '경제수리기초(혹은 미적분학I 이나 미적분학II)',
             'semester_one': 1,
             'semester_two': 0,
             'teamplay': 4,
@@ -1059,9 +1059,9 @@ class Command(BaseCommand):
             'title': '국제경제학', ## ## ##
             'code':'ECO3017',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
+            'former': '경제학원론I, 경제학원론II',
             'semester_one': 1,
-            'semester_two': 2, #1+1
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1095,8 +1095,8 @@ class Command(BaseCommand):
             'title': '경제성장론', ## #0 #
             'code':'ECO3021',
             'point': 3,
-            # 'former': 'ECO2003(혹은 STS2005나 STS2006), ECO2007',
-            'semester_one': 1, #1
+            'former': '경제수리기초(혹은 미적분학I 이나 미적분학II), 거시경제학I',
+            'semester_one': 1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -1113,8 +1113,8 @@ class Command(BaseCommand):
             'title': '경제성장론', ## #0
             'code':'ECO3021',
             'point': 3,
-            # 'former': 'ECO2003(혹은 STS2005나 STS2006), ECO2007',
-            'semester_one': 1, #1
+            'former': '경제수리기초(혹은 미적분학I 이나 미적분학II), 거시경제학I',
+            'semester_one': 1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -1131,8 +1131,8 @@ class Command(BaseCommand):
             'title': 'AI금융(캡스톤디자인)', ## #0 #
             'code':'ECO3023',
             'point': 3,            
-            # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1, #1
+            'former': '경제학원론I, 경제학원론II',
+            'semester_one': 1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -1150,7 +1150,7 @@ class Command(BaseCommand):
             'code':'ECO3024',
             'point': 3,
             'former': None,
-            'semester_one': 1, #2+
+            'semester_one': 2+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '1~3',
@@ -1167,8 +1167,8 @@ class Command(BaseCommand):
             'title': '교통경제학', #0 # #
             'code':'ECO3026',
             'point': 3,
-            # 'former': 'ECO2001, ECO2004',
-            'semester_one': 1, #1
+            'former': '경제학원론I, 경제통계학',
+            'semester_one': 1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -1185,9 +1185,9 @@ class Command(BaseCommand):
             'title': '주식및채권시장', #0 ## #
             'code':'ECO4037',
             'point': 3,
-            # 'former': 'ECO2003, ECO2004, ECO2006',
-            'semester_one': 1, #1
-            'semester_two': 1, #1
+            'former': '경제수리기초, 경제통계학, 미시경제학I',
+            'semester_one': 1+1,
+            'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1205,7 +1205,7 @@ class Command(BaseCommand):
             'point': 3,
             'former': None,
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1221,7 +1221,7 @@ class Command(BaseCommand):
             'title': '응용미시이론',
             'code':'ECO4039',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1239,9 +1239,9 @@ class Command(BaseCommand):
             'title': '미시경제학II', ## ## ##
             'code':'ECO4001',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0, 
-            'semester_two': 2, #1+1
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1257,9 +1257,9 @@ class Command(BaseCommand):
             'title': '미시경제학II',
             'code':'ECO4001',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
-            'semester_two': 2, #1+1
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1275,9 +1275,9 @@ class Command(BaseCommand):
             'title': '미시경제학II',
             'code':'ECO4001',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
-            'semester_two': 2, #1+1
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1293,9 +1293,9 @@ class Command(BaseCommand):
             'title': '거시경제학II', ## #0
             'code':'ECO4002',
             'point': 3,
-            'former': 'ECO2007',
+            'former': '거시경제학I',
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1311,9 +1311,9 @@ class Command(BaseCommand):
             'title': '거시경제학II', ## #0 ##
             'code':'ECO4002',
             'point': 3,
-            'former': 'ECO2007',
+            'former': '거시경제학I',
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1329,9 +1329,9 @@ class Command(BaseCommand):
             'title': '거시경제학II', ## #0
             'code':'ECO4002',
             'point': 3,
-            'former': 'ECO2007',
+            'former': '거시경제학I',
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1347,9 +1347,9 @@ class Command(BaseCommand):
             'title': '거시경제학II', ## #0
             'code':'ECO4002',
             'point': 3,
-            'former': 'ECO2007',
+            'former': '거시경제학I',
             'semester_one': 0,
-            'semester_two': 1, #1
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '3~4',
             'season_open': 0,
@@ -1365,7 +1365,7 @@ class Command(BaseCommand):
             'title': '재정정책',
             'code':'ECO4011',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
+            'former': '미시경제학I, 거시경제학I',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1383,9 +1383,9 @@ class Command(BaseCommand):
             'title': '경제학특강I', ## #0
             'code':'ECO4018',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
-            'semester_one': 1, #1
-            'semester_two': 1, #1
+            'former': '경제학원론I, 경제학원론II',
+            'semester_one': 1,
+            'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1401,7 +1401,7 @@ class Command(BaseCommand):
             'title': '경제학특강II',
             'code':'ECO4019',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
+            'former': '경제학원론I, 경제학원론II',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1419,7 +1419,7 @@ class Command(BaseCommand):
             'title': '경제학특강III',
             'code':'ECO4020',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
+            'former': '경제학원론I, 경제학원론II',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1437,7 +1437,7 @@ class Command(BaseCommand):
             'title': '경제학특강IV',
             'code':'ECO4021',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
+            'former': '경제학원론I, 경제학원론II',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1455,7 +1455,7 @@ class Command(BaseCommand):
             'title': '경제학특강V',
             'code':'ECO4022',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002',
+            'former': '경제학원론I, 경제학원론II',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1473,7 +1473,7 @@ class Command(BaseCommand):
             'title': '경제학세미나',
             'code':'ECO4023',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
+            'former': '미시경제학I, 거시경제학I',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1491,8 +1491,8 @@ class Command(BaseCommand):
             'title': '경제학방법론', #0 #
             'code':'ECO4029',
             'point': 3,
-            # 'former': 'ECO2004(혹은 MGT2002나 MAT3020)',
-            'semester_one': 1, #1
+            'former': '경제통계학(혹은 경영통계학 이나 통계학입문)',
+            'semester_one': 1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '4',
@@ -1509,8 +1509,8 @@ class Command(BaseCommand):
             'title': '행동경제학', ## # #0
             'code':'ECO4030',
             'point': 3,
-            'former': 'ECO2006',
-            'semester_one': 1, #1+1
+            'former': '미시경제학I',
+            'semester_one': 1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -1527,8 +1527,8 @@ class Command(BaseCommand):
             'title': '행동경제학', ## #
             'code':'ECO4030',
             'point': 3,
-            'former': 'ECO2006',
-            'semester_one': 1, #1+1
+            'former': '미시경제학I',
+            'semester_one': 1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -1545,8 +1545,8 @@ class Command(BaseCommand):
             'title': '행동경제학', ## #
             'code':'ECO4030',
             'point': 3,
-            'former': 'ECO2006',
-            'semester_one': 1, #1+1
+            'former': '미시경제학I',
+            'semester_one': 1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -1563,9 +1563,9 @@ class Command(BaseCommand):
             'title': '실험경제학', ## ## ##
             'code':'ECO4031',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
-            'semester_two': 2, #1+1
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1581,9 +1581,9 @@ class Command(BaseCommand):
             'title': '실험경제학', ## ## ##
             'code':'ECO4031',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
-            'semester_two': 2, #1+1
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1599,9 +1599,9 @@ class Command(BaseCommand):
             'title': '고급미시경제학I', ## # ##
             'code':'ECOG010',
             'point': 3,
-            'former': 'ECO2006',
-            'semester_one': 2, #1+1
-            'semester_two': 1, #1
+            'former': '미시경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1+1,
             'teamplay': 4,
             'grade_recommend': '4',
             'season_open': 0,
@@ -1617,7 +1617,7 @@ class Command(BaseCommand):
             'title': '고급미시경제이론',
             'code':'ECOG011',
             'point': 3,
-            'former': 'ECO2006',
+            'former': '미시경제학I',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1635,9 +1635,9 @@ class Command(BaseCommand):
             'title': '고급거시경제학I', ## ## ##
             'code':'ECOG020',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
-            'semester_one': 2, #1+1
-            'semester_two': 2, #1+1
+            'former': '미시경제학I, 거시경제학I',
+            'semester_one': 1+1+1,
+            'semester_two': 1+1+1,
             'teamplay': 4,
             'grade_recommend': '4',
             'season_open': 0,
@@ -1653,7 +1653,7 @@ class Command(BaseCommand):
             'title': '고급거시경제이론',
             'code':'ECOG021',
             'point': 3,
-            # 'former': 'ECO2006, ECO2007',
+            'former': '미시경제학I, 거시경제학I',
             'semester_one': 0,
             'semester_two': 0,
             'teamplay': 4,
@@ -1672,7 +1672,7 @@ class Command(BaseCommand):
             'code':'ECOG040',
             'point': 3,
             'former': None,
-            'semester_one': 2, #1+1
+            'semester_one': 1+1+1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
@@ -1689,8 +1689,8 @@ class Command(BaseCommand):
             'title': 'AI와빅데이터를활용한경제정보처리', #0 ## #
             'code':'ECOG051',
             'point': 3,
-            'semester_one': 1, #1
-            'semester_two': 1, #1
+            'semester_one': 1+1,
+            'semester_two': 1,
             'teamplay': 4,
             'grade_recommend': '2~4',
             'season_open': 0,
@@ -1706,8 +1706,8 @@ class Command(BaseCommand):
             'title': '금융시장행태주의(behavioral)분석(캡스톤디자인)', ## #0
             'code':'ECO4034',
             'point': 3,
-            # 'former': 'ECO2001, ECO2002'
-            'semester_one': 1, #1
+            'former': '경제학원론I, 경제학원론II',
+            'semester_one': 1,
             'semester_two': 0,
             'teamplay': 4,
             'grade_recommend': '3~4',
