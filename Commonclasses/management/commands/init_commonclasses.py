@@ -489,12 +489,17 @@ class Command(BaseCommand):
     ]
 
     def handle(self, *args, **options):
+        for data in self.Lectures:
+            a = data['title']
+            if 'eta' not in data:
+                data['eta'] = f"https://everytime.kr/lecture/search?keyword={a}&condition=name"
         for data in self.Lectures:  # 수정된 부분
             lec = Lecture(
                 label = data['title'],
                 title = data['title'], 
                 code = data['code'], 
                 point = data['point'], 
+                eta = data['eta'],
                 semester_one = data['semester_one'], 
                 semester_two = data['semester_two'], 
                 teamplay = data['teamplay'], 
