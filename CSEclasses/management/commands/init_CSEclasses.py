@@ -130,7 +130,7 @@ class Command(BaseCommand):
             'duty_point' : 45 ,
             'choice_point' : 15
         },
-                {
+        {
             # 단일전공 21학번 쭉
             'track': 6,
             'major': '컴퓨터공학',
@@ -175,7 +175,7 @@ class Command(BaseCommand):
             'duty_point' : 45 ,
             'choice_point' : 15
         },
-                {
+        {
             # 단일전공 21학번 쭉
             'track': 11,
             'major': '컴퓨터공학',

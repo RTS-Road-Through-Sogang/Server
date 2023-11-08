@@ -130,15 +130,20 @@ class StudentYearSerializer(serializers.ModelSerializer):
 class CSEMajorTrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = CSEMajorTrack
-        fields = ('complete_point','gicho_point','duty_point','duty_choice_point','choice_point',)
+        # fields = ('complete_point','gicho_point','duty_point','duty_choice_point','choice_point',)
+        fields = '__all__'
+
 class MGTMajorTrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = MGTMajorTrack
-        fields = ('complete_point','gicho_point','duty_point','duty_choice_point','choice_point',)
+        # fields = ('complete_point','gicho_point','duty_point','choice_point',)
+        fields = '__all__'
+
 class ECOMajorTrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = ECOMajorTrack
-        fields = ('complete_point','gicho_point','duty_point','duty_choice_point','choice_point',)
+        # fields = ('complete_point','gicho_point','duty_point','choice_point',)
+        fields = '__all__'
 
 class TrackSerializer(serializers.Serializer):
     title = serializers.CharField()
