@@ -98,7 +98,83 @@ class TrackByMajor(APIView):
         serialized_data = self.serializer_class(user_a).data
         return Response(serialized_data)
         
+class PointsListView(generics.ListAPIView):
+    mgtserializer_class = MGTMajorTrackSerializer
+    ecoserializer_class = ECOMajorTrackSerializer
+    cseserializer_class = CSEMajorTrackSerializer
+    def get_queryset(self):
+        queryset = []
+        #student_year, track, major, submajor를 받아와서 채워줘야됨
+        student_year = self.request.user.student_year
+        track_pk = self.kwargs['track_pk']
+        major = self.request.user.major.title
+        if major == '경영':
+            points = MGTMajorTrack.objects.filter(track=track_pk).first()
+            queryset.append({
+                'points': self.mgtserializer_class(points).data
+            })
+        elif major == '경제':
+            points = ECOMajorTrack.objects.filter(track=track_pk).first()
+            queryset.append({
+                'points': self.ecoserializer_class(points).data
+            })
+        elif major == '컴퓨터공학':
+            points = CSEMajorTrack.objects.filter(track=track_pk).first()
+            queryset.append({
+                'points': self.cseserializer_class(points).data
+            })
+        #만약 다전공이라면:
+        submajor = self.request.data.get('submajor', None)
+        if major == '경영':
+            if track_pk == 1 or track_pk == 2 or track_pk == 3:
+                if submajor == '경제':
+                    subtrack = ECOTrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                    subpoints = ECOMajorTrack.objects.filter(track=subtrack).first()
+                    queryset.append({
+                        'subpoints': self.ecoserializer_class(subpoints).data
+                    })
+                elif submajor == '컴퓨터공학과':
+                    subtrack = CSETrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                    subpoints = CSEMajorTrack.objects.filter(track=subtrack).first()
+                    queryset.append({
+                        'subpoints': self.cseserializer_class(subpoints).data
+                    })
+        elif major == '경제':
+            if track_pk == 1 or track_pk == 2 or track_pk == 3:
+                if submajor == '경영':
+                    subtrack = MGTTrack.objects.filter(title='다전공 타전공', student_year=student_year-20).first()
+                    print(subtrack)
+                    subpoints = MGTMajorTrack.objects.filter(track=subtrack).first()
+                    queryset.append({
+                        'subpoints': self.mgtserializer_class(subpoints).data
+                    })
+                elif submajor == '컴퓨터공학과':
+                    subtrack = CSETrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                    subpoints = CSEMajorTrack.objects.filter(track=subtrack).first()
+                    queryset.append({
+                        'subpoints': self.cseserializer_class(subpoints).data
+                    })
+        elif major == '컴퓨터공학':
+            if track_pk == 3 or track_pk == 8 or track_pk == 13:
+                if submajor == '경제':
+                    subtrack = ECOTrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                    subpoints = ECOMajorTrack.objects.filter(track=subtrack).first()
+                    queryset.append({
+                        'subpoints': self.ecoserializer_class(subpoints).data
+                    })
+                elif submajor == '경영':
+                    subtrack = MGTTrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                    subpoints = MGTMajorTrack.objects.filter(track=subtrack).first()
+                    queryset.append({
+                        'subpoints': self.mgtserializer_class(subpoints).data
+                    })
 
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        return Response(queryset)
+    
 # 1.5. 공통고르는건 똑같으니까 공통 데이터부터 보내주자.
 class CommonDutyLectureListView(generics.ListAPIView):
     serializer_class = CommonLectureListSerializer
@@ -129,32 +205,38 @@ class CommonDutyLectureListView(generics.ListAPIView):
         category_field_name = f"category{student_year}"
         category_names = ['서강인성', '글쓰기', '글로벌 언어I', '전공 진로 탐색', '소프트웨어']
         queryset = []
-#####################################
-        # #student_year, track, major, submajor를 받아와서 채워줘야됨
-        # track_pk = self.kwargs['track_pk']
-        # major = self.request.user.major.title
-        # if major == '경영':
-        #     track = MGTTrack.objects.get(pk=track_pk)
-        #     points = MGTMajorTrack.objects.filter(track)
-        #     queryset.append({
-        #         'lectures': self.mgtserializer_class(points).data
-        #     })
-        # elif major == '경제':
-        #     track = ECOTrack.objects.get(pk=track_pk)
-        #     points = ECOMajorTrack.objects.filter(track)
-        #     queryset.append({
-        #         'lectures': self.ecoserializer_class(points).data
-        #     })
-        # elif major == '컴퓨터공학':
-        #     track = CSETrack.objects.get(pk=track_pk)
-        #     points = CSEMajorTrack.objects.filter(track)
-        #     queryset.append({
-        #         'lectures': self.cseserializer_class(points).data
-        #     })
+# #####################################
+#         #student_year, track, major, submajor를 받아와서 채워줘야됨
+#         track_pk = self.kwargs['track_pk']
+#         major = self.request.user.major.title
+#         if major == '경영':
+#             points = MGTMajorTrack.objects.filter(track=track_pk).first()
+#             queryset.append({
+#                 'points': self.mgtserializer_class(points).data
+#             })
+#         elif major == '경제':
+#             points = ECOMajorTrack.objects.filter(track=track_pk).first()
+#             queryset.append({
+#                 'points': self.ecoserializer_class(points).data
+#             })
+#         elif major == '컴퓨터공학':
+#             points = CSEMajorTrack.objects.filter(track=track_pk).first()
+#             queryset.append({
+#                 'points': self.cseserializer_class(points).data
+#             })
+#         #만약 다전공이라면:
+#         if major == '경영':
+#             if track_pk == 1 or track_pk == 2 or track_pk == 3:
 
-        # # track = CSETrack.objects.get(pk=track_pk)
-        # # major_track = track.track_CSEtrack.first()
-#####################################
+#         elif major == '경제':
+#             if track_pk == 1 or track_pk == 2 or track_pk == 3:
+#         elif major == '컴퓨터공학':
+#             if track_pk == 3 or track_pk == 8 or track_pk == 13:
+
+
+#         # track = CSETrack.objects.get(pk=track_pk)
+#         # major_track = track.track_CSEtrack.first()
+# #####################################
         for category_name in category_names:
             category_point = self.get_category_point(category_name)
             category = Category.objects.get(detail=category_name)
