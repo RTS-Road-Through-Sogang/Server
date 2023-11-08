@@ -9,6 +9,8 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from Majors import *
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from rest_framework import status
 from rest_framework import generics
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -140,10 +142,10 @@ def signup_view(request):
 @csrf_exempt
 def login_view(request):
     if request.method == 'POST':
-        student_number = request.POST.get('student_number')
+        email = request.POST.get('email')
         password = request.POST.get('password')
         
-        user = authenticate(request, student_number=student_number, password=password)
+        user = authenticate(request, email=email, password=password)
         
         if user is not None:
             login(request, user)
@@ -158,10 +160,33 @@ def logout_view(request):
     logout(request)
     messages.info(request, '로그아웃되었습니다.')
     return JsonResponse({"message" : "Logout Success!"},status=status.HTTP_201_CREATED)
-
+###
 class UserRegisterAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
 class CustomTokenOBtainPairAPIView(TokenObtainPairView):
-    pass
+    @csrf_exempt
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        student_number = data.get('student_number')
+        password = data.get('password')
+        user = authenticate(request, student_number=student_number, password=password)
+        print(user)
+        if user is not None:
+            login(request, user)
+            tokens = self.get_tokens(user)
+
+            return JsonResponse({
+                'access': str(tokens['access']),
+                'refresh': str(tokens['refresh']),
+            })
+        else:
+            return JsonResponse({'message': 'Login failed'}, status=401)
+    def get_tokens(self, user):
+        refresh = RefreshToken.for_user(user)
+
+        return {
+            'access': str(refresh.access_token),
+            'refresh': str(refresh),
+        }
