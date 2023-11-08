@@ -47,6 +47,7 @@ class RoadmapFullView(generics.ListAPIView):
                 detail_lectures = RoadmapDetailLecture.objects.filter(roadmap_detail=detail)
                 lectures_data = RoadMapDetailLectureSerializer(detail_lectures, many=True).data
                 
+                
                 detail_data['roadmapdetaillecture'] = {semester: lectures_data}  
                 roadmap_info['roadmap_detail'].append(detail_data['roadmapdetaillecture']) 
 
@@ -79,7 +80,34 @@ class RoadmapDefaultView(generics.ListAPIView):
                 semester = detail_data['semester']
                 detail_lectures = RoadmapDetailLecture.objects.filter(roadmap_detail=detail,completed=True)
                 lectures_data = RoadMapDetailLectureSerializer(detail_lectures, many=True).data
-                detail_data['roadmapdetaillecture'] = {semester: lectures_data}  
+                detail_data['roadmapdetaillecture'] = {semester: lectures_data} 
+                if detail_lectures.commonlecture:
+                    former = detail_lectures.commonlecture.former
+                    eta = detail_lectures.commonlecture.eta
+                    semester_one = detail_lectures.commonlecture.semester_one
+                    semester_two = detail_lectures.commonlecture.semester_two
+                    
+                    
+                elif detail_lectures.cselecture:
+                    former = detail_lectures.cselecture.former
+                    eta = detail_lectures.cselecture.eta
+                    semester_one = detail_lectures.cselecture.semester_one
+                    semester_two = detail_lectures.cselecture.semester_two
+                
+                elif detail_lectures.mgtlecture:
+                    former = detail_lectures.mgtlecture.former
+                    eta = detail_lectures.mgtlecture.eta
+                    semester_one = detail_lectures.mgtlecture.semester_one
+                    semester_two = detail_lectures.mgtlecture.semester_two
+                    
+                else:
+                    
+                    former = detail_lectures.ecolecture.former
+                    eta = detail_lectures.ecolecture.eta
+                    semester_one = detail_lectures.ecolecture.semester_one
+                    semester_two = detail_lectures.ecolecture.semester_two
+                    
+                 
                 roadmap_info['roadmap_detail'].append(detail_data['roadmapdetaillecture']) 
 
             roadmap_data['roadmaps'].append(roadmap_info)
