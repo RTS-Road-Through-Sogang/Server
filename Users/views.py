@@ -169,10 +169,10 @@ class CustomTokenOBtainPairAPIView(TokenObtainPairView):
     @csrf_exempt
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
-        email = data.get('email')
+        student_number = data.get('student_number')
         password = data.get('password')
-        
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, student_number=student_number, password=password)
+        print(user)
         if user is not None:
             login(request, user)
             tokens = self.get_tokens(user)
