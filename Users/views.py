@@ -91,7 +91,8 @@ def verify_email(request):
 @csrf_exempt
 def sending_email(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        data = json.loads(request.body)
+        email = data.get('email')
         try:
             
             validate_email(email)  # 이메일 형식 검증
