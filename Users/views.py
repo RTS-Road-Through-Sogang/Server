@@ -140,10 +140,10 @@ def signup_view(request):
 @csrf_exempt
 def login_view(request):
     if request.method == 'POST':
-        student_number = request.POST.get('student_number')
+        email = request.POST.get('email')
         password = request.POST.get('password')
         
-        user = authenticate(request, student_number=student_number, password=password)
+        user = authenticate(request, email=email, password=password)
         
         if user is not None:
             login(request, user)
@@ -158,7 +158,7 @@ def logout_view(request):
     logout(request)
     messages.info(request, '로그아웃되었습니다.')
     return JsonResponse({"message" : "Logout Success!"},status=status.HTTP_201_CREATED)
-
+###
 class UserRegisterAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
