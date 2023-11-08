@@ -75,7 +75,7 @@ class Lecture(models.Model):
     semester_one = models.IntegerField(blank=True)
     semester_two = models.IntegerField( blank=True)
     teamplay = models.IntegerField(choices=[(0,'none'),(1,'little'),(2,'average'),(3,'much'),(4,'full')], blank=True)
-    former = models.CharField(max_length=30,null=True, blank=True)
+    former = models.CharField(max_length=60,null=True, blank=True)
     grade_recommend = models.CharField(max_length=10)
     season_open = models.BooleanField()
     label= models.CharField(max_length=30)
