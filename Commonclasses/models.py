@@ -58,10 +58,10 @@ class Lecture(models.Model):
     code = models.CharField(max_length=30)
     point = models.IntegerField(choices=[(1,'1point'),(2,'2point'),(3,'3point')])
     eta = models.URLField(blank=True)
-    semester_one = models.IntegerField(choices=[(1,'low'),(2,'mid'),(3,'high')], blank=True)
-    semester_two = models.IntegerField(choices=[(1,'low'),(2,'mid'),(3,'high')], blank=True)
+    semester_one = models.IntegerField(blank=True)
+    semester_two = models.IntegerField( blank=True)
     teamplay = models.IntegerField(choices=[(1,'none'),(2,'little'),(3,'average'),(4,'much'),(5,'full')], blank=True)
-    former = models.CharField(max_length=30)
+    former = models.CharField(max_length=30, blank=True, null=True)
     grade_recommend = models.CharField(max_length=10)
     season_open = models.BooleanField()
 
