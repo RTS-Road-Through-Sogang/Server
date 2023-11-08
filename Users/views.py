@@ -158,7 +158,7 @@ def logout_view(request):
     logout(request)
     messages.info(request, '로그아웃되었습니다.')
     return JsonResponse({"message" : "Logout Success!"},status=status.HTTP_201_CREATED)
-
+###
 class UserRegisterAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
