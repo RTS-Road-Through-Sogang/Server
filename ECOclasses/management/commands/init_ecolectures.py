@@ -1723,7 +1723,7 @@ class Command(BaseCommand):
     ]
 
     def handle(self, *args, **options):
-        for data in self.Lecture:
+        for data in self.Lectures:
                 if 'former' not in data:
                     data['former'] = None
         for data in self.Lectures:
