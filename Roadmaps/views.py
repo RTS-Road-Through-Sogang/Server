@@ -130,30 +130,30 @@ class CommonDutyLectureListView(generics.ListAPIView):
         category_names = ['서강인성', '글쓰기', '글로벌 언어I', '전공 진로 탐색', '소프트웨어']
         queryset = []
 #####################################
-        #student_year, track, major, submajor를 받아와서 채워줘야됨
-        track_pk = self.kwargs['track_pk']
-        major = self.request.user.major.title
-        if major == '경영':
-            track = MGTTrack.objects.get(pk=track_pk)
-            points = MGTMajorTrack.objects.filter(track)
-            queryset.append({
-                'lectures': self.mgtserializer_class(points).data
-            })
-        elif major == '경제':
-            track = ECOTrack.objects.get(pk=track_pk)
-            points = ECOMajorTrack.objects.filter(track)
-            queryset.append({
-                'lectures': self.ecoserializer_class(points).data
-            })
-        elif major == '컴퓨터공학':
-            track = CSETrack.objects.get(pk=track_pk)
-            points = CSEMajorTrack.objects.filter(track)
-            queryset.append({
-                'lectures': self.cseserializer_class(points).data
-            })
+        # #student_year, track, major, submajor를 받아와서 채워줘야됨
+        # track_pk = self.kwargs['track_pk']
+        # major = self.request.user.major.title
+        # if major == '경영':
+        #     track = MGTTrack.objects.get(pk=track_pk)
+        #     points = MGTMajorTrack.objects.filter(track)
+        #     queryset.append({
+        #         'lectures': self.mgtserializer_class(points).data
+        #     })
+        # elif major == '경제':
+        #     track = ECOTrack.objects.get(pk=track_pk)
+        #     points = ECOMajorTrack.objects.filter(track)
+        #     queryset.append({
+        #         'lectures': self.ecoserializer_class(points).data
+        #     })
+        # elif major == '컴퓨터공학':
+        #     track = CSETrack.objects.get(pk=track_pk)
+        #     points = CSEMajorTrack.objects.filter(track)
+        #     queryset.append({
+        #         'lectures': self.cseserializer_class(points).data
+        #     })
 
-        # track = CSETrack.objects.get(pk=track_pk)
-        # major_track = track.track_CSEtrack.first()
+        # # track = CSETrack.objects.get(pk=track_pk)
+        # # major_track = track.track_CSEtrack.first()
 #####################################
         for category_name in category_names:
             category_point = self.get_category_point(category_name)
