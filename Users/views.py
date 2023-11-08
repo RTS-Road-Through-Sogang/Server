@@ -177,7 +177,7 @@ class CustomTokenOBtainPairAPIView(TokenObtainPairView):
             login(request, user)
             tokens = self.get_tokens(user)
 
-            return Response({
+            return JsonResponse({
                 'access': str(tokens['access']),
                 'refresh': str(tokens['refresh']),
             })
