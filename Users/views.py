@@ -9,6 +9,8 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from Majors import *
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from rest_framework import status
 from rest_framework import generics
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -164,4 +166,27 @@ class UserRegisterAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     
 class CustomTokenOBtainPairAPIView(TokenObtainPairView):
-    pass
+    @csrf_exempt
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        email = data.get('email')
+        password = data.get('password')
+        
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            tokens = self.get_tokens(user)
+
+            return Response({
+                'access': str(tokens['access']),
+                'refresh': str(tokens['refresh']),
+            })
+        else:
+            return JsonResponse({'message': 'Login failed'}, status=401)
+    def get_tokens(self, user):
+        refresh = RefreshToken.for_user(user)
+
+        return {
+            'access': str(refresh.access_token),
+            'refresh': str(refresh),
+        }
