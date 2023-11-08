@@ -93,12 +93,12 @@ def sending_email(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         email = data.get('email')
-        try:
+        """try:
             
             validate_email(email)  # 이메일 형식 검증
             validate_email_domain(email)  # 도메인 검증
         except ValidationError as e:
-            return JsonResponse({'message': str(e)}, status=400)
+            return JsonResponse({'message': str(e)}, status=400)"""
         verification_code = generate_verification_code()
         # 인증 메일 전송
         send_mail(
