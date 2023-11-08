@@ -24,7 +24,7 @@ from django.db.models import Q
 class RoadmapFullView(generics.ListAPIView):
     queryset = Roadmap.objects.all()
     serializer_class = RoadMapSerializer
-
+    
     
     
     def get(self, request, *args, **kwargs):
@@ -46,6 +46,7 @@ class RoadmapFullView(generics.ListAPIView):
                 semester = detail_data['semester']
                 detail_lectures = RoadmapDetailLecture.objects.filter(roadmap_detail=detail)
                 lectures_data = RoadMapDetailLectureSerializer(detail_lectures, many=True).data
+                
                 detail_data['roadmapdetaillecture'] = {semester: lectures_data}  
                 roadmap_info['roadmap_detail'].append(detail_data['roadmapdetaillecture']) 
 
