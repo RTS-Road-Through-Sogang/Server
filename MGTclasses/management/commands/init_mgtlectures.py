@@ -2232,7 +2232,7 @@ class Command(BaseCommand):
             for data in self.Lecture:
                 if 'former' not in data:
                     data['former'] = None
-            for data in self.Lectures:
+            for data in self.Lecture:
                 a = data['title']
                 if 'eta' not in data:
                     data['eta'] = f"https://everytime.kr/lecture/search?keyword={a}&condition=name"
