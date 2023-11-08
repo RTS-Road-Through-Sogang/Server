@@ -179,7 +179,8 @@ class CommonDutyLectureListView(generics.ListAPIView):
                 lectures = CommonLecture.objects.filter(**{category_field_name: category})
 
             queryset.append({
-                category_name: category_point,
+                'category_detail': category_name,
+                'category_point': category_point,
                 'lectures': self.serializer_class(lectures, many=True).data
             })
 
@@ -223,7 +224,8 @@ class CommonChoiceLectureListView(generics.ListAPIView):
                 lectures = CommonLecture.objects.filter(**{category_field_name: category})
             
             queryset.append({
-                category_name: category_point,
+                'category_detail': category_name,
+                'category_point': category_point,
                 'lectures': self.serializer_class(lectures, many=True).data
             })
 
