@@ -1142,7 +1142,7 @@ class MGTGichoLectureListView(generics.ListAPIView):
                     '이수 학점': category_point
                 })
         choice_lectures_1 = [
-                '경제학원론 I', '경제학원론 II'
+                '경제학원론I', '경제학원론II'
             ]
         choice_1_category_point = 3
         filtered_choice_lectures_1 = MGTLecture.objects.filter(
