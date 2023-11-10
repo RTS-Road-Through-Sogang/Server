@@ -20,7 +20,7 @@ from rest_framework.views import APIView
 
 import random
 import json
-
+import string
 from .models import *
 from .serializers import UserSerializer
 
@@ -30,7 +30,10 @@ User = get_user_model()
 
 def generate_verification_code():
     return str(random.randint(100000, 999999))
-
+def new_password():
+    characters = string.ascii_letters + string.digits
+    random_string = ''.join(random.choice(characters) for _ in range(6))
+    return random_string
 
 """@csrf_exempt
 def signup_view(request):
@@ -114,6 +117,82 @@ def sending_email(request):
     else:
         return JsonResponse({'message': 'post로 처리되어야함'}, status=400)    
         
+@csrf_exempt
+def email_duplicated(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        email = data.get('email')
+        user = MyUser.objects.all()
+        for u in user:
+            if email == u.email:
+                return JsonResponse({"message": "the email is duplicated"}, status=400)
+        return JsonResponse({"message": "OK good"})
+    else:
+        return JsonResponse({'message': 'only POST'}, status=400)
+
+@csrf_exempt
+def student_number_duplicated(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        student_number = data.get('student_number')
+        user = MyUser.objects.all()
+        for u in user:
+            if student_number == u.student_number:
+                return JsonResponse({"message": "the student_number is duplicated"}, status=400)
+        return JsonResponse({"message": "OK good"})
+    else:
+        return JsonResponse({'message': 'only POST'}, status=400)
+        
+@csrf_exempt
+def password_forget(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        student_number = data.get('student_number')
+        email = data.get('email')
+        print(student_number)
+        print(email)
+        try:
+            user = MyUser.objects.get(email=email, student_number=student_number)
+        except MyUser.DoesNotExist:
+            return JsonResponse({"message": "이메일과 학번이 일치하지 않습니다"}, status=400)
+        
+        
+        characters = string.ascii_letters + string.digits
+        random_string = ''.join(random.choice(characters) for _ in range(6))
+        new_password = random_string
+        print(new_password)
+        
+        
+        user.set_password(new_password)
+        user.save()
+        
+       
+        send_mail(
+            '새로운 비밀번호',
+            f'새로운 비밀번호는: {new_password} 입니다.',
+            'rtssogang@gmail.com',
+            [email],
+            fail_silently=False,
+        )
+        
+        return JsonResponse({"message": "비밀번호가 변경되었습니다"})
+    else:
+        return JsonResponse({'message': 'POST 요청만 허용됩니다'}, status=400)
+
+@csrf_exempt
+def password_change(request):
+    if request.method == 'PATCH':
+        data = json.loads(request.body)
+        new_password = data.get('new_password')     
+        user = request.user 
+        """if original_password != checking_user.password:
+            return JsonResponse({"message": "기존 비밀번호가 올바르지 않습니다"})"""
+        
+        user.set_password(new_password)
+        user.save()
+        return JsonResponse({"message": "비밀번호가 변경되었습니다"})  
+        
+            
 
 
 @csrf_exempt
