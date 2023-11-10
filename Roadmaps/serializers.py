@@ -128,22 +128,37 @@ class StudentYearSerializer(serializers.ModelSerializer):
         fields = ('student_year',)
 
 class CSEMajorTrackSerializer(serializers.ModelSerializer):
+    major_point = serializers.SerializerMethodField()
+
     class Meta:
         model = CSEMajorTrack
-        # fields = ('complete_point','gicho_point','duty_point','duty_choice_point','choice_point',)
-        fields = '__all__'
+        fields = ('complete_point','major_point','gicho_point','duty_point','choice_point',)
+        # fields = '__all__'
+    def get_major_point(self, obj):
+    # 'major_point' 필드의 값을 계산
+        return obj.duty_point + obj.choice_point
 
 class MGTMajorTrackSerializer(serializers.ModelSerializer):
+    major_point = serializers.SerializerMethodField()
+
     class Meta:
         model = MGTMajorTrack
-        # fields = ('complete_point','gicho_point','duty_point','choice_point',)
-        fields = '__all__'
+        fields = ('complete_point','major_point','gicho_point','duty_point','duty_choice_point','choice_point',)
+        # fields = '__all__'
+    def get_major_point(self, obj):
+    # 'major_point' 필드의 값을 계산
+        return obj.duty_point + obj.duty_choice_point + obj.choice_point
 
 class ECOMajorTrackSerializer(serializers.ModelSerializer):
+    major_point = serializers.SerializerMethodField()
+
     class Meta:
         model = ECOMajorTrack
-        # fields = ('complete_point','gicho_point','duty_point','choice_point',)
-        fields = '__all__'
+        fields = ('complete_point','major_point','gicho_point','duty_point','choice_point',)
+        # fields = '__all__'
+    def get_major_point(self, obj):
+    # 'major_point' 필드의 값을 계산
+        return obj.duty_point + obj.choice_point
 
 class TrackSerializer(serializers.Serializer):
     title = serializers.CharField()
