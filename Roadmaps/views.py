@@ -230,9 +230,12 @@ class TrackByMajor(APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request):
-        user_a = request.user
-        serialized_data = self.serializer_class(user_a).data
-        return Response(serialized_data)
+        try:
+            user_a = request.user
+            serialized_data = self.serializer_class(user_a).data
+            return Response(serialized_data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 class PointsListView(generics.ListAPIView):
     mgtserializer_class = MGTMajorTrackSerializer
@@ -308,8 +311,11 @@ class PointsListView(generics.ListAPIView):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
     
 # 1.5. 공통고르는건 똑같으니까 공통 데이터부터 보내주자.
 class CommonDutyLectureListView(generics.ListAPIView):
@@ -405,8 +411,11 @@ class CommonDutyLectureListView(generics.ListAPIView):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 
 class CommonChoiceLectureListView(generics.ListAPIView):
     serializer_class = CommonLectureListSerializer
@@ -450,8 +459,12 @@ class CommonChoiceLectureListView(generics.ListAPIView):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
+    
 # 2. 프론트로부터 고른 track과 다전공일때의 부전공을 받았을때 부전공이 null인지 1개인지 2개인지를 확인.
 
 ############################################################################################################################################################
@@ -633,8 +646,11 @@ class CSEGichoLectureListView(generics.ListAPIView):
 
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 
 class CSEDutyLectureListView(generics.ListAPIView):
     serializer_class = CSELectureDetailSerializer
@@ -764,8 +780,11 @@ class CSEDutyLectureListView(generics.ListAPIView):
 
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
     
 class CSEDutyChoiceLectureListView(generics.ListAPIView):
     serializer_class = CSELectureDetailSerializer
@@ -911,10 +930,12 @@ class CSEDutyChoiceLectureListView(generics.ListAPIView):
 
         return queryset
 
-
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 
 class CSEChoiceLectureListView(generics.ListAPIView):
     serializer_class = CSELectureDetailSerializer
@@ -1032,8 +1053,11 @@ class CSEChoiceLectureListView(generics.ListAPIView):
 
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 # class CSEDutyLectureListView(generics.ListAPIView):
 #     serializer_class = CSELectureDetailSerializer
 
@@ -1181,8 +1205,11 @@ class MGTGichoLectureListView(generics.ListAPIView):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 
 class MGTDutyLectureListView(generics.ListAPIView):
     serializer_class = MGTLectureDetailSerializer
@@ -1232,8 +1259,11 @@ class MGTDutyLectureListView(generics.ListAPIView):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
     
 class MGTDutyChoiceLectureListView(generics.ListAPIView):
     serializer_class = MGTLectureDetailSerializer
@@ -1277,8 +1307,11 @@ class MGTDutyChoiceLectureListView(generics.ListAPIView):
 
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
     
 class MGTChoiceLectureListView(generics.ListAPIView):  ## 남은걸 뽑아줘야됨
     serializer_class = MGTLectureDetailSerializer
@@ -1326,8 +1359,11 @@ class MGTChoiceLectureListView(generics.ListAPIView):  ## 남은걸 뽑아줘야
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 #####################################################################################################################################
 #6.경제
 class ECOGichoLectureListView(generics.ListAPIView):
@@ -1383,8 +1419,11 @@ class ECOGichoLectureListView(generics.ListAPIView):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 
 class ECODutyLectureListView(generics.ListAPIView):
     serializer_class = ECOLectureDetailSerializer
@@ -1442,8 +1481,11 @@ class ECODutyLectureListView(generics.ListAPIView):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 
 
 class ECODutyChoiceLectureListView(generics.ListAPIView):
@@ -1518,8 +1560,11 @@ class ECODutyChoiceLectureListView(generics.ListAPIView):
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
     
     
         # category_name = '전공선택교과'
@@ -1590,8 +1635,11 @@ class ECOChoiceLectureListView(generics.ListAPIView):  ## 남은걸 뽑아줘야
         return queryset
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        return Response(queryset)
+        try:
+            queryset = self.get_queryset()
+            return Response(queryset, status=status.HTTP_200_OK)  # 성공 시 200 OK 반환
+        except Exception as e:
+            return Response({"error": "Failed to retrieve data", "detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  # 실패 시 500 Internal Server Error 반환
 ####################################################################################################################################################333
 # 로드맵 디테일 생성하기 작성
 class RoadmapDetailCreateView(generics.CreateAPIView):
