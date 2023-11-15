@@ -11,7 +11,7 @@ urlpatterns = [
     path('commondutylecturelists/',CommonDutyLectureListView.as_view()),
     path('commonchoicelecturelists/',CommonChoiceLectureListView.as_view()),
 ############################################################################################################################################################
-    path('completed_lecture_search/',CompletedSerachListAPIView.as_view() ),
+    path('completed_lecture_search/<str:major>/<str:search>/',CompletedSearchListAPIView.as_view() ),
     ############################################################################################################################
     path('cse_gicho_lecture/<int:track_pk>/' , CSEGichoLectureListView.as_view()),
     path('cse_duty_lecture/<int:track_pk>/' , CSEDutyLectureListView.as_view()),
