@@ -469,25 +469,28 @@ class CommonChoiceLectureListView(generics.ListAPIView):
 
 ############################################################################################################################################################
 # 검색결과를 보여주는 것
-class CompletedSerachListAPIView(generics.ListAPIView):
+class CompletedSearchListAPIView(generics.ListCreateAPIView):
     serializer_class = None
 
     def get_serializer_class(self):
-        self.major = self.request.data.get('major') 
-        if self.major == '경제':
+        major = self.kwargs['major']
+        if major == '경제':
             return ECOLectureDetailSerializer
-        elif self.major == '컴퓨터공학':
+        elif major == '컴퓨터공학':
             return CSELectureDetailSerializer
-        elif self.major == '경영':
+        elif major == '경영':
             return MGTLectureDetailSerializer
-        elif self.major == '공통':
+        elif major == '공통':
             return CommonLectureDetailSerializer
+        else:
+            return None
 
     def get_queryset(self):
-        major = self.request.data.get('major', None)
-        keyword = self.request.data.get('keyword',None)
+        major = self.kwargs['major']
+        keyword = self.kwargs['search']
         conditions = Q(title__icontains=keyword) if keyword else Q()
-
+        print(major)
+        print(keyword)
         if major:
             if major == '경제':
                 return ECOLecture.objects.filter(conditions)
@@ -501,8 +504,6 @@ class CompletedSerachListAPIView(generics.ListAPIView):
                 return []
 
     def list(self, request, *args, **kwargs):
-        self.major = self.request.data.get('major')
-        self.keyword = self.request.data.get('keyword')
         queryset = self.get_queryset()
         serializer_class = self.get_serializer_class()
 
