@@ -469,25 +469,28 @@ class CommonChoiceLectureListView(generics.ListAPIView):
 
 ############################################################################################################################################################
 # 검색결과를 보여주는 것
-class CompletedSerachListAPIView(generics.ListAPIView):
+class CompletedSearchListAPIView(generics.ListCreateAPIView):
     serializer_class = None
 
     def get_serializer_class(self):
-        self.major = self.request.data.get('major') 
-        if self.major == '경제':
+        major = self.kwargs['major']
+        if major == '경제':
             return ECOLectureDetailSerializer
-        elif self.major == '컴퓨터공학':
+        elif major == '컴퓨터공학':
             return CSELectureDetailSerializer
-        elif self.major == '경영':
+        elif major == '경영':
             return MGTLectureDetailSerializer
-        elif self.major == '공통':
+        elif major == '공통':
             return CommonLectureDetailSerializer
+        else:
+            return None
 
     def get_queryset(self):
-        major = self.request.data.get('major', None)
-        keyword = self.request.data.get('keyword',None)
+        major = self.kwargs['major']
+        keyword = self.kwargs['search']
         conditions = Q(title__icontains=keyword) if keyword else Q()
-
+        print(major)
+        print(keyword)
         if major:
             if major == '경제':
                 return ECOLecture.objects.filter(conditions)
@@ -501,8 +504,6 @@ class CompletedSerachListAPIView(generics.ListAPIView):
                 return []
 
     def list(self, request, *args, **kwargs):
-        self.major = self.request.data.get('major')
-        self.keyword = self.request.data.get('keyword')
         queryset = self.get_queryset()
         serializer_class = self.get_serializer_class()
 
@@ -1667,7 +1668,7 @@ class RoadmapDetailCreateView(generics.CreateAPIView):
             
         )
 
-        return Response({'id': roadmapdetail.id}, status=status.HTTP_201_CREATED)
+        return JsonResponse({'id': roadmapdetail.id}, status=status.HTTP_201_CREATED)
         
 
 # 로드맵 디테일 이름 변경 또는 추가 또는 삭제
@@ -1676,9 +1677,9 @@ class RoadmapDetailUpdateDeleteView(APIView):
         try:
             roadmap_detail = RoadmapDetail.objects.get(pk=pk)
             roadmap_detail.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return JsonResponse(status=status.HTTP_204_NO_CONTENT)
         except RoadmapDetail.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse(status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk, format=None):
         try:
@@ -1687,9 +1688,9 @@ class RoadmapDetailUpdateDeleteView(APIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except RoadmapDetail.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse(status=status.HTTP_404_NOT_FOUND)
 class RoadmapDetailCreateAPIView(generics.CreateAPIView):
     queryset = RoadmapDetail.objects.all()
 # 로드맵 수정 및 만들어주기
@@ -1698,9 +1699,9 @@ class RoadmapUpdateDeleteView(APIView):
         try:
             roadmap_detail = Roadmap.objects.get(pk=pk)
             roadmap_detail.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return JsonResponse(status=status.HTTP_204_NO_CONTENT)
         except Roadmap.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse(status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk, format=None):
         try:
@@ -1710,9 +1711,9 @@ class RoadmapUpdateDeleteView(APIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Roadmap.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse(status=status.HTTP_404_NOT_FOUND)
 
 
 class RoadmapCreateAPIView(generics.CreateAPIView):
@@ -1723,29 +1724,24 @@ class RoadmapCreateAPIView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        # Assuming the title is provided in the request data
         title = serializer.validated_data.get('title')
 
-        # Assuming you're using the authenticated user
         user = request.user
 
        
 
-        # Create the Roadmap
         roadmap = Roadmap.objects.create(
             student=user,
             title=title
         )
 
-        return Response({'id': roadmap.id}, status=status.HTTP_201_CREATED)
+        return JsonResponse({'id': roadmap.id}, status=status.HTTP_201_CREATED)
 #########################################################################################
 # 로드맵에 과목 넣어주기 ()
 class RoadmapDetailLectureCreateView(APIView):
     def post(self, request, format=None):
-        # 1. Serializer 인스턴스 생성
         serializer = RoadmapDetailLectureCreateSerializer(data=request.data)
 
-        # 2. 데이터 유효성 검사
         if serializer.is_valid():
             roadmap_detail_id = serializer.validated_data.get('roadmap_detail_id')
             lecture_type = serializer.validated_data.get('lecture_type')
@@ -1784,20 +1780,18 @@ class RoadmapDetailLectureCreateView(APIView):
                     raise serializers.ValidationError("Invalid lecture type")
 
             except RoadmapDetail.DoesNotExist as e:
-                return Response({"error": f"RoadmapDetail with id {roadmap_detail_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({"error": f"RoadmapDetail with id {roadmap_detail_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
             except CommonLecture.DoesNotExist as e:
-                return Response({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
             except CSELecture.DoesNotExist as e:
-                return Response({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
             except ECOLecture.DoesNotExist as e:
-                return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
             except MGTLecture.DoesNotExist as e:
-                return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
 
-            # 원하는 작업을 수행한 후 응답을 반환하거나, 다른 처리를 수행할 수 있습니다.
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        # 유효성 검사에 실패한 경우 에러 응답 반환
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -1814,7 +1808,7 @@ class CompletedLectureCreateView(APIView):
             serializer = CompletedLectureCreateSerializer(data=request.data)
             create_method = self.create_completed_lecture
         else:
-            return Response({"error": "Invalid action."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": "Invalid action."}, status=status.HTTP_400_BAD_REQUEST)
 
         if serializer.is_valid():
             return create_method(serializer)
@@ -1854,11 +1848,11 @@ class CompletedLectureCreateView(APIView):
                 )
             elif lecture_type == 'mgtlecture':
                 roadmap_detail = RoadmapDetail.objects.get(pk=roadmap_detail_id)
-                commonlecture = MGTLecture.objects.get(pk=lecture_id)
+                mgtlecture= MGTLecture.objects.get(pk=lecture_id)
                 obj = RoadmapDetailLecture.objects.create(
                     completed = True,
                     roadmap_detail=roadmap_detail,
-                    commonlecture=commonlecture
+                    mgtlecture=mgtlecture
                 )
             else:
                 raise serializers.ValidationError("Invalid lecture type")
@@ -1866,15 +1860,15 @@ class CompletedLectureCreateView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except RoadmapDetail.DoesNotExist as e:
-            return Response({"error": f"RoadmapDetail with id {roadmap_detail_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"RoadmapDetail with id {roadmap_detail_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except CommonLecture.DoesNotExist as e:
-            return Response({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except CSELecture.DoesNotExist as e:
-            return Response({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except ECOLecture.DoesNotExist as e:
-            return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except MGTLecture.DoesNotExist as e:
-            return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
 
     def create_completed_lecture(self, serializer):
         user_id = self.request.user
@@ -1912,13 +1906,13 @@ class CompletedLectureCreateView(APIView):
             return Response({"message": "Object created successfully", "data": serializer.data}, status=status.HTTP_201_CREATED)
 
         except CommonLecture.DoesNotExist as e:
-            return Response({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"CommonLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except CSELecture.DoesNotExist as e:
-            return Response({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"CSELecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except ECOLecture.DoesNotExist as e:
-            return Response({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"ECOLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         except MGTLecture.DoesNotExist as e:
-            return Response({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"MGTLecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
 #################################################################################
 # 렉쳐 넣은 것들 수정하기 위해서 삭제하기
 class RoadmapDetailLectureDeleteAPIView(generics.DestroyAPIView):
@@ -1953,9 +1947,9 @@ class RoadmapDetailLectureDeleteAPIView(generics.DestroyAPIView):
                 
                 obj.delete()
             
-            return Response({"message": f"Lecture with id {lecture_id} deleted successfully."}, status=status.HTTP_200_OK)
+            return JsonResponse({"message": f"Lecture with id {lecture_id} deleted successfully."}, status=status.HTTP_200_OK)
         except RoadmapDetailLecture.DoesNotExist as e:
-            return Response({"error": f"Lecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"Lecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
 ##################################################################################################################################
 class CompletedLectureDeleteView(generics.DestroyAPIView):
     def destroy(self, request, *args, **kwargs):
@@ -1993,9 +1987,9 @@ class CompletedLectureDeleteView(generics.DestroyAPIView):
                 user_obj.delete()
                 obj.delete()
             
-            return Response({"message": f"Lecture with id {lecture_id} deleted successfully."}, status=status.HTTP_200_OK)
+            return JsonResponse({"message": f"Lecture with id {lecture_id} deleted successfully."}, status=status.HTTP_200_OK)
         except RoadmapDetailLecture.DoesNotExist as e:
-            return Response({"error": f"Lecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"error": f"Lecture with id {lecture_id} does not exist."}, status=status.HTTP_400_BAD_REQUEST)
 
 ############################################################################################################################################
 class Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
@@ -2027,4 +2021,4 @@ class Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
                 roadmap=roadmap
             )
 
-        return Response({'id': roadmap.id}, status=status.HTTP_201_CREATED)
+        return JsonResponse({'id': roadmap.id}, status=status.HTTP_201_CREATED)
