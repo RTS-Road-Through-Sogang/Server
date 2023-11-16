@@ -263,7 +263,7 @@ class PointsListView(generics.ListAPIView):
                 'points': self.cseserializer_class(points).data
             })
         #만약 다전공이라면:
-        submajor = self.request.data.get('submajor', None)
+        submajor = self.kwargs.get('submajor', None)
         if major == '경영':
             if track_pk == 1 or track_pk == 2 or track_pk == 3:
                 if submajor == '경제':
