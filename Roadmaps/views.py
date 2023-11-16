@@ -267,13 +267,13 @@ class PointsListView(generics.ListAPIView):
         if major == '경영':
             if track_pk == 1 or track_pk == 2 or track_pk == 3:
                 if submajor == '경제':
-                    subtrack = ECOTrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                    subtrack = ECOTrack.objects.filter(title="다전공 타전공", student_year=student_year-20).first()
                     subpoints = ECOMajorTrack.objects.filter(track=subtrack).first()
                     queryset.append({
                         'subpoints': self.ecoserializer_class(subpoints).data
                     })
-                elif submajor == '컴퓨터공학과':
-                    subtrack = CSETrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                elif submajor == '컴퓨터공학':
+                    subtrack = CSETrack.objects.filter(title="다전공 타전공", student_year=student_year-20).first()
                     subpoints = CSEMajorTrack.objects.filter(track=subtrack).first()
                     queryset.append({
                         'subpoints': self.cseserializer_class(subpoints).data
@@ -287,8 +287,9 @@ class PointsListView(generics.ListAPIView):
                     queryset.append({
                         'subpoints': self.mgtserializer_class(subpoints).data
                     })
-                elif submajor == '컴퓨터공학과':
-                    subtrack = CSETrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                elif submajor == '컴퓨터공학':
+                    subtrack = CSETrack.objects.filter(title="다전공 타전공", student_year=student_year-20).first()
+                    print(subtrack)
                     subpoints = CSEMajorTrack.objects.filter(track=subtrack).first()
                     queryset.append({
                         'subpoints': self.cseserializer_class(subpoints).data
@@ -296,13 +297,13 @@ class PointsListView(generics.ListAPIView):
         elif major == '컴퓨터공학':
             if track_pk == 3 or track_pk == 8 or track_pk == 13:
                 if submajor == '경제':
-                    subtrack = ECOTrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                    subtrack = ECOTrack.objects.filter(title="다전공 타전공", student_year=student_year-20).first()
                     subpoints = ECOMajorTrack.objects.filter(track=subtrack).first()
                     queryset.append({
                         'subpoints': self.ecoserializer_class(subpoints).data
                     })
                 elif submajor == '경영':
-                    subtrack = MGTTrack.objects.filter(title="다전공 타전공", student_year=student_year).first()
+                    subtrack = MGTTrack.objects.filter(title="다전공 타전공", student_year=student_year-20).first()
                     subpoints = MGTMajorTrack.objects.filter(track=subtrack).first()
                     queryset.append({
                         'subpoints': self.mgtserializer_class(subpoints).data
