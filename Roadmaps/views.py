@@ -474,7 +474,7 @@ class CompletedSearchListAPIView(generics.ListCreateAPIView):
     serializer_class = None
 
     def get_serializer_class(self):
-        major = self.kwargs['major']
+        major = self.kwargs.get('major')
         if major == '경제':
             return ECOLectureDetailSerializer
         elif major == '컴퓨터공학':
@@ -487,20 +487,34 @@ class CompletedSearchListAPIView(generics.ListCreateAPIView):
             return None
 
     def get_queryset(self):
-        major = self.kwargs['major']
-        keyword = self.kwargs['search']
+        major = self.kwargs.get('major')
+        keyword = self.kwargs.get('search')
         conditions = Q(title__icontains=keyword) if keyword else Q()
+        
         print(major)
         print(keyword)
         if major:
             if major == '경제':
-                return ECOLecture.objects.filter(conditions)
+                if keyword =="None":
+                    return ECOLecture.objects.all()
+                else:
+                    return ECOLecture.objects.filter(conditions)
             elif major == '컴퓨터공학':
-                return CSELecture.objects.filter(conditions)
+                if keyword == "None":
+                    return CSELecture.objects.all()
+                else:
+                    return CSELecture.objects.filter(conditions)
             elif major == '경영':
-                return MgtLecture.objects.filter(conditions)
+                if keyword == "None":
+                    return MgtLecture.objects.all()
+                else:
+                    return MgtLecture.objects.filter(conditions)
             elif major == '공통':
-                return CommonLecture.objects.filter(conditions)
+                if keyword == "None":
+                    return CommonLecture.objects.all()
+                else:
+                    return CommonLecture.objects.filter(conditions)
+                
             else:
                 return []
 
