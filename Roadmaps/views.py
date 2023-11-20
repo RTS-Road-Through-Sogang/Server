@@ -108,7 +108,7 @@ class RoadmapDefaultView(generics.ListAPIView):
         user_id = logged_user.student_number
 
         user = MyUser.objects.get(student_number=user_id)
-        roadmaps = Roadmap.objects.filter(student=user)
+        roadmaps = Roadmap.objects.get(student=user, title="default")
 
         roadmap_data = {'roadmaps': []}
 
@@ -2041,7 +2041,7 @@ class Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
         )
 
        
-        titles = ['1-1', '1-하계','1-2','1-동계', '2-1', '2-하계', '2-2','2-동계', '3-1','3-하계', '3-2','3-동계' , '4-1','4-하계', '4-2','4-동계']
+        titles = ['1-1', '1-2','2-1','2-2','3-1', '3-2', '4-1', '4-2', '하계', '동계']
         for title in titles:
             RoadmapDetail.objects.create(
                 semester=title,
@@ -2072,7 +2072,7 @@ class Default_Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
         )
 
        
-        titles = ['1-1', '1-하계','1-2','1-동계', '2-1', '2-하계', '2-2','2-동계', '3-1','3-하계', '3-2','3-동계' , '4-1','4-하계', '4-2','4-동계']
+        titles = ['1-1', '1-2', '2-1','2-2','3-1', '3-2','4-1', '4-2','하계', '동계']
         for title in titles:
             RoadmapDetail.objects.create(
                 semester=title,
@@ -2080,3 +2080,34 @@ class Default_Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
             )
 
         return JsonResponse({'id': roadmap.id}, status=status.HTTP_201_CREATED)
+
+##################################################################################################################################3
+class Default_Adjust(generics.CreateAPIView):
+    queryset = RoadmapDetailLecture
+    serializer_class = RoadMapDetailLectureSerializer
+    
+    def create(self, request, *args, **kwargs):
+        user = request.user
+        new_id = request.data.get('new_roadmap_id')
+        new_roadmap = Roadmap.objects.get(student=user, pk=new_id)
+        default_roadmap = Roadmap.objects.get(title='default')
+        default_roadmapdetail = RoadmapDetail.objects.filter(roadmap=default_roadmap)
+        new_roadmapdetail = RoadmapDetail.objects.filter(roadmap=new_roadmap)
+        
+        for default_detail in default_roadmapdetail:
+            print(default_detail)
+            new_detail = RoadmapDetail.objects.get(roadmap=new_roadmap, semester=default_detail.semester)
+            for default_detail_lecture in default_detail:
+                RoadmapDetailLecture.objects.create(
+                    roadmap_detail=new_detail,
+                    completed = False,
+                    cselecture = default_detail_lecture.cselecture,
+                    ecolecture = default_detail_lecture.ecolecture,
+                    mgtlecture = default_detail_lecture.mgtlecture,
+                    commonlecture = default_detail_lecture.commonlecture,
+                )
+        return JsonResponse({'message': "완료"}, status=status.HTTP_201_CREATED)
+            
+                
+        
+        

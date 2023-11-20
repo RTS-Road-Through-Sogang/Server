@@ -44,6 +44,9 @@ urlpatterns = [
     # 이수 과목들 등록해줌
     path('completed_lecture_create/', CompletedLectureCreateView.as_view(), name='create_roadmap_detail_lecture'),
     path('completed_lecture_create/delete/', CompletedLectureDeleteView.as_view(), name='create_roadmap_detail_lecture'),
+    
+    # roadmap생성시 default값 적용되도록 함
+    path('default_adjust/',Default_Adjust.as_view(), name='default_adjust' ),
 
     
 ]
