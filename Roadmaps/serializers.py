@@ -196,8 +196,8 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
             all_tracks.append({'CSE_tracks': cse_serialized})
             second_major_info = {
                 "second_major": [
-                    {"major1": "경영"},
-                    {"major2": "경제"}
+                    {"major": "경영"},
+                    {"major": "경제"}
                 ]
             }
         elif major.title == "경영":
