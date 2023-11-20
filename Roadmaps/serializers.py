@@ -31,22 +31,104 @@ class UserMajorSerializer(serializers.ModelSerializer):
 
 
 class ECOLectureDetailSerializer(serializers.ModelSerializer):
-    
+    category21 = serializers.SerializerMethodField()
+    category22 = serializers.SerializerMethodField()
+    category23 = serializers.SerializerMethodField()
+
     class Meta:
         model = EcoLecture
         fields ='__all__'
+
+    def get_category21(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category21 is not None:
+            return obj.category21.title
+        return None
+    def get_category22(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category22 is not None:
+            return obj.category22.title
+        return None
+    def get_category23(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category23 is not None:
+            return obj.category23.title
+        return None
+    
 class CSELectureDetailSerializer(serializers.ModelSerializer):
+    category21 = serializers.SerializerMethodField()
+    category22 = serializers.SerializerMethodField()
+    category23 = serializers.SerializerMethodField()
+    
     class Meta:
         model = CSELecture
         fields ='__all__'
+
+    def get_category21(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category21 is not None:
+            return obj.category21.title
+        return None
+    def get_category22(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category22 is not None:
+            return obj.category22.title
+        return None
+    def get_category23(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category23 is not None:
+            return obj.category23.title
+        return None
+    
 class MGTLectureDetailSerializer(serializers.ModelSerializer):
+    category21 = serializers.SerializerMethodField()
+    category22 = serializers.SerializerMethodField()
+    category23 = serializers.SerializerMethodField()
+
     class Meta:
         model = MgtLecture
         fields ='__all__'
+
+    def get_category21(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category21 is not None:
+            return obj.category21.title
+        return None
+    def get_category22(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category22 is not None:
+            return obj.category22.title
+        return None
+    def get_category23(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category23 is not None:
+            return obj.category23.title
+        return None
+    
 class CommonLectureDetailSerializer(serializers.ModelSerializer):
+    category21 = serializers.SerializerMethodField()
+    category22 = serializers.SerializerMethodField()
+    category23 = serializers.SerializerMethodField()
+
     class Meta:
         model = CommonLecture
         fields ='__all__'
+
+    def get_category21(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category21 is not None:
+            return obj.category21.title
+        return None
+    def get_category22(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category22 is not None:
+            return obj.category22.title
+        return None
+    def get_category23(self, obj):
+    # category21이 None이 아니면 해당 Category 객체의 title을 반환합니다.
+        if obj.category23 is not None:
+            return obj.category23.title
+        return None
 
 
 class LectureDetailSerializer(serializers.ModelSerializer):
