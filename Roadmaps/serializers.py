@@ -203,7 +203,7 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
         elif major.title == "경영":
             mgt_tracks = MGTTrack.objects.filter(major=major, student_year__student_year=student_year).exclude(title="다전공 타전공")
             mgt_serialized = TrackSerializer(mgt_tracks, many=True).data
-            mgt_track_info = {'MGT_tracks': mgt_serialized}
+            all_tracks.append({'MGT_tracks': mgt_serialized})
             
             # Add second major information here
             second_major_info = {
@@ -212,9 +212,6 @@ class UserMajorTrackSerializer(serializers.ModelSerializer):
                     {"major": "경제"}
                 ]
             }
-            mgt_track_info.update(second_major_info)
-            
-            all_tracks.append(mgt_track_info)
         elif major.title == "경제":
             eco_tracks = ECOTrack.objects.filter(major=major, student_year__student_year=student_year).exclude(title="다전공 타전공")
             eco_serialized = TrackSerializer(eco_tracks, many=True).data
