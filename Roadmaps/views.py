@@ -108,70 +108,70 @@ class RoadmapDefaultView(generics.ListAPIView):
         user_id = logged_user.student_number
 
         user = MyUser.objects.get(student_number=user_id)
-        roadmaps = Roadmap.objects.filter(student=user)
+        roadmap = Roadmap.objects.get(student=user, title="Default")
 
         roadmap_data = {'roadmaps': []}
 
-        for roadmap in roadmaps:
-            roadmap_info = {
-                'roadmap_id': roadmap.id,
-                'title': roadmap.title,  # 예시로 roadmap의 필드를 추가할 수 있음
+        
+        roadmap_info = {
+            'roadmap_id': roadmap.id,
+            'title': roadmap.title,  # 예시로 roadmap의 필드를 추가할 수 있음
+            # 기타 필요한 정보들 추가
+            'roadmap_detail': []
+        }
+
+        roadmap_details = RoadmapDetail.objects.filter(roadmap=roadmap)
+
+        for detail in roadmap_details:
+        
+            detail_data = {
+                'roadmap_detail_id': detail.id,
+                'semester': detail.semester,  # 예시로 roadmap detail의 필드를 추가할 수 있음
                 # 기타 필요한 정보들 추가
-                'roadmap_detail': []
+                'lectures': []
             }
 
-            roadmap_details = RoadmapDetail.objects.filter(roadmap=roadmap)
+            detail_lectures = RoadmapDetailLecture.objects.filter(roadmap_detail=detail, completed=True)
 
-            for detail in roadmap_details:
-            
-                detail_data = {
-                    'roadmap_detail_id': detail.id,
-                    'semester': detail.semester,  # 예시로 roadmap detail의 필드를 추가할 수 있음
-                    # 기타 필요한 정보들 추가
-                    'lectures': []
-                }
+            for lecture in detail_lectures:
+                lecture_info = {}
+                
+                if lecture.commonlecture:
+                    lecture_info['title'] = lecture.commonlecture.title
+                    lecture_info['former'] = lecture.commonlecture.former
+                    lecture_info['eta'] = lecture.commonlecture.eta
+                    lecture_info['semester_one'] = lecture.commonlecture.semester_one
+                    lecture_info['semester_two'] = lecture.commonlecture.semester_two
+                    lecture_info['code'] = lecture.commonlecture.code
+                elif lecture.cselecture:
+                    lecture_info['title'] = lecture.cselecture.title
+                    lecture_info['former'] = lecture.cselecture.former
+                    lecture_info['eta'] = lecture.cselecture.eta
+                    lecture_info['semester_one'] = lecture.cselecture.semester_one
+                    lecture_info['semester_two'] = lecture.cselecture.semester_two
+                    lecture_info['code'] = lecture.cselecture.code
 
-                detail_lectures = RoadmapDetailLecture.objects.filter(roadmap_detail=detail, completed=True)
+                elif lecture.mgtlecture:
+                    lecture_info['title'] = lecture.mgtlecture.title
+                    lecture_info['former'] = lecture.mgtlecture.former
+                    lecture_info['eta'] = lecture.mgtlecture.eta
+                    lecture_info['semester_one'] = lecture.mgtlecture.semester_one
+                    lecture_info['semester_two'] = lecture.mgtlecture.semester_two
+                    lecture_info['code'] = lecture.mgtlecture.code
 
-                for lecture in detail_lectures:
-                    lecture_info = {}
-                    
-                    if lecture.commonlecture:
-                        lecture_info['title'] = lecture.commonlecture.title
-                        lecture_info['former'] = lecture.commonlecture.former
-                        lecture_info['eta'] = lecture.commonlecture.eta
-                        lecture_info['semester_one'] = lecture.commonlecture.semester_one
-                        lecture_info['semester_two'] = lecture.commonlecture.semester_two
-                        lecture_info['code'] = lecture.commonlecture.code
-                    elif lecture.cselecture:
-                        lecture_info['title'] = lecture.cselecture.title
-                        lecture_info['former'] = lecture.cselecture.former
-                        lecture_info['eta'] = lecture.cselecture.eta
-                        lecture_info['semester_one'] = lecture.cselecture.semester_one
-                        lecture_info['semester_two'] = lecture.cselecture.semester_two
-                        lecture_info['code'] = lecture.cselecture.code
+                else:
+                    lecture_info['title'] = lecture.ecolecture.title
+                    lecture_info['former'] = lecture.ecolecture.former
+                    lecture_info['eta'] = lecture.ecolecture.eta
+                    lecture_info['semester_one'] = lecture.ecolecture.semester_one
+                    lecture_info['semester_two'] = lecture.ecolecture.semester_two
+                    lecture_info['code'] = lecture.ecolecture.code
 
-                    elif lecture.mgtlecture:
-                        lecture_info['title'] = lecture.mgtlecture.title
-                        lecture_info['former'] = lecture.mgtlecture.former
-                        lecture_info['eta'] = lecture.mgtlecture.eta
-                        lecture_info['semester_one'] = lecture.mgtlecture.semester_one
-                        lecture_info['semester_two'] = lecture.mgtlecture.semester_two
-                        lecture_info['code'] = lecture.mgtlecture.code
+                detail_data['lectures'].append(lecture_info)
 
-                    else:
-                        lecture_info['title'] = lecture.ecolecture.title
-                        lecture_info['former'] = lecture.ecolecture.former
-                        lecture_info['eta'] = lecture.ecolecture.eta
-                        lecture_info['semester_one'] = lecture.ecolecture.semester_one
-                        lecture_info['semester_two'] = lecture.ecolecture.semester_two
-                        lecture_info['code'] = lecture.ecolecture.code
+            roadmap_info['roadmap_detail'].append(detail_data)
 
-                    detail_data['lectures'].append(lecture_info)
-
-                roadmap_info['roadmap_detail'].append(detail_data)
-
-            roadmap_data['roadmaps'].append(roadmap_info)
+        roadmap_data['roadmaps'].append(roadmap_info)
 
         return JsonResponse(roadmap_data['roadmaps'], safe=False)
     
@@ -1842,7 +1842,7 @@ class CompletedLectureCreateView(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
+    
     def create_roadmap_lecture(self, serializer):
         roadmap_detail_id = serializer.validated_data.get('roadmap_detail_id')
         lecture_type = serializer.validated_data.get('lecture_type')
@@ -2041,7 +2041,7 @@ class Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
         )
 
        
-        titles = ['1-1', '1-하계','1-2','1-동계', '2-1', '2-하계', '2-2','2-동계', '3-1','3-하계', '3-2','3-동계' , '4-1','4-하계', '4-2','4-동계']
+        titles = ['1-1', '1-2','2-1','2-2','3-1', '3-2', '4-1', '4-2', '하계', '동계']
         for title in titles:
             RoadmapDetail.objects.create(
                 semester=title,
@@ -2072,7 +2072,7 @@ class Default_Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
         )
 
        
-        titles = ['1-1', '1-하계','1-2','1-동계', '2-1', '2-하계', '2-2','2-동계', '3-1','3-하계', '3-2','3-동계' , '4-1','4-하계', '4-2','4-동계']
+        titles = ['1-1', '1-2', '2-1','2-2','3-1', '3-2','4-1', '4-2','하계', '동계']
         for title in titles:
             RoadmapDetail.objects.create(
                 semester=title,
@@ -2080,3 +2080,34 @@ class Default_Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
             )
 
         return JsonResponse({'id': roadmap.id}, status=status.HTTP_201_CREATED)
+
+##################################################################################################################################3
+class Default_Adjust(generics.CreateAPIView):
+    queryset = RoadmapDetailLecture
+    serializer_class = RoadMapDetailLectureSerializer
+    
+    def create(self, request, *args, **kwargs):
+        user = request.user
+        new_id = request.data.get('new_roadmap_id')
+        new_roadmap = Roadmap.objects.get(student=user, pk=new_id)
+        default_roadmap = Roadmap.objects.get(title='default')
+        default_roadmapdetail = RoadmapDetail.objects.filter(roadmap=default_roadmap)
+        new_roadmapdetail = RoadmapDetail.objects.filter(roadmap=new_roadmap)
+        
+        for default_detail in default_roadmapdetail:
+            new_detail = RoadmapDetail.objects.get(roadmap=new_roadmap, semester=default_detail.semester)
+            roadmap_detail_lecture = RoadmapDetailLecture.objects.filter(roadmap_detail=default_detail)
+            for default_detail_lecture in roadmap_detail_lecture:
+                RoadmapDetailLecture.objects.create(
+                    roadmap_detail=new_detail,
+                    completed = False,
+                    cselecture = default_detail_lecture.cselecture,
+                    ecolecture = default_detail_lecture.ecolecture,
+                    mgtlecture = default_detail_lecture.mgtlecture,
+                    commonlecture = default_detail_lecture.commonlecture,
+                )
+        return JsonResponse({'message': "완료"}, status=status.HTTP_201_CREATED)
+            
+                
+        
+        

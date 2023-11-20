@@ -344,7 +344,7 @@ class RoadmapDetailCreateSerializer(serializers.Serializer):
     def create(self, validated_data):
         roadmap_id = validated_data.get('roadmap_id') 
         roadmap = Roadmap.objects.get(pk=roadmap_id) # Get roadmap_id
-        titles = ['1-1', '1-하계','1-2','1-동계', '2-1', '2-하계', '2-2','2-동계', '3-1','3-하계', '3-2','3-동계' , '4-1','4-하계', '4-2','4-동계']
+        titles = ['1-1','1-2', '2-1',  '2-2', '3-1', '3-2', '4-1', '4-2','하계','동계']
 
         for title in titles:
             RoadmapDetail.objects.create(
