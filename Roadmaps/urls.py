@@ -5,6 +5,8 @@ from .views import *
 urlpatterns = [
     path('',RoadmapFullView.as_view() ),
     path('default/',RoadmapDefaultView.as_view()),
+    #디폴트값 넣어줄 로드맵이랑 로드맵 디테일 만들기
+    path('default_roadmap_create/', Default_Roadmap_Roadmapdetail_CreatedAPIView.as_view()),
 ############################################################################################################################################################
     path('usermajortracks/',TrackByMajor.as_view()),
     path('pointslists/<int:track_pk>/<str:submajor>/',PointsListView.as_view()),
