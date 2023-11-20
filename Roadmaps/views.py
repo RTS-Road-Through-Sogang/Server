@@ -1842,7 +1842,7 @@ class CompletedLectureCreateView(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    
+
     def create_roadmap_lecture(self, serializer):
         roadmap_detail_id = serializer.validated_data.get('roadmap_detail_id')
         lecture_type = serializer.validated_data.get('lecture_type')
@@ -2100,7 +2100,7 @@ class Default_Adjust(generics.CreateAPIView):
             for default_detail_lecture in roadmap_detail_lecture:
                 RoadmapDetailLecture.objects.create(
                     roadmap_detail=new_detail,
-                    completed = False,
+                    completed = True,
                     cselecture = default_detail_lecture.cselecture,
                     ecolecture = default_detail_lecture.ecolecture,
                     mgtlecture = default_detail_lecture.mgtlecture,
