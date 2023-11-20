@@ -568,7 +568,7 @@ class CSEGichoLectureListView(generics.ListAPIView):
         track = CSETrack.objects.get(pk=track_pk)
         completed_lecture = UserCSELecture.objects.filter(user=user_request).values_list('cselecture_id', flat=True)
         category_point = self.get_category_point(category_name)
-        if track.title == ('단일전공' or '융합과정'):
+        if track.title == '단일전공' or track.title ==  '융합과정':
             if track.title=='단일전공':
                 queryset.append({
                     'track': '단일전공',
