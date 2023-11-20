@@ -2017,7 +2017,7 @@ class Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
 
 
 
-        # Assuming you're using the authenticated user
+        
         user = request.user
         roadmaps_count = Roadmap.objects.filter(student=user).count()
         
@@ -2028,7 +2028,38 @@ class Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
             title=new_title
         )
 
-        # Create RoadmapDetails
+       
+        titles = ['1-1', '1-하계','1-2','1-동계', '2-1', '2-하계', '2-2','2-동계', '3-1','3-하계', '3-2','3-동계' , '4-1','4-하계', '4-2','4-동계']
+        for title in titles:
+            RoadmapDetail.objects.create(
+                semester=title,
+                roadmap=roadmap
+            )
+
+        return JsonResponse({'id': roadmap.id}, status=status.HTTP_201_CREATED)
+######################################################################################################################################################################################
+class Default_Roadmap_Roadmapdetail_CreatedAPIView(generics.CreateAPIView):
+    queryset = Roadmap.objects.all()
+    serializer_class = RoadMapSerializers
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+
+
+        
+        user = request.user
+        roadmaps_count = Roadmap.objects.filter(student=user).count()
+        
+        new_title = "Default"
+        # Create the Roadmap
+        roadmap = Roadmap.objects.create(
+            student=user,
+            title=new_title
+        )
+
+       
         titles = ['1-1', '1-하계','1-2','1-동계', '2-1', '2-하계', '2-2','2-동계', '3-1','3-하계', '3-2','3-동계' , '4-1','4-하계', '4-2','4-동계']
         for title in titles:
             RoadmapDetail.objects.create(
