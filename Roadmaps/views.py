@@ -66,24 +66,30 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['eta'] = lecture.commonlecture.eta
                         lecture_info['semester_one'] = lecture.commonlecture.semester_one
                         lecture_info['semester_two'] = lecture.commonlecture.semester_two
+                        lecture_info['code'] = lecture.commonlecture.code
                     elif lecture.cselecture:
                         lecture_info['title'] = lecture.cselecture.title
                         lecture_info['former'] = lecture.cselecture.former
                         lecture_info['eta'] = lecture.cselecture.eta
                         lecture_info['semester_one'] = lecture.cselecture.semester_one
                         lecture_info['semester_two'] = lecture.cselecture.semester_two
+                        lecture_info['code'] = lecture.cselecture.code
+
                     elif lecture.mgtlecture:
                         lecture_info['title'] = lecture.mgtlecture.title
                         lecture_info['former'] = lecture.mgtlecture.former
                         lecture_info['eta'] = lecture.mgtlecture.eta
                         lecture_info['semester_one'] = lecture.mgtlecture.semester_one
                         lecture_info['semester_two'] = lecture.mgtlecture.semester_two
+                        lecture_info['code'] = lecture.mgtlecture.code
+
                     else:
                         lecture_info['title'] = lecture.ecolecture.title
                         lecture_info['former'] = lecture.ecolecture.former
                         lecture_info['eta'] = lecture.ecolecture.eta
                         lecture_info['semester_one'] = lecture.ecolecture.semester_one
                         lecture_info['semester_two'] = lecture.ecolecture.semester_two
+                        lecture_info['code'] = lecture.ecolecture.code
 
                     detail_data['lectures'].append(lecture_info)
 
@@ -136,24 +142,30 @@ class RoadmapDefaultView(generics.ListAPIView):
                         lecture_info['eta'] = lecture.commonlecture.eta
                         lecture_info['semester_one'] = lecture.commonlecture.semester_one
                         lecture_info['semester_two'] = lecture.commonlecture.semester_two
+                        lecture_info['code'] = lecture.commonlecture.code
                     elif lecture.cselecture:
                         lecture_info['title'] = lecture.cselecture.title
                         lecture_info['former'] = lecture.cselecture.former
                         lecture_info['eta'] = lecture.cselecture.eta
                         lecture_info['semester_one'] = lecture.cselecture.semester_one
                         lecture_info['semester_two'] = lecture.cselecture.semester_two
+                        lecture_info['code'] = lecture.cselecture.code
+
                     elif lecture.mgtlecture:
                         lecture_info['title'] = lecture.mgtlecture.title
                         lecture_info['former'] = lecture.mgtlecture.former
                         lecture_info['eta'] = lecture.mgtlecture.eta
                         lecture_info['semester_one'] = lecture.mgtlecture.semester_one
                         lecture_info['semester_two'] = lecture.mgtlecture.semester_two
+                        lecture_info['code'] = lecture.mgtlecture.code
+
                     else:
                         lecture_info['title'] = lecture.ecolecture.title
                         lecture_info['former'] = lecture.ecolecture.former
                         lecture_info['eta'] = lecture.ecolecture.eta
                         lecture_info['semester_one'] = lecture.ecolecture.semester_one
                         lecture_info['semester_two'] = lecture.ecolecture.semester_two
+                        lecture_info['code'] = lecture.ecolecture.code
 
                     detail_data['lectures'].append(lecture_info)
 
