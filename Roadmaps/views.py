@@ -2090,7 +2090,7 @@ class Default_Adjust(generics.CreateAPIView):
         user = request.user
         new_id = request.data.get('new_roadmap_id')
         new_roadmap = Roadmap.objects.get(student=user, pk=new_id)
-        default_roadmap = Roadmap.objects.get(title='default')
+        default_roadmap = Roadmap.objects.get(student=user, title='Default')
         default_roadmapdetail = RoadmapDetail.objects.filter(roadmap=default_roadmap)
         new_roadmapdetail = RoadmapDetail.objects.filter(roadmap=new_roadmap)
         
