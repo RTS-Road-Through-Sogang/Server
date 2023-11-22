@@ -69,6 +69,7 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['code'] = lecture.commonlecture.code
                         lecture_info['lecture_type'] = "commonlecture"
                         lecture_info['lecture_id'] = lecture.commonlecture.pk
+                        lecture_info['grade_recommend'] = lecture.commonlecture.grade_recommend
                         
                     elif lecture.cselecture:
                         lecture_info['title'] = lecture.cselecture.title
@@ -79,6 +80,8 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['code'] = lecture.cselecture.code
                         lecture_info['lecture_type'] = "cselecture"
                         lecture_info['lecture_id'] = lecture.cselecture.pk
+                        lecture_info['grade_recommend'] = lecture.cselecture.grade_recommend
+
 
                     elif lecture.mgtlecture:
                         lecture_info['title'] = lecture.mgtlecture.title
@@ -89,6 +92,8 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['code'] = lecture.mgtlecture.code
                         lecture_info['lecture_type'] = "mgtlecture"
                         lecture_info['lecture_id'] = lecture.mgtlecture.pk
+                        lecture_info['grade_recommend'] = lecture.mgtlecture.grade_recommend
+
 
                     else:
                         lecture_info['title'] = lecture.ecolecture.title
@@ -99,6 +104,8 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['code'] = lecture.ecolecture.code
                         lecture_info['lecture_type'] = "ecolecture"
                         lecture_info['lecture_id'] = lecture.ecolecture.pk
+                        lecture_info['grade_recommend'] = lecture.ecolecture.grade_recommend
+
 
                     detail_data['lectures'].append(lecture_info)
 
@@ -154,6 +161,7 @@ class RoadmapDefaultView(generics.ListAPIView):
                     lecture_info['code'] = lecture.commonlecture.code
                     lecture_info['lecture_type'] = "commonlecture"
                     lecture_info['lecture_id'] = lecture.commonlecture.pk
+                    lecture_info['grade_recommend'] = lecture.commonlecture.grade_recommend
                 elif lecture.cselecture:
                     lecture_info['title'] = lecture.cselecture.title
                     lecture_info['former'] = lecture.cselecture.former
@@ -163,6 +171,7 @@ class RoadmapDefaultView(generics.ListAPIView):
                     lecture_info['code'] = lecture.cselecture.code
                     lecture_info['lecture_type'] = "cselecture"
                     lecture_info['lecture_id'] = lecture.cselecture.pk
+                    lecture_info['grade_recommend'] = lecture.cselecture.grade_recommend
 
                 elif lecture.mgtlecture:
                     lecture_info['title'] = lecture.mgtlecture.title
@@ -173,6 +182,8 @@ class RoadmapDefaultView(generics.ListAPIView):
                     lecture_info['code'] = lecture.mgtlecture.code
                     lecture_info['lecture_type'] = "mgtlecture"
                     lecture_info['lecture_id'] = lecture.mgtlecture.pk
+                    lecture_info['grade_recommend'] = lecture.mgtlecture.grade_recommend
+
 
                 else:
                     lecture_info['title'] = lecture.ecolecture.title
@@ -183,6 +194,8 @@ class RoadmapDefaultView(generics.ListAPIView):
                     lecture_info['code'] = lecture.ecolecture.code
                     lecture_info['lecture_type'] = "ecolecture"
                     lecture_info['lecture_id'] = lecture.ecolecture.pk
+                    lecture_info['grade_recommend'] = lecture.ecolecture.grade_recommend
+
 
                 detail_data['lectures'].append(lecture_info)
 
