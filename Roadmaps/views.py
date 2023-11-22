@@ -67,6 +67,9 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['semester_one'] = lecture.commonlecture.semester_one
                         lecture_info['semester_two'] = lecture.commonlecture.semester_two
                         lecture_info['code'] = lecture.commonlecture.code
+                        lecture_info['lecture_type'] = "commonlecture"
+                        lecture_info['lecture_id'] = lecture.commonlecture.pk
+                        
                     elif lecture.cselecture:
                         lecture_info['title'] = lecture.cselecture.title
                         lecture_info['former'] = lecture.cselecture.former
@@ -74,6 +77,8 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['semester_one'] = lecture.cselecture.semester_one
                         lecture_info['semester_two'] = lecture.cselecture.semester_two
                         lecture_info['code'] = lecture.cselecture.code
+                        lecture_info['lecture_type'] = "cselecture"
+                        lecture_info['lecture_id'] = lecture.cselecture.pk
 
                     elif lecture.mgtlecture:
                         lecture_info['title'] = lecture.mgtlecture.title
@@ -82,6 +87,8 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['semester_one'] = lecture.mgtlecture.semester_one
                         lecture_info['semester_two'] = lecture.mgtlecture.semester_two
                         lecture_info['code'] = lecture.mgtlecture.code
+                        lecture_info['lecture_type'] = "mgtlecture"
+                        lecture_info['lecture_id'] = lecture.mgtlecture.pk
 
                     else:
                         lecture_info['title'] = lecture.ecolecture.title
@@ -90,6 +97,8 @@ class RoadmapFullView(generics.ListAPIView):
                         lecture_info['semester_one'] = lecture.ecolecture.semester_one
                         lecture_info['semester_two'] = lecture.ecolecture.semester_two
                         lecture_info['code'] = lecture.ecolecture.code
+                        lecture_info['lecture_type'] = "ecolecture"
+                        lecture_info['lecture_id'] = lecture.ecolecture.pk
 
                     detail_data['lectures'].append(lecture_info)
 
@@ -143,6 +152,8 @@ class RoadmapDefaultView(generics.ListAPIView):
                     lecture_info['semester_one'] = lecture.commonlecture.semester_one
                     lecture_info['semester_two'] = lecture.commonlecture.semester_two
                     lecture_info['code'] = lecture.commonlecture.code
+                    lecture_info['lecture_type'] = "commonlecture"
+                    lecture_info['lecture_id'] = lecture.commonlecture.pk
                 elif lecture.cselecture:
                     lecture_info['title'] = lecture.cselecture.title
                     lecture_info['former'] = lecture.cselecture.former
@@ -150,6 +161,8 @@ class RoadmapDefaultView(generics.ListAPIView):
                     lecture_info['semester_one'] = lecture.cselecture.semester_one
                     lecture_info['semester_two'] = lecture.cselecture.semester_two
                     lecture_info['code'] = lecture.cselecture.code
+                    lecture_info['lecture_type'] = "cselecture"
+                    lecture_info['lecture_id'] = lecture.cselecture.pk
 
                 elif lecture.mgtlecture:
                     lecture_info['title'] = lecture.mgtlecture.title
@@ -158,6 +171,8 @@ class RoadmapDefaultView(generics.ListAPIView):
                     lecture_info['semester_one'] = lecture.mgtlecture.semester_one
                     lecture_info['semester_two'] = lecture.mgtlecture.semester_two
                     lecture_info['code'] = lecture.mgtlecture.code
+                    lecture_info['lecture_type'] = "mgtlecture"
+                    lecture_info['lecture_id'] = lecture.mgtlecture.pk
 
                 else:
                     lecture_info['title'] = lecture.ecolecture.title
@@ -166,6 +181,8 @@ class RoadmapDefaultView(generics.ListAPIView):
                     lecture_info['semester_one'] = lecture.ecolecture.semester_one
                     lecture_info['semester_two'] = lecture.ecolecture.semester_two
                     lecture_info['code'] = lecture.ecolecture.code
+                    lecture_info['lecture_type'] = "ecolecture"
+                    lecture_info['lecture_id'] = lecture.ecolecture.pk
 
                 detail_data['lectures'].append(lecture_info)
 
@@ -1726,9 +1743,9 @@ class RoadmapUpdateDeleteView(APIView):
         try:
             roadmap_detail = Roadmap.objects.get(pk=pk)
             roadmap_detail.delete()
-            return JsonResponse(status=status.HTTP_204_NO_CONTENT)
+            return JsonResponse(data={"message" : "success"},status=status.HTTP_204_NO_CONTENT)
         except Roadmap.DoesNotExist:
-            return JsonResponse(status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse(data={"message" : "roadmap not exists"},status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk, format=None):
         try:
