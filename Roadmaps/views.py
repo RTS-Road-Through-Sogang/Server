@@ -539,34 +539,51 @@ class CompletedSearchListAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         major = self.kwargs.get('major')
         keyword = self.kwargs.get('search')
+        user = self.request.user
         conditions = Q(title__icontains=keyword) if keyword else Q()
-        
+        userecolecture = UserECOLecture.objects.filter(user=user)
+        usercommonlecture = UserCommonLecture.objects.filter(user=user)
+        usercselecture = UserCSELecture.objects.filter(user=user)
+        usermgtlecture = UserMGTLecture.objects.filter(user=user)
+
         print(major)
         print(keyword)
+
         if major:
             if major == '경제':
-                if keyword =="None":
-                    return ECOLecture.objects.all()
-                else:
-                    return ECOLecture.objects.filter(conditions)
+                queryset = ECOLecture.objects
             elif major == '컴퓨터공학':
-                if keyword == "None":
-                    return CSELecture.objects.all()
-                else:
-                    return CSELecture.objects.filter(conditions)
+                queryset = CSELecture.objects
             elif major == '경영':
-                if keyword == "None":
-                    return MgtLecture.objects.all()
-                else:
-                    return MgtLecture.objects.filter(conditions)
+                queryset = MgtLecture.objects
             elif major == '공통':
-                if keyword == "None":
-                    return CommonLecture.objects.all()
-                else:
-                    return CommonLecture.objects.filter(conditions)
-                
+                queryset = CommonLecture.objects
             else:
                 return []
+
+            if keyword == "None":
+                lectures = queryset.all()
+            else:
+                lectures = queryset.filter(conditions)
+
+            # Exclude completed lectures based on the major
+            if major == '경제':
+                completed_lecture_ids = userecolecture.values_list('ecolecture__id', flat=True)
+            elif major == '컴퓨터공학':
+                completed_lecture_ids = usercselecture.values_list('cselecture__id', flat=True)
+            elif major == '경영':
+                completed_lecture_ids = usermgtlecture.values_list('mgtlecture__id', flat=True)
+            elif major == '공통':
+                completed_lecture_ids = usercommonlecture.values_list('commonlecture__id', flat=True)
+            else:
+                return []
+
+            # Exclude completed lectures
+            lectures = lectures.exclude(id__in=completed_lecture_ids)
+            return lectures
+
+        return []
+
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -2147,5 +2164,17 @@ class Default_Adjust(generics.CreateAPIView):
         return JsonResponse({'message': "완료"}, status=status.HTTP_201_CREATED)
             
                 
+
+###############################################################################
+# 학점 반영해주기
+class Point_Get(generics.ListAPIView):
+    queryset = RoadmapDetailLecture
+    serializer_class = RoadMapDetailLectureSerializer
+    
+    #유저의 default인 값들을 들고 와서 전공별 몇개씩 들었는지 다 합쳐서 보여준다
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        roadmap_default = Roadmap.objects.get(title='Default', student = user)
+        roadmap_detail_default = RoadmapDetail.objects.filter(roadmap=roadmap_default)
         
         
