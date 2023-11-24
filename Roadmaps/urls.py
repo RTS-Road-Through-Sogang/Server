@@ -3,6 +3,7 @@ from .views import *
 
 
 urlpatterns = [
+    path('check/', checking.as_view()),
     path('',RoadmapFullView.as_view() ),
     path('default/',RoadmapDefaultView.as_view()),
     #디폴트값 넣어줄 로드맵이랑 로드맵 디테일 만들기
