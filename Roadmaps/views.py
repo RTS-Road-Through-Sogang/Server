@@ -2178,7 +2178,7 @@ class Point_Get(generics.ListAPIView):
         roadmap_detail_default = RoadmapDetail.objects.filter(roadmap=roadmap_default)
         
         
-class Checking(generics.ListAPIView):
+class checking(generics.ListAPIView):
     queryset = RoadmapDetailLecture.objects.all()
     serializer_class = RoadMapDetailLectureSerializer
 
