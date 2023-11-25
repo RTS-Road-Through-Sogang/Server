@@ -2179,4 +2179,14 @@ class Point_Get(generics.ListAPIView):
         
         
 class checking(generics.ListAPIView):
-    print("a")
+    queryset = MyUser
+    serializer_class = MyUserSerializer
+    
+    def get(self):
+        queryset = MyUser.objects.all()
+
+        # 시리얼라이즈
+        serializer = MyUserSerializer(queryset, many=True)
+
+        # Response 반환
+        return Response(serializer.data, status=status.HTTP_200_OK)
