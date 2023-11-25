@@ -2179,8 +2179,4 @@ class Point_Get(generics.ListAPIView):
         
         
 class checking(generics.ListAPIView):
-    queryset = RoadmapDetailLecture.objects.all()
-    serializer_class = RoadMapDetailLectureSerializer
-
-    def get_queryset(self):
-        return self.queryset
+    print("a")
