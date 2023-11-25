@@ -494,3 +494,8 @@ class RoadmapDetailCreateSerializers(serializers.ModelSerializer):
     class Meta:
         model = RoadmapDetail
         fields = ['roadmap']
+        
+class MyUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyUser
+        fields = "__all__"
